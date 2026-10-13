@@ -1,0 +1,23 @@
+{
+  "topic_id": "psydefdetect",
+  "evaluation_variant": "gpt6luna",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "GPT-6-Luna",
+  "frameworks": [
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": [
+        "dr-claw",
+        "docs",
+        "automation"
+      ],
+      "native_entrypoint": "node server/cli.js chat --model GPT-6-Luna",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-6-Luna provider (paratera relay)",
+      "expected_status": "blocked_benchmark_authorization"
+    }
+  ]
+}

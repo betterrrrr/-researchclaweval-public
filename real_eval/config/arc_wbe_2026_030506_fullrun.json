@@ -1,0 +1,40 @@
+{
+  "frameworks": [
+    {
+      "id": "03",
+      "name": "ARIS",
+      "run_dir": "03_aris_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/03_aris_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "docs",
+        "automation"
+      ]
+    },
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/05_deepscientist_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": [
+        "DeepScientist",
+        "docs",
+        "automation"
+      ]
+    },
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": [
+        "dr-claw",
+        "docs",
+        "automation"
+      ]
+    }
+  ]
+}

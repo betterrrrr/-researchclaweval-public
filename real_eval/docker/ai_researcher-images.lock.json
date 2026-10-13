@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "description": "Lock file template for AI-Researcher outer and inner runtime images.",
+  "notes": [
+    "Fill in the actual SHA-256 digests after building the images.",
+    "Run `python real_eval/scripts/verify_ai_researcher_images.py --lock` to update hashes.",
+    "Run `python real_eval/scripts/verify_ai_researcher_images.py --check-locked` to verify integrity."
+  ],
+  "metadata": {
+    "created_at": "2026-08-12T00:00:00Z",
+    "updated_at": "2026-08-12T00:00:00Z",
+    "generated_by": "verify_ai_researcher_images.py --lock",
+    "project": "AI-Researcher",
+    "version": "0.2.0",
+    "apt_snapshot_date": "2026-08-12",
+    "apt_snapshot_url": "https://snapshot.debian.org/archive/debian/20260812T000000Z/"
+  },
+  "dockerfiles": {
+    "outer": {
+      "path": "real_eval/docker/ai_researcher_runtime.Dockerfile",
+      "sha256": "10cf528d2d52ed8faf4c40313d86aab01587dd969d06fbc77a160fbc2d2d26bb",
+      "source_ref": "AI-Researcher/docker/Dockerfile@HEAD",
+      "source_sha256": null
+    },
+    "inner": {
+      "path": "real_eval/docker/ai_researcher_exec_runtime.Dockerfile",
+      "sha256": "ce1da9d51fe1f48db38ca2cb76f05277907d1fd782af65880a2ec69ee51d0714",
+      "source_ref": "python:3.11-slim-bookworm",
+      "source_sha256": null
+    }
+  },
+  "images": {
+    "outer": {
+      "tag": "ai-researcher:runtime-ready",
+      "digest": null,
+      "base_image": "pytorch/pytorch:2.5.1-cuda12.1-cudnn9-runtime",
+      "base_digest": null,
+      "build_timestamp": null
+    },
+    "inner": {
+      "tag": "ai-researcher-exec:runtime-ready",
+      "digest": null,
+      "base_image": "python:3.11-slim-bookworm",
+      "base_digest": null,
+      "build_timestamp": null
+    }
+  },
+  "dependencies": {
+    "pip_wheels": {
+      "requirements_file": null,
+      "sha256": null,
+      "entries": null
+    },
+    "pip_wheels_exec": {
+      "requirements_file": null,
+      "sha256": null,
+      "entries": null
+    },
+    "apt_packages": {
+      "outer": {
+        "snapshot_url": "https://snapshot.debian.org/archive/debian/20260812T000000Z/",
+        "package_count": null,
+        "manifest_sha256": null
+      },
+      "inner": {
+        "snapshot_url": "https://snapshot.debian.org/archive/debian/20260812T000000Z/",
+        "package_count": null,
+        "manifest_sha256": null
+      }
+    },
+    "additional_pip": {
+      "rdkit": "rdkit-pypi==2024.9.6",
+      "sentence-transformers": "sentence-transformers==3.4.1",
+      "docling": "docling==2.18.0"
+    }
+  },
+  "verification": {
+    "last_verified": null,
+    "verified_by": null,
+    "import_gate": {
+      "torch": false,
+      "rdkit": false,
+      "sentence_transformers": false,
+      "docling": false,
+      "playwright": false
+    },
+    "rebuild_twice_identical": {
+      "outer_image_id_1": null,
+      "outer_image_id_2": null,
+      "inner_image_id_1": null,
+      "inner_image_id_2": null,
+      "outer_match": false,
+      "inner_match": false,
+      "verified_at": null
+    }
+  }
+}

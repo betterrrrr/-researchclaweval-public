@@ -1,0 +1,115 @@
+{
+  "format_version": "1.0",
+  "description": "Shared model adapter map for AI-Researcher evaluation across GPT, DeepSeek, and Kimi relay layers.",
+  "models": {
+    "gpt-5.4": {
+      "model_id": "gpt-5.4",
+      "provider_config": "api/codex_gpt54_shubiaobiao.toml",
+      "wire_protocol": "responses",
+      "outer": {
+        "base_url_template": "https://dts.deepexi.com",
+        "wire_api": "responses",
+        "relay_required": false
+      },
+      "inner": {
+        "base_url_template": "http://host.docker.internal:8787/v1",
+        "wire_api": "responses",
+        "relay_required": false,
+        "env_overrides": {
+          "OPENAI_BASE_URL": "http://host.docker.internal:8787/v1"
+        }
+      },
+      "env": {
+        "COMPLETION_MODEL": "openai/gpt-5.4",
+        "CHEEP_MODEL": "openai/gpt-5.4",
+        "OPENAI_MODEL": "gpt-5.4",
+        "OPENROUTER_MODEL": "gpt-5.4"
+      },
+      "preflight": {
+        "model_arg": "gpt-5.4",
+        "completion_model_var": "openai/gpt-5.4"
+      }
+    },
+    "deepseek-v4-flash": {
+      "model_id": "deepseek-v4-flash",
+      "provider_config": "api/codex_deepseek_v4_flash_bianxie.toml",
+      "wire_protocol": "chat",
+      "outer": {
+        "base_url_template": "https://api.bianxie.ai/v1",
+        "wire_api": "chat",
+        "relay_required": false
+      },
+      "inner": {
+        "base_url_template": "http://172.17.0.1:8788/v1",
+        "wire_api": "responses",
+        "relay_required": true,
+        "relay_container_config": "api/codex_deepseek_v4_flash_bianxie_relay_container.toml",
+        "env_overrides": {
+          "OPENAI_BASE_URL": "http://172.17.0.1:8788/v1"
+        }
+      },
+      "env": {
+        "COMPLETION_MODEL": "openai/deepseek-v4-flash",
+        "CHEEP_MODEL": "openai/deepseek-v4-flash",
+        "OPENAI_MODEL": "deepseek-v4-flash",
+        "OPENROUTER_MODEL": "deepseek-v4-flash"
+      },
+      "preflight": {
+        "model_arg": "deepseek-v4-flash",
+        "completion_model_var": "openai/deepseek-v4-flash"
+      }
+    },
+    "kimi-k2.6": {
+      "model_id": "kimi-k2.6",
+      "provider_config": "api/codex_kimi_k27_code_relay_container.toml",
+      "wire_protocol": "responses",
+      "outer": {
+        "base_url_template": "http://host.docker.internal:8787/v1",
+        "wire_api": "responses",
+        "relay_required": true,
+        "relay_host_config": "api/codex_kimi_k27_code_relay_host.toml"
+      },
+      "inner": {
+        "base_url_template": "http://host.docker.internal:8787/v1",
+        "wire_api": "responses",
+        "relay_required": true,
+        "relay_container_config": "api/codex_kimi_k27_code_relay_container.toml",
+        "env_overrides": {
+          "OPENAI_BASE_URL": "http://host.docker.internal:8787/v1"
+        }
+      },
+      "env": {
+        "COMPLETION_MODEL": "openai/kimi-k2.6",
+        "CHEEP_MODEL": "openai/kimi-k2.6",
+        "OPENAI_MODEL": "kimi-k2.6",
+        "OPENROUTER_MODEL": "kimi-k2.6"
+      },
+      "preflight": {
+        "model_arg": "kimi-k2.6",
+        "completion_model_var": "openai/kimi-k2.6"
+      }
+    }
+  },
+  "variable_chain": {
+    "description": "Canonical env-var resolution order for AI-Researcher model selection. Each wrapper script sources this chain so that a single AI_RESEARCHER_COMPLETION_MODEL controls all downstream model references.",
+    "chain": [
+      "AI_RESEARCHER_COMPLETION_MODEL (primary override — set this to control all frameworks)",
+      "  ↳ composed from: AI_RESEARCHER_COMPLETION_MODEL = openai/${REAL_EVAL_FRAMEWORK_MODEL}",
+      "REAL_EVAL_FRAMEWORK_MODEL (per-framework override)",
+      "  ↳ fallback chain: REAL_EVAL_FRAMEWORK_MODEL = ${REAL_EVAL_MODEL}",
+      "REAL_EVAL_MODEL (global evaluation model override)",
+      "  ↳ fallback chain: $TOPIC_MODEL (e.g. BABYLM_MODEL, TDC_ADMET_TOX_EVAL_MODEL, etc.)",
+      "TOPIC-specific env var (per-topic override, e.g. BABYLM_MODEL, TDC_ADMET_TOX_EVAL_MODEL, PSYDEFDETECT_EVAL_MODEL, ARC_WBE_2026_MODEL)",
+      "  ↳ fallback to hardcoded default in each wrapper",
+      "",
+      "Example: To run with DeepSeek across all AI-Researcher wrappers:",
+      "  export AI_RESEARCHER_COMPLETION_MODEL=openai/deepseek-v4-flash",
+      "",
+      "Example: To run one topic with Kimi:",
+      "  export BABYLM_MODEL=kimi-k2.6",
+      "",
+      "The AI_RESEARCHER_CHEAP_MODEL defaults to AI_RESEARCHER_COMPLETION_MODEL",
+      "when not set separately."
+    ]
+  }
+}

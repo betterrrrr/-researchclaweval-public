@@ -1,0 +1,33 @@
+{
+  "topic_id": "arc_wbe_2026",
+  "evaluation_variant": "kimi",
+  "comparison_mode": "native_framework_orchestration",
+  "campaign_id": "topic3-arc-wbe-kimi-method-free-20260810-rerun-problematic",
+  "campaign_spec": "real_eval/config/topic3_arc_wbe_kimi_method_free_20260808_v1.json",
+  "campaign_freeze_manifest": "real_eval/config/topic3-arc-wbe-kimi-method-free-20260808-v1.freeze.json",
+  "model": "kimi-k2.6",
+  "campaign_note": "Subset rerun for Topic3 problematic observations after 2026-08-10 audit; native entrypoint, topic-pure, method-free.",
+  "frameworks": [
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/07_evoscientist_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": [
+        "EvoScientist",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready"
+      ],
+      "source_dir": "EvoScientist",
+      "native_probe_paths": [
+        "EvoScientist/__main__.py"
+      ],
+      "native_entrypoint": "evoscientist --use-cwd --auto-mode",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated kimi-k2.6 relay",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated kimi-k2.6 relay"
+    }
+  ]
+}

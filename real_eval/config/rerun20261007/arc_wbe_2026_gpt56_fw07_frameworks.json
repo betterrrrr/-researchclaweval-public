@@ -1,0 +1,31 @@
+{
+  "topic_id": "arc_wbe_2026",
+  "evaluation_variant": "gpt56",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "AZ-GPT-5.6-Luna",
+  "frameworks": [
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/07_evoscientist_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": [
+        "EvoScientist",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready"
+      ],
+      "source_dir": "EvoScientist",
+      "native_probe_paths": [
+        "EvoScientist/__main__.py"
+      ],
+      "native_entrypoint": "evoscientist --use-cwd --auto-mode",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.6-Luna provider (paratera)",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.6-Luna provider (paratera)"
+    }
+  ],
+  "_generated_by": "gen_rerun_configs.py (2026-10-07 rerun per gpt6 playbook)",
+  "_template": "seven_arc_wbe_2026_gpt6luna_fullrun_frameworks.json"
+}

@@ -1,0 +1,8 @@
+{
+  "topic": "babylm",
+  "metric": "validation_perplexity",
+  "value": 11.2,
+  "official": true,
+  "scored_by": "host",
+  "created_at": "2026-08-12T12:30:00+00:00"
+}

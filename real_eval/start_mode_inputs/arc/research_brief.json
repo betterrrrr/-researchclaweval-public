@@ -1,0 +1,12 @@
+{
+  "title": "ARC-WBE 2026 white-box estimation experiment",
+  "goal": "Develop a white-box estimation method for ARC-WBE 2026. The goal is to minimize the adjusted final-layer score on the WHEST evaluation.",
+  "metric": "WHEST adjusted final-layer score (lower is better)",
+  "requirements": [
+    "design 2-4 materially different white-box estimation approaches",
+    "use the ARC-WBE 2026 weights and framework",
+    "select best approach by lowest WHEST score",
+    "deliver research_idea.json, experiment_trace.json, final_report.md"
+  ],
+  "dataset_path": "/data/ARC-WBE-2026"
+}

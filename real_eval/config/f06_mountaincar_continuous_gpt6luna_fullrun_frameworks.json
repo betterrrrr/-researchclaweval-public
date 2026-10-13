@@ -1,0 +1,32 @@
+{
+  "topic_id": "mountaincar_continuous",
+  "evaluation_variant": "gpt6luna",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "GPT-6-Luna",
+  "frameworks": [
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_mountaincar_continuous_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_mountaincar_continuous_fullrun.sh",
+      "validator": "mountaincar_continuous_fullrun",
+      "required_paths": [
+        "dr-claw",
+        "automation"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready"
+      ],
+      "source_dir": "dr-claw",
+      "native_probe_paths": [
+        "server/cli.js"
+      ],
+      "native_entrypoint": "node server/cli.js chat --model GPT-6-Luna",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-6-Luna provider (paratera relay)",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-6-Luna provider (paratera relay)"
+    }
+  ],
+  "campaign_id": "topic-mountaincar-continuous-gpt-method-free-20260815-v1",
+  "campaign_spec": "real_eval/config/topic_mountaincar_continuous_gpt_method_free_20260815_v1.json",
+  "campaign_freeze_manifest": "real_eval/config/topic-mountaincar-continuous-gpt-method-free-20260815-v1.freeze.json"
+}

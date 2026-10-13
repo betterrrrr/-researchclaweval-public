@@ -1,0 +1,21 @@
+# Project 1: AI-Researcher
+
+- Status: Blocked
+- Project Path: `AI-Researcher/`
+- Dependency Guide: `依赖配置指南/ChatGPT-AI-Researcher框架端到端运行.md`
+- Docker Reference: `/home/jin/researchclaweval/docker_file_instruction.md`
+- Minimal Input: 使用"sklearn digits/iris 轻量分类器改进"研究主题。
+- Required E2E Flow: research idea → research plan / implementation plan → DockerEnv or sandbox experiment → result analysis → paper agent / write-up generation → optional PDF compile if supported.
+- Pre-E2E Checks: Python import check; `ai-researcher --help` / `paper-agent --help` / `python main_ai_researcher.py --help` 等入口检查；`AI-Researcher/docker/Dockerfile` 或 `tjbtech1/airesearcher:v1` 执行环境检查；Playwright/browser check；API environment variable presence check；LaTeX check if paper PDF is required.
+- Acceptance: 从最终镜像启动新容器后，AI-Researcher 能按自己的 Research Link / Paper Generation Link 路径完成一次最小运行；验收产物按项目原生命名记录，包括 `workplace_paper/task_<instance>_<model>/workplace/` 下的 research agent 运行轨迹、`run_infer_idea.py` / `run_infer_plan.py` 产生的 idea/plan 或等价日志、DockerEnv/执行容器记录、实验结果文件，以及 `paper_agent/<research_field>/<instance_id>/` 或 `paper_agent/final_paper/` 下由 `run_paper.sh` / `writing.py` 生成的 `.tex`、`.bib`、编译日志和 PDF（如本次配置启用 PDF 编译）。
+- Blocked At: 2026-05-16 20:28 CST
+- Reason: 宿主 Docker socket 无访问权限，`sudo docker` 需要密码，rootless Docker 还缺少 `uidmap`，无法按要求完成容器内安装、镜像固化和 fresh-container 验证。
+- Last Error: `permission denied while trying to connect to the docker API at unix:///var/run/docker.sock`
+- Next Action: 为当前用户开放 Docker 访问权限，或提供可用的无密码 `sudo docker`，或在宿主安装 `uidmap` 后启用 rootless Docker；随后重跑 `Dockerfile.exec` / `Dockerfile.runtime` 构建与 `tiny_cls/digits_iris_light` 最小 E2E 验证。
+- Image: None
+- Image ID: None
+- Verification: Blocked
+- Verification Command: None
+- Min E2E Command: TBD
+- Report: `Report/AI-Researcher_report.md`
+- Notes: 项目已落盘；执行时优先读取 `AI-Researcher/README.md`、`AI-Researcher/setup.cfg`、`AI-Researcher/.env.template`、`AI-Researcher/docker/Dockerfile`、`AI-Researcher/docker/requirements.txt`、`AI-Researcher/research_agent/` 和 `AI-Researcher/paper_agent/`。

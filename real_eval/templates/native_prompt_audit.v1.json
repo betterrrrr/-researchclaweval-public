@@ -1,0 +1,31 @@
+{
+  "standard_version": "1.0",
+  "framework_id": "01",
+  "status": "passed",
+  "method_choice_owned_by_framework": true,
+  "prescribed_methods": [],
+  "reviewed_host_constraints": [
+    "topic_question",
+    "data_visibility",
+    "train_validation_split",
+    "official_metric",
+    "compute_budget",
+    "wall_clock_budget",
+    "request_budget",
+    "experiment_count_range",
+    "available_dependencies",
+    "network_policy",
+    "safety_policy",
+    "output_schema"
+  ],
+  "prompt_files": [
+    {
+      "path": "automation/replace_me_contract.md",
+      "sha256": "replace-me"
+    },
+    {
+      "path": "real_eval/scripts/01_ai_researcher_replace_me_fullrun.sh",
+      "sha256": "replace-me"
+    }
+  ]
+}

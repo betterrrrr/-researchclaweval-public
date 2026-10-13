@@ -1,0 +1,7 @@
+{
+  "framework": "AI-Researcher",
+  "topic": "babylm",
+  "selected_experiment": "exp_01",
+  "best_validation_perplexity": 12.5,
+  "created_at": "2026-08-12T12:00:00+00:00"
+}

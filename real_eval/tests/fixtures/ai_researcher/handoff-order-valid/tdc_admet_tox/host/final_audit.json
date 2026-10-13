@@ -1,0 +1,9 @@
+{
+  "topic": "tdc_admet_tox",
+  "status": "passed",
+  "hidden_labels_used": true,
+  "hidden_labels_source": "host/hidden_labels",
+  "framework_audit_verified": true,
+  "scoring_completed": true,
+  "created_at": "2026-08-12T13:00:00+00:00"
+}

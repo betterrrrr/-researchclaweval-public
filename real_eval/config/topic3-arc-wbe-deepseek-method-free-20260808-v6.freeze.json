@@ -1,0 +1,80 @@
+{
+  "standard_version": "1.0",
+  "campaign_id": "topic3-arc-wbe-deepseek-method-free-20260808-v6",
+  "files": {
+    "real_eval/config/topic3_arc_wbe_deepseek_method_free_20260808_v6.json": "d7889df82b981c3913997f96fcafce2251fdadd83d71683fcb0974a5ab36e70e",
+    "real_eval/standards/native_evaluation_standard.v1.json": "b4b40595215919146318be2aae5bd0068ac83da31a9578243ffe10564fc092d1",
+    "automation/arc_wbe_2026_contract.md": "f27571c559e5090ed9ca972e275f07cc3f262d1588f2acb9634acd77198ccd42",
+    "automation/scripts/generate_arc_wbe_2026_native_inputs.py": "1026486f74f75e00478c86946c4886b630a7e400eaf53bfdcb4505d730de6b42",
+    "automation/scripts/run_arc_wbe_2026_local_score.py": "861b89296c4c92e63694f0933cf4bde58377f4e683721db18452c75b6a7ed32f",
+    "real_eval/scripts/validate_framework_run.py": "fda09313d2e95dd485686e6e8c91f895df35e974aa1407ac02b4c02b570c271b",
+    "api/codex_deepseek_v4_flash_bianxie_relay_container.toml": "1fb584eccb606c8e71e9091449ba39b14296dacfb9b325300d1a14a0644be673",
+    "real_eval/scripts/preflight_arc_wbe_2026_deepseek_relay.sh": "211e4cb1c70a165394bf67d19eef025a7e94425395b46672a84d5648b7a70d5e",
+    "automation/arc_wbe_2026_execution_budget.md": "63a4d3561d91a25efc44c1274e007415f1ea615cbd76bf0cf75be76dbdac4444",
+    "AI-Researcher/README.md": "cd27ac5ee215541fb7f42461dc2c5cb64aaf70a4a5767ee3714f92c922c6f242",
+    "real_eval/scripts/01_ai_researcher_arc_wbe_2026_fullrun.sh": "0b7a513bb7a241353484a40323f4a20b1a1884175e3e30896be9d45a22c13970",
+    "real_eval/scripts/01_ai_researcher_arc_wbe_2026_smoke.sh": "c596bcdb1b68535524e0b2bf7f02ae62949ff2748eb0f5ee00f415f9e668c6d8",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_01_admission.json": "73f8742a40483a315482f142d2b2c46972bd257702c0b982dda38e44d8f3ba4e",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_01_prompt_audit.json": "9b38d569d83510852a6fbf8f003df5a84ae02135e24f88313a829bf119f0505b",
+    "AI-Scientist-v2/README.md": "ed4ae4b9353641dff469679f14cbffd6547f7a6137b9d5b397f3be9a367b4e82",
+    "real_eval/scripts/02_ai_scientist_v2_arc_wbe_2026_fullrun.sh": "2c87e54724a117454337f5fb61c37ce839f5163b4d3dcf24a02b8f9f21f1da00",
+    "real_eval/scripts/02_ai_scientist_v2_arc_wbe_2026_smoke.sh": "53dc847c85eacae4b1d8af75e2063c435f6491f16518cc916a501c9626c3eeb4",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_02_admission.json": "c4c54b64c28b4a51a90fbef1c2534031343f159726b1002104de67eecb8364f8",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_02_prompt_audit.json": "e95e5a4d1dece2e6bda38c3bf1d8bca707a7837d410d8565591fd7a008f30092",
+    "Auto-claude-code-research-in-sleep/README.md": "702611dad4de771de42ebd8470f77be63426e4c2760d0ba30b1d9d0f3ffe02d5",
+    "real_eval/scripts/03_aris_arc_wbe_2026_fullrun.sh": "c790d4a6fdd918ff0876ef1291483ec68c93ed0334edc7b276bd55f1559f5352",
+    "real_eval/scripts/03_aris_arc_wbe_2026_smoke.sh": "acb76519d3cf1600ace673edecc172c287011ea01ef9f5097e0f660d85df4181",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_03_admission.json": "dc0f68c7ec071d9bb8b08065a23f75779c4e6419ad91c3f2929d45010752a866",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_03_prompt_audit.json": "05221049a85db058212d00e42bfcec55fc39faa663d5536510edddd5adf7f10d",
+    "AutoResearchClaw/README.md": "29d0a7f12f860927c25220ec651fc2d1dc57ebb95a108aef04a4c2e5f66f58e5",
+    "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_fullrun.sh": "7e80a59987cf737a3bdafeb46a51322ebb2508d90ccd746e898ae5f96bf4a1ee",
+    "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_smoke.sh": "838268d122759d48a3dc2b8a38b319c79b35b8d90bb11e16793a3399daa7190f",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_04_admission.json": "6b57169edfaf137a0d8603951a9d12b4e48d2c4c487e7744288d9b5a0b1b735d",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_04_prompt_audit.json": "1eb01fc4d6789f8fa6ff1955b058088d1d711ece4622f8aba968cc20dd33ae93",
+    "DeepScientist/README.md": "2e3c9098a342875ddc641c796dbb3592b08a19110f7c1aad4d18b43624a728d5",
+    "real_eval/scripts/05_deepscientist_arc_wbe_2026_fullrun.sh": "b855835a4dd3e1f1d5c62bf7b845ec723ec9181ba7f73401a8fc2060fa6771f4",
+    "real_eval/scripts/05_deepscientist_arc_wbe_2026_smoke.sh": "c449d8a83c2d235d7663bd850b394573d462fd9d5963ce115a11d2d8ea4168bb",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_05_admission.json": "c8875f373861dd75cd0f32cbad59e614364601db06d03642bad50e266f117184",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_05_prompt_audit.json": "8e67dd823e4c62863ac6026888c6134b720f51cbeff72db169e148914a99f551",
+    "dr-claw/README.md": "87363fbfc1c90a5dd9da9267d2e317d63b1f63a96f3acbba3537a179fed7013f",
+    "real_eval/scripts/06_drclaw_arc_wbe_2026_fullrun.sh": "f2cffce2ac56013b726593ae27fe1e5ba58ae32bbf4280c7cc6665db9f3864a8",
+    "real_eval/scripts/06_drclaw_arc_wbe_2026_smoke.sh": "cbabd6d4c07abaa2d55e96f4b48ce3757d6574e7438c6a7078f154b4969a0a10",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_06_admission.json": "1fad8bd1f97ade6fb52332d8847fb70f30872019adc2ab816774eda3f8fc70ab",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_06_prompt_audit.json": "0d6a3523f7cb5f93a9ddaec1f76dd33d26643c84694bf649b94a44b01e31f9ac",
+    "EvoScientist/README.md": "59de49aa42e83f475416a4f65f2b23c91d46f0c7ef721bde970ffccc7228dc5f",
+    "real_eval/scripts/07_evoscientist_arc_wbe_2026_fullrun.sh": "3f2b26ad1f83b6782ca6ddd3045d4471e1df49bcd89a1bf12b0a2e9b2005063e",
+    "real_eval/scripts/07_evoscientist_arc_wbe_2026_smoke.sh": "04e82ba5aac739b9380626e11f04441b9a508363a17ef9cc3ba156629e652640",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_07_admission.json": "5c7ec9b8b5b635a65cf428917f62b96cc569592432da759229fb2e1f7c0fbc79",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260808-v6/framework_07_prompt_audit.json": "d6b599c5363b8ffcf5fc14036cd974f8afd3db7d12fa95fdff7c86b5c9d90a79"
+  },
+  "framework_images": {
+    "01": {
+      "runtime_image": "ai-researcher:runtime-ready",
+      "runtime_image_digest": "sha256:ace1299b07974a7807b8b36b351250d1ad9e0ffca0dd491c24c055033f258aa5"
+    },
+    "02": {
+      "runtime_image": "ai-scientist-v2:runtime-ready",
+      "runtime_image_digest": "sha256:11eb66e8fe4b9b836061618cf7c77cb1d86f44edd64160c8627d6cca75b6b913"
+    },
+    "03": {
+      "runtime_image": "aris:runtime-ready",
+      "runtime_image_digest": "sha256:e037d2d56eb1f15aee868e4133906f7a7ba2c573b02b1b0a5ac50a8b6d7deb35"
+    },
+    "04": {
+      "runtime_image": "autoresearchclaw:runtime-ready",
+      "runtime_image_digest": "sha256:4ca72e60102d6a59beaefe449452059ea8a850d128661e3b34c4a82de1508f6e"
+    },
+    "05": {
+      "runtime_image": "deepscientist:runtime-ready",
+      "runtime_image_digest": "sha256:b119227470b4d24fa800c975434aa9260fc6ae992d4b5cf9a7c7f5c882705ec0"
+    },
+    "06": {
+      "runtime_image": "dr-claw:runtime-ready",
+      "runtime_image_digest": "sha256:4d10e6bbfda9743f8e8c409190d180d9262998f278518ba09cc366b5e0c3ae4d"
+    },
+    "07": {
+      "runtime_image": "evoscientist:runtime-ready",
+      "runtime_image_digest": "sha256:7532eadd3696c469b0be655c707c3e4ff0bdeb2ab32277101035024fda4e0795"
+    }
+  }
+}

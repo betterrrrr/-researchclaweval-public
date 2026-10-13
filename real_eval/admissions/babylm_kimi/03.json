@@ -1,0 +1,1 @@
+{"id": "03", "name": "ARIS", "runtime_image": "aris:runtime-ready", "source_dir": "Auto-claude-code-research-in-sleep", "native_probe_paths": ["skills/skills-codex/experiment-bridge/SKILL.md"]}

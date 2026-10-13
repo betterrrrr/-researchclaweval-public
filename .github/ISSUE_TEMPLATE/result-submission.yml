@@ -1,0 +1,32 @@
+name: Result Submission
+description: Submit a sanitized, evidence-linked native observation.
+title: "[Result] "
+labels: [result]
+body:
+  - type: input
+    id: mapping
+    attributes:
+      label: Topic, framework, mode, and adapter commit
+    validations:
+      required: true
+  - type: input
+    id: campaign
+    attributes:
+      label: Campaign ID
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized trace and artifact links
+    validations:
+      required: true
+  - type: checkboxes
+    id: integrity
+    attributes:
+      label: Integrity declaration
+      options:
+        - label: No credentials, hidden labels, private data, or raw host paths are included.
+          required: true
+        - label: The framework used its native entrypoint and owned the full research workflow.
+          required: true

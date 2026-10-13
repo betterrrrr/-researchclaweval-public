@@ -1,0 +1,42 @@
+{
+  "framework_id": "03",
+  "all_passed": true,
+  "checks": {
+    "native_entrypoint": {
+      "check": "native_entrypoint",
+      "passed": true,
+      "missing": []
+    },
+    "topic_inputs": {
+      "check": "topic_inputs",
+      "passed": true,
+      "txt_files": [
+        "bnc_spoken.train.txt",
+        "childes.train.txt",
+        "gutenberg.train.txt",
+        "open_subtitles.train.txt",
+        "simple_wiki.train.txt",
+        "switchboard.train.txt"
+      ]
+    },
+    "workspace_write": {
+      "check": "workspace_write",
+      "passed": true
+    },
+    "scorer_dependencies": {
+      "check": "scorer_dependencies",
+      "passed": true,
+      "results": "no_scorer_to_check"
+    },
+    "relay_request": {
+      "check": "relay_request",
+      "passed": true,
+      "response_id": "chatcmpl-f110cfb6-5c24-9d6a-b888-1058f85ba03d",
+      "content_preview": "admission-probe-ok"
+    }
+  },
+  "model_id": "kimi-k2.6",
+  "container_base_url": "http://host.docker.internal:8787/v1",
+  "runtime_image": "aris:runtime-ready",
+  "runtime_image_digest": "sha256:e037d2d56eb1f15aee868e4133906f7a7ba2c573b02b1b0a5ac50a8b6d7deb35"
+}

@@ -1,0 +1,43 @@
+name: Adapter patches
+
+on:
+  pull_request:
+    paths: ["adapters/**", "real_eval/registry/frameworks.json"]
+  schedule:
+    - cron: "23 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        adapter:
+          - 01-ai-researcher
+          - 02-ai-scientist-v2
+          - 03-aris
+          - 04-autoresearchclaw
+          - 05-deepscientist
+          - 06-dr-claw
+          - 07-evoscientist
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch pinned upstream and verify patches
+        env:
+          MANIFEST: adapters/${{ matrix.adapter }}/manifest.json
+        run: |
+          set -euo pipefail
+          url="$(jq -r .upstream_url "$MANIFEST")"
+          commit="$(jq -r .upstream_commit "$MANIFEST")"
+          git init /tmp/upstream
+          git -C /tmp/upstream remote add origin "$url"
+          git -C /tmp/upstream fetch --depth=1 origin "$commit"
+          git -C /tmp/upstream checkout --detach FETCH_HEAD
+          jq -r '.patches[]' "$MANIFEST" | while read -r patch; do
+            git -C /tmp/upstream apply --check "$GITHUB_WORKSPACE/adapters/${{ matrix.adapter }}/$patch"
+          done
+

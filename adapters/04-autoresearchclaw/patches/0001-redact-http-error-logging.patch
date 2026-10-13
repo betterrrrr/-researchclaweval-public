@@ -1,0 +1,25 @@
+diff --git a/researchclaw/llm/client.py b/researchclaw/llm/client.py
+index 8f7d765..5d9d07b 100644
+--- a/researchclaw/llm/client.py
++++ b/researchclaw/llm/client.py
+@@ -478,6 +478,20 @@ class LLMClient:
+                     req, timeout=self.config.timeout_sec
+                 ) as resp:
+                     data = json.loads(resp.read())
++            except urllib.error.HTTPError as exc:
++                try:
++                    response_body = exc.read().decode("utf-8", errors="replace")
++                except Exception:  # noqa: BLE001 - diagnostic logging must not mask the HTTP error
++                    response_body = "<unavailable>"
++                # Status and a short body are enough to distinguish relay/protocol errors.
++                # Do not log request headers or payloads because they can contain credentials.
++                logger.warning(
++                    "OpenAI-compatible request failed: status=%s endpoint=%s body=%r",
++                    exc.code,
++                    url,
++                    response_body.replace("\n", " ")[:512],
++                )
++                raise
+             except (urllib.error.URLError, OSError) as exc:
+                 # MetaClaw bridge: fallback to direct LLM if proxy unreachable
+                 if self.config.fallback_url:

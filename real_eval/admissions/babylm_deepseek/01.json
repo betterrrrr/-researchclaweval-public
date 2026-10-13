@@ -1,0 +1,1 @@
+{"id": "01", "name": "AI-Researcher", "runtime_image": "ai-researcher:runtime-ready", "source_dir": "AI-Researcher", "native_probe_paths": ["research_agent/run_infer_idea.py"]}

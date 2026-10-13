@@ -1,0 +1,60 @@
+{
+  "frameworks": [
+    {
+      "id": "01",
+      "name": "AI-Researcher",
+      "run_dir": "01_ai_researcher_gave2_task2_fullrun",
+      "wrapper": "real_eval/scripts/01_ai_researcher_gave2_task2_fullrun.sh",
+      "validator": "gave2_fullrun",
+      "required_paths": ["AI-Researcher", "docs", "automation"]
+    },
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "run_dir": "02_ai_scientist_v2_gave2_task2_fullrun",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_gave2_task2_fullrun.sh",
+      "validator": "gave2_fullrun",
+      "required_paths": ["AI-Scientist-v2", "docs", "automation"]
+    },
+    {
+      "id": "03",
+      "name": "ARIS",
+      "run_dir": "03_aris_gave2_task2_fullrun",
+      "wrapper": "real_eval/scripts/03_aris_gave2_task2_fullrun.sh",
+      "validator": "gave2_fullrun",
+      "required_paths": ["Auto-claude-code-research-in-sleep", "docs", "automation"]
+    },
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_gave2_task2_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_gave2_task2_fullrun.sh",
+      "validator": "gave2_fullrun",
+      "required_paths": ["AutoResearchClaw", "docs", "automation"]
+    },
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_gave2_task2_fullrun",
+      "wrapper": "real_eval/scripts/05_deepscientist_gave2_task2_fullrun.sh",
+      "validator": "gave2_fullrun",
+      "required_paths": ["DeepScientist", "docs", "automation"]
+    },
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_gave2_task2_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_gave2_task2_fullrun.sh",
+      "validator": "gave2_fullrun",
+      "required_paths": ["dr-claw", "docs", "automation"]
+    },
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_gave2_task2_fullrun",
+      "wrapper": "real_eval/scripts/07_evoscientist_gave2_task2_fullrun.sh",
+      "validator": "gave2_fullrun",
+      "required_paths": ["EvoScientist", "docs", "automation"]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "framework_id": "01",
+  "status": "passed",
+  "model_id": "replace-me-model",
+  "container_base_url": "http://host.docker.internal:9999/v1",
+  "runtime_image": "replace-me-framework:runtime-ready",
+  "runtime_image_digest": "sha256:replace-me",
+  "checks": {
+    "native_entrypoint": true,
+    "relay_request": true,
+    "topic_inputs": true,
+    "workspace_write": true,
+    "scorer_dependencies": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "framework": "AI-Researcher",
+  "topic": "tdc_admet_tox",
+  "native_entrypoint": "run_infer_idea.py",
+  "executor_kind": "framework_cli",
+  "framework_orchestration": true,
+  "framework_native_execution": true,
+  "native_log_marker": "AI_RESEARCHER_NATIVE_INFER_IDEA",
+  "experiments": [
+    {"experiment_id": "exp_01", "status": "completed", "model": "gcn"},
+    {"experiment_id": "exp_02", "status": "completed", "model": "gat"},
+    {"experiment_id": "exp_03", "status": "completed", "model": "mpnn"}
+  ],
+  "selected_experiment_id": "exp_03",
+  "idea_artifact": "research_idea.json",
+  "idea_locked_before_experiments": true,
+  "first_experiment_started_at": "2026-08-12T10:05:00+00:00",
+  "created_at": "2026-08-12T12:00:00+00:00"
+}

@@ -1,0 +1,95 @@
+{
+  "topic_id": "tdc_admet_tox",
+  "evaluation_variant": "kimi",
+  "comparison_mode": "native_framework_orchestration_recovery",
+  "model": "kimi-k2.6",
+  "recovery_of": "topic5-tdc-admet-tox-kimi-mf2-20260806-163452 (recovered run ids: topic5-tdc-admet-tox-kimi-mf2-01_ai_researcher-20260806-163452, topic5-tdc-admet-tox-kimi-mf2-02_ai_scientist_v2-20260806-163452, topic5-tdc-admet-tox-kimi-mf-03_aris-20260806-120828, topic5-tdc-admet-tox-kimi-mf3-04_autoresearchclaw-20260806-222321, topic5-tdc-admet-tox-kimi-mf2-05_deepscientist-20260806-163452)",
+  "recovery_reason": "kimi relay chain fixes (responses->chat tool_choice conversion, picklable LLM errors, custom/MCP tool translation), AI-Researcher host-scorer guard and context bounding, ARIS truthful trace gate with native repair round, AutoResearchClaw budget-discipline brief, per-run relay upstream timeout raised to 900s; fresh workspaces for all five frameworks",
+  "frameworks": [
+    {
+      "id": "01",
+      "name": "AI-Researcher",
+      "run_dir": "01_ai_researcher_tdc_admet_tox_fullrun",
+      "wrapper": "real_eval/scripts/01_ai_researcher_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "required_paths": [
+        "AI-Researcher",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-researcher:runtime-ready"
+      ],
+      "native_entrypoint": "research_agent/run_infer_idea.py",
+      "provider_injection": "AI-Researcher OpenAI-compatible client reads the isolated OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL; adapter enforces a context bound, blocks host-scorer paths, and keeps a method-neutral hard budget"
+    },
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "run_dir": "02_ai_scientist_v2_tdc_admet_tox_fullrun",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-scientist-v2:runtime-ready"
+      ],
+      "native_entrypoint": "perform_ideation_temp_free.py -> launch_scientist_bfts.py",
+      "provider_injection": "ai_scientist.llm OpenAI-compatible client -> kimi relay; forced named-function tool choice normalized to auto; LLM API errors raise picklable RuntimeError so the worker pool survives"
+    },
+    {
+      "id": "03",
+      "name": "ARIS",
+      "run_dir": "03_aris_tdc_admet_tox_fullrun",
+      "wrapper": "real_eval/scripts/03_aris_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "aris:runtime-ready"
+      ],
+      "native_entrypoint": "install_aris_codex.sh -> /research-pipeline",
+      "provider_injection": "official ARIS Codex skill reads the minimal isolated /codex-home/config.toml; wrapper gates experiment_trace.json on the injected relay values with a native ARIS repair round"
+    },
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_tdc_admet_tox_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "required_paths": [
+        "AutoResearchClaw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "native_entrypoint": "python -m researchclaw.cli run",
+      "provider_injection": "AutoResearchClaw openai-compatible config reads the isolated OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL; topic brief forbids degenerate repair/REFINE loops and requires promoting the best validated configuration"
+    },
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_tdc_admet_tox_fullrun",
+      "wrapper": "real_eval/scripts/05_deepscientist_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "required_paths": [
+        "DeepScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:tdc-runtime-ready"
+      ],
+      "native_entrypoint": "ds init -> ds new -> ds run run-experiment --runner codex",
+      "provider_injection": "official DeepScientist CodexRunner -> kimi relay; relay now translates custom/MCP tools to chat function tools and back, so artifact.confirm_baseline/waive_baseline reach the model"
+    }
+  ]
+}

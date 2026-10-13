@@ -1,0 +1,38 @@
+# Python and tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+dist/
+build/
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+api/
+opencode.json
+
+# External framework and dataset assets
+AI-Researcher/
+AI-Scientist-v2/
+Auto-claude-code-research-in-sleep/
+AutoResearchClaw/
+DeepScientist/
+dr-claw/
+EvoScientist/
+data/
+external/
+
+# Runtime state and generated evidence
+automation/env/
+automation/runs/
+automation/state/
+real_eval/runs/
+real_eval/run_checks/
+real_eval/systemd_runs/
+.framework-refresh/
+.sdd/
+recovery/
+

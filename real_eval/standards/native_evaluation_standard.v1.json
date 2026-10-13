@@ -1,0 +1,129 @@
+{
+  "standard_version": "1.0",
+  "framework_ids": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07"
+  ],
+  "adaptation_statuses": [
+    "pending",
+    "admitted",
+    "unsupported",
+    "blocked"
+  ],
+  "dispatch_terminal_statuses": [
+    "unsupported",
+    "blocked"
+  ],
+  "required_framework_responsibilities": [
+    "planning",
+    "experiment_design",
+    "experiment_execution",
+    "comparison",
+    "selection",
+    "analysis",
+    "final_artifact_delivery"
+  ],
+  "allowed_host_responsibilities": [
+    "input_projection",
+    "lifecycle_management",
+    "official_scoring",
+    "output_validation",
+    "packaging"
+  ],
+  "required_outcome_dimensions": [
+    "native_compliance",
+    "research_completed",
+    "scored",
+    "contract_complete",
+    "engineering_complete"
+  ],
+  "required_result_views": [
+    "synchronized_primary",
+    "best_completed_native"
+  ],
+  "required_model_env": [
+    "OPENAI_BASE_URL",
+    "OPENAI_API_KEY",
+    "OPENAI_MODEL"
+  ],
+  "required_trace_fields": [
+    "framework_native_execution",
+    "consumed_topic_input",
+    "workspace_trace_root",
+    "framework_internal_model",
+    "framework_internal_api_base_url",
+    "experiments",
+    "selected_experiment_id",
+    "idea_artifact",
+    "idea_locked_before_experiments"
+  ],
+  "required_framework_artifacts": [
+    "research_idea.json",
+    "experiment_trace.json",
+    "final_report.md"
+  ],
+  "ideation_policy": {
+    "framework_owns_method_choice": true,
+    "host_method_prescription_forbidden": true,
+    "idea_artifact": "research_idea.json",
+    "idea_locked_before_experiments": true,
+    "allowed_host_constraints": [
+      "topic_question",
+      "data_visibility",
+      "train_validation_split",
+      "official_metric",
+      "compute_budget",
+      "wall_clock_budget",
+      "request_budget",
+      "experiment_count_range",
+      "available_dependencies",
+      "network_policy",
+      "safety_policy",
+      "output_schema"
+    ],
+    "forbidden_host_constraints": [
+      "algorithm_family",
+      "feature_representation",
+      "model_architecture",
+      "hyperparameters",
+      "experiment_sequence",
+      "selected_method"
+    ],
+    "idea_quality_dimensions": [
+      "novelty",
+      "hypothesis_clarity",
+      "technical_soundness",
+      "feasibility",
+      "experimental_discrimination"
+    ]
+  },
+  "experiment_budget": {
+    "minimum": 2,
+    "maximum": 4
+  },
+  "forbidden_native_entrypoint_tokens": [
+    "codex exec"
+  ],
+  "allowed_codex_native_executor_kinds": [
+    "official_framework_skill",
+    "framework_skill_executor"
+  ],
+  "public_provider_markers": [
+    "api.openai.com",
+    "api.anthropic.com",
+    "openrouter.ai"
+  ],
+  "workspace_policy": {
+    "runtime_workspace": "/workspace",
+    "fresh_physical_workspace_required": true,
+    "dataset_read_only": true,
+    "contract_read_only": true,
+    "repository_root_writable_mount_forbidden": true,
+    "host_artifact_backfill_forbidden": true
+  }
+}

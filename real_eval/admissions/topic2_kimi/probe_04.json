@@ -1,0 +1,36 @@
+{
+  "framework_id": "04",
+  "all_passed": true,
+  "checks": {
+    "native_entrypoint": {
+      "check": "native_entrypoint",
+      "passed": true,
+      "missing": []
+    },
+    "topic_inputs": {
+      "check": "topic_inputs",
+      "passed": true,
+      "missing": []
+    },
+    "workspace_write": {
+      "check": "workspace_write",
+      "passed": true
+    },
+    "scorer_dependencies": {
+      "check": "scorer_dependencies",
+      "passed": true,
+      "scorer": "/input/run_topic2_host_score.py"
+    },
+    "relay_request": {
+      "check": "relay_request",
+      "passed": true,
+      "response_id": "chatcmpl-facc3cb3-df4d-9390-9d86-58175f85bd6b",
+      "returned_model": "kimi-k2.6",
+      "content_preview": "admission-probe-ok"
+    }
+  },
+  "model_id": "kimi-k2.6",
+  "container_base_url": "http://host.docker.internal:8787/v1",
+  "runtime_image": "autoresearchclaw:runtime-ready",
+  "runtime_image_digest": "sha256:45a0e0f1063ee5ab6775be375f47f9249955e489b1336a8085ed7766cafb2135"
+}

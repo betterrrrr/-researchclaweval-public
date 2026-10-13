@@ -1,0 +1,119 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import os
+from pathlib import Path
+
+
+def check_native_entrypoint(probe_paths: list[str]) -> dict:
+    missing = []
+    for path in probe_paths:
+        full = Path("/framework-source") / path
+        if not full.exists():
+            missing.append(str(full))
+    return {"check": "native_entrypoint", "passed": len(missing) == 0, "missing": missing}
+
+
+def check_topic_inputs() -> dict:
+    dataset_root = Path("/data/topic2")
+    if not dataset_root.exists():
+        return {"check": "topic_inputs", "passed": False, "error": "dataset root not found"}
+    required = [
+        dataset_root / "src" / "train.py",
+        dataset_root / "protected" / "evaluate.py",
+    ]
+    missing = [str(p) for p in required if not p.exists()]
+    return {"check": "topic_inputs", "passed": len(missing) == 0, "missing": missing}
+
+
+def check_workspace_write() -> dict:
+    probe = Path("/workspace-admission/probe.txt")
+    try:
+        probe.parent.mkdir(parents=True, exist_ok=True)
+        probe.write_text("admission-probe-ok\n")
+        readback = probe.read_text().strip()
+        return {"check": "workspace_write", "passed": readback == "admission-probe-ok"}
+    except OSError as e:
+        return {"check": "workspace_write", "passed": False, "error": str(e)}
+
+
+def check_scorer_dependencies() -> dict:
+    scorer = Path("/input/run_topic2_host_score.py")
+    return {"check": "scorer_dependencies", "passed": scorer.exists(), "scorer": str(scorer)}
+
+
+def check_relay_request() -> dict:
+    base_url = os.environ.get("OPENAI_BASE_URL", "http://host.docker.internal:8787/v1")
+    # 密钥不再硬编码（该值曾随公开仓泄露）。缺失时直接判失败，不发请求。
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        return {
+            "check": "relay_request",
+            "passed": False,
+            "error": "OPENAI_API_KEY 未设置；密钥不再写在源码里",
+        }
+    model = os.environ.get("OPENAI_MODEL", "kimi-k2.6")
+    try:
+        import urllib.request
+        payload = json.dumps({
+            "model": model,
+            "messages": [{"role": "user", "content": "Say 'admission-probe-ok' and nothing else."}],
+            "max_tokens": 16,
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"{base_url.rstrip('/')}/chat/completions",
+            data=payload,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            body = json.loads(resp.read().decode("utf-8"))
+            response_id = body.get("id", "")
+            content = body.get("choices", [{}])[0].get("message", {}).get("content", "")
+            returned_model = body.get("model", "")
+            return {
+                "check": "relay_request",
+                "passed": bool(response_id) and returned_model == model,
+                "response_id": response_id,
+                "returned_model": returned_model,
+                "content_preview": content[:100],
+            }
+    except Exception as e:
+        return {"check": "relay_request", "passed": False, "error": str(e)}
+
+
+def main() -> int:
+    framework_id = os.environ.get("FRAMEWORK_ID", "unknown")
+    probe_paths_str = os.environ.get("NATIVE_PROBE_PATHS", "[]")
+    try:
+        probe_paths = json.loads(probe_paths_str)
+    except json.JSONDecodeError:
+        probe_paths = []
+
+    checks = [
+        check_native_entrypoint(probe_paths),
+        check_topic_inputs(),
+        check_workspace_write(),
+        check_scorer_dependencies(),
+        check_relay_request(),
+    ]
+
+    all_passed = all(c["passed"] for c in checks)
+    result = {
+        "framework_id": framework_id,
+        "all_passed": all_passed,
+        "checks": {c["check"]: c for c in checks},
+        "model_id": os.environ.get("OPENAI_MODEL", "kimi-k2.6"),
+        "container_base_url": os.environ.get("OPENAI_BASE_URL", "http://host.docker.internal:8787/v1"),
+    }
+
+    print(json.dumps(result, ensure_ascii=False))
+    return 0 if all_passed else 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

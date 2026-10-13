@@ -1,0 +1,86 @@
+{
+  "topic_id": "psydefdetect",
+  "evaluation_variant": "kimi",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "kimi-k2.6",
+  "frameworks": [
+    {
+      "id": "01",
+      "name": "AI-Researcher",
+      "run_dir": "01_ai_researcher_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/01_ai_researcher_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["AI-Researcher", "docs", "automation"],
+      "required_images": ["ai-researcher:runtime-ready", "ai-researcher-exec:runtime-ready"],
+      "native_entrypoint": "research_agent/run_infer_idea.py",
+      "provider_injection": "COMPLETION_MODEL/CHEEP_MODEL/API_BASE_URL -> kimi-k2.6 relay"
+    },
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "run_dir": "02_ai_scientist_v2_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["AI-Scientist-v2", "docs", "automation"],
+      "required_images": ["ai-scientist-v2:runtime-ready"],
+      "native_entrypoint": "perform_ideation_temp_free.py -> launch_scientist_bfts.py",
+      "provider_injection": "ai_scientist.llm OpenAI client -> kimi-k2.6 relay"
+    },
+    {
+      "id": "03",
+      "name": "ARIS",
+      "run_dir": "03_aris_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/03_aris_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["Auto-claude-code-research-in-sleep", "docs", "automation"],
+      "required_images": ["aris:runtime-ready"],
+      "native_entrypoint": "ARIS /experiment-bridge skill",
+      "provider_injection": "official ARIS Codex skill executor -> kimi-k2.6 relay"
+    },
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["AutoResearchClaw", "docs", "automation"],
+      "required_images": ["autoresearchclaw:runtime-ready"],
+      "native_entrypoint": "python -m researchclaw.cli run",
+      "provider_injection": "openai-compatible config -> kimi-k2.6 relay"
+    },
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/05_deepscientist_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["DeepScientist", "docs", "automation"],
+      "required_images": ["deepscientist:runtime-ready"],
+      "native_entrypoint": "ds init -> ds new -> ds run run-experiment --runner codex",
+      "provider_injection": "official DeepScientist CodexRunner exception -> kimi-k2.6 relay",
+      "codex_native_exception": true
+    },
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["dr-claw", "docs", "automation"],
+      "native_entrypoint": "node server/cli.js chat --model kimi-k2.6",
+      "provider_injection": "OPENAI_BASE_URL/OPENAI_API_KEY/OPENAI_MODEL -> kimi-k2.6 relay",
+      "expected_status": "blocked_benchmark_authorization"
+    },
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/07_evoscientist_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["EvoScientist", "docs", "automation"],
+      "required_images": ["evoscientist:runtime-ready"],
+      "native_entrypoint": "evoscientist --use-cwd --auto-mode",
+      "provider_injection": "custom-openai provider -> kimi-k2.6 relay"
+    }
+  ]
+}

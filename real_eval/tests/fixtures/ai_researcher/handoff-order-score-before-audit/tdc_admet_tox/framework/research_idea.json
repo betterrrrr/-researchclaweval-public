@@ -1,0 +1,13 @@
+{
+  "framework": "AI-Researcher",
+  "topic": "tdc_admet_tox",
+  "hypothesis": "GNNs can predict ADMET properties",
+  "method_rationale": "GNNs capture molecular topology",
+  "expected_failure_modes": "Poor generalization",
+  "comparison_logic": "Compare GNN variants",
+  "source_artifact": "stage-08/hypotheses.md",
+  "idea_locked_before_experiments": true,
+  "lock_event_id": "tdc-research-idea-v1",
+  "locked_at": "2026-08-12T10:00:00+00:00",
+  "created_at": "2026-08-12T10:00:00+00:00"
+}

@@ -1,0 +1,1 @@
+{"id": "06", "name": "Dr. Claw", "runtime_image": "dr-claw:runtime-ready", "source_dir": "dr-claw", "native_probe_paths": ["server/cli.js"]}

@@ -1,0 +1,260 @@
+{
+  "topic_id": "topic2",
+  "model_id": "kimi-k2.6",
+  "status": "passed",
+  "created_at": "2026-08-19T20:09:38.473771+08:00",
+  "frameworks": [
+    {
+      "framework_id": "01",
+      "all_passed": true,
+      "checks": {
+        "native_entrypoint": {
+          "check": "native_entrypoint",
+          "passed": true,
+          "missing": []
+        },
+        "topic_inputs": {
+          "check": "topic_inputs",
+          "passed": true,
+          "missing": []
+        },
+        "workspace_write": {
+          "check": "workspace_write",
+          "passed": true
+        },
+        "scorer_dependencies": {
+          "check": "scorer_dependencies",
+          "passed": true,
+          "scorer": "/input/run_topic2_host_score.py"
+        },
+        "relay_request": {
+          "check": "relay_request",
+          "passed": true,
+          "response_id": "chatcmpl-757aa13f-0bf2-9386-80b2-e5a543759448",
+          "returned_model": "kimi-k2.6",
+          "content_preview": "admission-probe-ok"
+        }
+      },
+      "model_id": "kimi-k2.6",
+      "container_base_url": "http://host.docker.internal:8787/v1",
+      "runtime_image": "ai-researcher:runtime-ready",
+      "runtime_image_digest": "sha256:ce3184fe3e948cd8377ea1cc87c68e2d826def8e48331597eee9d9086d5fda8b"
+    },
+    {
+      "framework_id": "02",
+      "all_passed": true,
+      "checks": {
+        "native_entrypoint": {
+          "check": "native_entrypoint",
+          "passed": true,
+          "missing": []
+        },
+        "topic_inputs": {
+          "check": "topic_inputs",
+          "passed": true,
+          "missing": []
+        },
+        "workspace_write": {
+          "check": "workspace_write",
+          "passed": true
+        },
+        "scorer_dependencies": {
+          "check": "scorer_dependencies",
+          "passed": true,
+          "scorer": "/input/run_topic2_host_score.py"
+        },
+        "relay_request": {
+          "check": "relay_request",
+          "passed": true,
+          "response_id": "chatcmpl-7020b095-417c-9bda-a9ce-658018fe7f11",
+          "returned_model": "kimi-k2.6",
+          "content_preview": "admission-probe-ok"
+        }
+      },
+      "model_id": "kimi-k2.6",
+      "container_base_url": "http://host.docker.internal:8787/v1",
+      "runtime_image": "ai-scientist-v2:runtime-ready",
+      "runtime_image_digest": "sha256:d7f4ee77b6b87377fa3cbcaffeeb6d29f31694f893d65148902f26638a65a02e"
+    },
+    {
+      "framework_id": "03",
+      "all_passed": true,
+      "checks": {
+        "native_entrypoint": {
+          "check": "native_entrypoint",
+          "passed": true,
+          "missing": []
+        },
+        "topic_inputs": {
+          "check": "topic_inputs",
+          "passed": true,
+          "missing": []
+        },
+        "workspace_write": {
+          "check": "workspace_write",
+          "passed": true
+        },
+        "scorer_dependencies": {
+          "check": "scorer_dependencies",
+          "passed": true,
+          "scorer": "/input/run_topic2_host_score.py"
+        },
+        "relay_request": {
+          "check": "relay_request",
+          "passed": true,
+          "response_id": "chatcmpl-d56756a6-79b5-9fd1-96dd-4dd8de80392b",
+          "returned_model": "kimi-k2.6",
+          "content_preview": "admission-probe-ok"
+        }
+      },
+      "model_id": "kimi-k2.6",
+      "container_base_url": "http://host.docker.internal:8787/v1",
+      "runtime_image": "aris:runtime-ready",
+      "runtime_image_digest": "sha256:f06d2015118f05ee173a68f4b89cc2a159f294e7881a72667a47ee8e6436126e"
+    },
+    {
+      "framework_id": "04",
+      "all_passed": true,
+      "checks": {
+        "native_entrypoint": {
+          "check": "native_entrypoint",
+          "passed": true,
+          "missing": []
+        },
+        "topic_inputs": {
+          "check": "topic_inputs",
+          "passed": true,
+          "missing": []
+        },
+        "workspace_write": {
+          "check": "workspace_write",
+          "passed": true
+        },
+        "scorer_dependencies": {
+          "check": "scorer_dependencies",
+          "passed": true,
+          "scorer": "/input/run_topic2_host_score.py"
+        },
+        "relay_request": {
+          "check": "relay_request",
+          "passed": true,
+          "response_id": "chatcmpl-facc3cb3-df4d-9390-9d86-58175f85bd6b",
+          "returned_model": "kimi-k2.6",
+          "content_preview": "admission-probe-ok"
+        }
+      },
+      "model_id": "kimi-k2.6",
+      "container_base_url": "http://host.docker.internal:8787/v1",
+      "runtime_image": "autoresearchclaw:runtime-ready",
+      "runtime_image_digest": "sha256:45a0e0f1063ee5ab6775be375f47f9249955e489b1336a8085ed7766cafb2135"
+    },
+    {
+      "framework_id": "05",
+      "all_passed": true,
+      "checks": {
+        "native_entrypoint": {
+          "check": "native_entrypoint",
+          "passed": true,
+          "missing": []
+        },
+        "topic_inputs": {
+          "check": "topic_inputs",
+          "passed": true,
+          "missing": []
+        },
+        "workspace_write": {
+          "check": "workspace_write",
+          "passed": true
+        },
+        "scorer_dependencies": {
+          "check": "scorer_dependencies",
+          "passed": true,
+          "scorer": "/input/run_topic2_host_score.py"
+        },
+        "relay_request": {
+          "check": "relay_request",
+          "passed": true,
+          "response_id": "chatcmpl-87fdcee3-5dc2-9511-bccf-3bb1e83fa9be",
+          "returned_model": "kimi-k2.6",
+          "content_preview": "admission-probe-ok"
+        }
+      },
+      "model_id": "kimi-k2.6",
+      "container_base_url": "http://host.docker.internal:8787/v1",
+      "runtime_image": "deepscientist:runtime-ready",
+      "runtime_image_digest": "sha256:f8c433929bc7ed4de9a93680bab37855f2de13a9849424db476b4ba03459ce08"
+    },
+    {
+      "framework_id": "06",
+      "all_passed": true,
+      "checks": {
+        "native_entrypoint": {
+          "check": "native_entrypoint",
+          "passed": true,
+          "missing": []
+        },
+        "topic_inputs": {
+          "check": "topic_inputs",
+          "passed": true,
+          "missing": []
+        },
+        "workspace_write": {
+          "check": "workspace_write",
+          "passed": true
+        },
+        "scorer_dependencies": {
+          "check": "scorer_dependencies",
+          "passed": true,
+          "scorer": "/input/run_topic2_host_score.py"
+        },
+        "relay_request": {
+          "check": "relay_request",
+          "passed": true,
+          "response_id": "chatcmpl-c2d8cda4-d875-926c-9359-d177728f2b85",
+          "returned_model": "kimi-k2.6",
+          "content_preview": "admission-probe-ok"
+        }
+      },
+      "model_id": "kimi-k2.6",
+      "container_base_url": "http://host.docker.internal:8787/v1",
+      "runtime_image": "dr-claw:runtime-ready",
+      "runtime_image_digest": "sha256:10025c968386504a61853f94b93f026df7c2c18f27ca1be0f6b0ef8ca4de1377"
+    },
+    {
+      "framework_id": "07",
+      "all_passed": true,
+      "checks": {
+        "native_entrypoint": {
+          "check": "native_entrypoint",
+          "passed": true,
+          "missing": []
+        },
+        "topic_inputs": {
+          "check": "topic_inputs",
+          "passed": true,
+          "missing": []
+        },
+        "workspace_write": {
+          "check": "workspace_write",
+          "passed": true
+        },
+        "scorer_dependencies": {
+          "check": "scorer_dependencies",
+          "passed": true,
+          "scorer": "/input/run_topic2_host_score.py"
+        },
+        "relay_request": {
+          "check": "relay_request",
+          "passed": true,
+          "response_id": "chatcmpl-ecc13b32-9f87-9764-802b-5a646dde7e3c",
+          "returned_model": "kimi-k2.6",
+          "content_preview": "admission-probe-ok"
+        }
+      },
+      "model_id": "kimi-k2.6",
+      "container_base_url": "http://host.docker.internal:8787/v1",
+      "runtime_image": "evoscientist:runtime-ready",
+      "runtime_image_digest": "sha256:b88bd85f37cfa5a71f1e0e26910222580aa231019b70ebf4080ef5346bf74174"
+    }
+  ]
+}

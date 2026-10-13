@@ -1,0 +1,42 @@
+{
+  "framework_id": "02",
+  "all_passed": true,
+  "checks": {
+    "native_entrypoint": {
+      "check": "native_entrypoint",
+      "passed": true,
+      "missing": []
+    },
+    "topic_inputs": {
+      "check": "topic_inputs",
+      "passed": true,
+      "txt_files": [
+        "bnc_spoken.train.txt",
+        "childes.train.txt",
+        "gutenberg.train.txt",
+        "open_subtitles.train.txt",
+        "simple_wiki.train.txt",
+        "switchboard.train.txt"
+      ]
+    },
+    "workspace_write": {
+      "check": "workspace_write",
+      "passed": true
+    },
+    "scorer_dependencies": {
+      "check": "scorer_dependencies",
+      "passed": true,
+      "results": "no_scorer_to_check"
+    },
+    "relay_request": {
+      "check": "relay_request",
+      "passed": true,
+      "response_id": "chatcmpl-4342ac0d-9f43-9fdb-970d-b8d2320f1396",
+      "content_preview": ""
+    }
+  },
+  "model_id": "deepseek-v4-flash",
+  "container_base_url": "http://172.17.0.1:8788/v1",
+  "runtime_image": "ai-scientist-v2:runtime-ready",
+  "runtime_image_digest": "sha256:11eb66e8fe4b9b836061618cf7c77cb1d86f44edd64160c8627d6cca75b6b913"
+}

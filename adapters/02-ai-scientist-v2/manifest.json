@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "framework_id": "02",
+  "name": "AI-Scientist-v2",
+  "upstream_url": "https://github.com/SakanaAI/AI-Scientist-v2.git",
+  "upstream_commit": "96bd51617cfdbb494a9fc283af00fe090edfae48",
+  "license_spdx": "LicenseRef-AI-Scientist-Source-Code-1.0",
+  "native_entrypoint": "python ai_scientist/perform_ideation_temp_free.py && python launch_scientist_bfts.py",
+  "native_entrypoint_source": "ai_scientist/perform_ideation_temp_free.py",
+  "admission_status": "candidate_requires_runtime_evidence",
+  "supported_topics": ["babylm", "gave2_task2", "arc_wbe_2026", "psydefdetect"],
+  "required_env": ["OPENAI_BASE_URL", "OPENAI_API_KEY", "OPENAI_MODEL"],
+  "required_images": ["ai-scientist-v2:runtime-ready"],
+  "patches": []
+}

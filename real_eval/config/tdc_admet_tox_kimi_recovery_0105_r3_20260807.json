@@ -1,0 +1,44 @@
+{
+    "topic_id": "tdc_admet_tox",
+    "evaluation_variant": "kimi",
+    "comparison_mode": "native_framework_orchestration_recovery",
+    "model": "kimi-k2.6",
+    "recovery_of": "topic5-tdc-admet-tox-kimi-recovery-010204-r2-20260807 (recovered run ids: topic5-tdc-admet-tox-kimi-recovery-010204-r2-20260807-01_ai_researcher_tdc_admet_tox_fullrun, topic5-tdc-admet-tox-kimi-recovery-010204-r2-20260807-05_deepscientist_tdc_admet_tox_fullrun)",
+    "recovery_reason": "fixes: 01 AI-Researcher wrapper now exports TDC_ADMET_TOX_NATIVE_RUN=1 into FRAMEWORK_DOCKER_ARGS so the adapter's context bound is active (previous runs omitted the env var; r2 01 died at ~30 min with litellm 400 'Range of input length should be [1, 262144]' because context was unbounded). 05 DeepScientist: codex CLI 0.130.0 announces MCP servers as tools of type 'namespace' (mcp__artifact__/mcp__bash_exec__/mcp__memory__); relay _translate_responses_tools only handled function/custom and silently dropped namespace entries, so the model never received artifact.confirm_baseline and looped on shell_command with baseline_gate stuck pending in every previous batch. relay.py now expands namespace tools into prefixed function tools (mcp__artifact__confirm_baseline etc., 60 tools total) and the host relay was restarted with the fix; per-run relays mount the same file. Only frameworks 01 and 05 are rerun; 02/04 failed in framework/model code (log_summarization unpack error; generated experiment code missing import os) and are not part of this batch.",
+    "frameworks": [
+        {
+            "id": "01",
+            "name": "AI-Researcher",
+            "run_dir": "01_ai_researcher_tdc_admet_tox_fullrun",
+            "wrapper": "real_eval/scripts/01_ai_researcher_tdc_admet_tox_fullrun.sh",
+            "validator": "tdc_admet_tox_fullrun",
+            "required_paths": [
+                "AI-Researcher",
+                "docs",
+                "automation"
+            ],
+            "required_images": [
+                "ai-researcher:runtime-ready"
+            ],
+            "native_entrypoint": "research_agent/run_infer_idea.py",
+            "provider_injection": "AI-Researcher OpenAI-compatible client reads the isolated OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL; adapter enforces a context bound (enabled by TDC_ADMET_TOX_NATIVE_RUN=1 in the wrapper), blocks host-scorer paths, and keeps a method-neutral hard budget"
+        },
+        {
+            "id": "05",
+            "name": "DeepScientist",
+            "run_dir": "05_deepscientist_tdc_admet_tox_fullrun",
+            "wrapper": "real_eval/scripts/05_deepscientist_tdc_admet_tox_fullrun.sh",
+            "validator": "tdc_admet_tox_fullrun",
+            "required_paths": [
+                "DeepScientist",
+                "docs",
+                "automation"
+            ],
+            "required_images": [
+                "deepscientist:tdc-runtime-ready"
+            ],
+            "native_entrypoint": "ds init -> ds new -> ds run run-experiment --runner codex",
+            "provider_injection": "official DeepScientist CodexRunner -> kimi relay; relay expands codex 'namespace' MCP tools into chat function tools (mcp__artifact__confirm_baseline/waive_baseline etc.) and maps prefixed calls back to custom responses items, so artifact tools reach the model"
+        }
+    ]
+}

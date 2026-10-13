@@ -1,0 +1,14 @@
+{
+  "title": "BabyLM-10M language model experiment",
+  "goal": "Run a BabyLM-10M end-to-end experiment. Train and evaluate word-level language models to minimize validation perplexity.",
+  "dataset": "/data/BabyLM-2026-Strict-Small (6 .txt files, ~10M words, no separate validation set)",
+  "metric": "word-level validation perplexity (lower is better)",
+  "requirements": [
+    "design 2-4 materially different word-level language model architectures",
+    "split train data into train/validation yourself",
+    "verify all .txt files are non-empty before use",
+    "train on real BabyLM-10M data with GPU acceleration",
+    "select best model by lowest word-level validation perplexity",
+    "deliver research_idea.json, experiment_trace.json, final_report.md"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "updated": "2026-10-11",
+  "note": [
+    "b0/bT 的归一化锚点。norm = (raw - worst) / (best - worst)，方向已统一为越大越好。",
+    "固定锚点（不是跨格 min-max）的好处：绝对尺度，增减框架不改变已有分数；0 有明确含义。",
+    "改这里等于改口径 —— 改动必须同时更新 docs/evaluation_metrics.md §6 并在表里标注。",
+    "status=pending 的 topic 会让管线报错退出，绝不静默用假值。"
+  ],
+  "topics": {
+    "arc": {
+      "status": "ready",
+      "direction": "lower_better",
+      "worst": 0.075,
+      "best": 1e-06,
+      "scale": "log",
+      "worst_label": "random（随机猜测）",
+      "best_label": "covariance propagation（完整协方差）",
+      "source": "ARC-WBE starterkit 官方校准表：zeros~0.091 / random~0.075 / mean propagation~9.5e-05 / covariance~8.4e-06；>0.09 比什么都不做还差"
+    },
+    "mc": {
+      "status": "ready",
+      "direction": "higher_better",
+      "worst": -48,
+      "best": 90,
+      "scale": "linear",
+      "worst_label": "未训练/随机策略",
+      "best_label": "能解出任务的策略",
+      "source": "topic2 (MLGym rlMountainCarContinuous) Reward Mean 说明：未训练约 -48，解出约 +90"
+    },
+    "tdc": {
+      "status": "ready",
+      "direction": "higher_better",
+      "worst": 0.5,
+      "best": 1.0,
+      "scale": "linear",
+      "worst_label": "AUROC 随机水平",
+      "best_label": "完美排序",
+      "source": "AUROC 定义：0.5=随机，1.0=完美"
+    },
+    "psydef": {
+      "status": "ready",
+      "direction": "higher_better",
+      "worst": 0.125,
+      "best": 1.0,
+      "scale": "linear",
+      "worst_label": "8 类随机（1/8）",
+      "best_label": "完美 macro-F1",
+      "source": "指标是 labels 1-8 上的 macro-F1；8 类均匀随机 ≈ 0.125，NB 基线实测 0.121"
+    },
+    "babylm": {
+      "status": "pending",
+      "direction": "lower_better",
+      "worst": null,
+      "best": null,
+      "scale": "log",
+      "worst_label": "未学习（unigram/均匀）",
+      "best_label": "待定",
+      "source": "PENDING：仓库内没有权威的 babylm 困惑度锚点。babylm_10m_harness 里的 unigram_baseline 是硬编码测试夹具（proxy 分 0.00221178），不是真实测量，且 proxy 分 != 困惑度。矩阵观测值 20.01..3021.99 是参赛池极值，用它作锚点会退化成相对尺度。",
+      "suggested_procedure": "用各 run 自己的 tokenizer 在 BabyLM 验证集上算 unigram LM 的困惑度，作为『不学习』下界；上界需要一个『强但可达』的参考实现。补上后把 status 改为 ready。"
+    }
+  }
+}

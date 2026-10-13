@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "framework_id": "06",
+  "name": "Dr. Claw",
+  "upstream_url": "https://github.com/OpenLAIR/dr-claw.git",
+  "upstream_commit": "0fab72c75368efa8f248b1d44634fe2354bee686",
+  "license_spdx": "LicenseRef-Combined-GPL-3.0-AGPL-3.0",
+  "native_entrypoint": "node server/cli.js chat",
+  "native_entrypoint_source": "README.md Option C / server/cli.js",
+  "admission_status": "candidate_requires_runtime_evidence",
+  "supported_topics": ["babylm", "gave2_task2", "arc_wbe_2026", "psydefdetect"],
+  "required_env": ["OPENAI_BASE_URL", "OPENAI_API_KEY", "OPENAI_MODEL"],
+  "required_images": ["dr-claw:runtime-ready"],
+  "patches": ["patches/0001-openai-compatible-relay-and-cli-lifecycle.patch"]
+}

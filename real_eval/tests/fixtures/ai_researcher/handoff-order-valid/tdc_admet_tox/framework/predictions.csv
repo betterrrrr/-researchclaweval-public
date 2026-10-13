@@ -1,0 +1,4 @@
+compound_id,AMES_prediction,hERG_prediction,DILI_prediction
+C001,0.95,0.12,0.88
+C002,0.23,0.89,0.15
+C003,0.87,0.34,0.92

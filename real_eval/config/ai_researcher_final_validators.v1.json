@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.0",
+  "description": "Manifest mapping F1-F4 final-verification validators for AI-Researcher evaluation. Each validator maps to a todo item, has an exact argv template, an immutable SHA-256 of the executable, input/output schema, and expected success/failure exit codes.",
+  "framework": "AI-Researcher",
+  "project_root": "<REPO_ROOT>",
+  "validators": {
+    "F1": {
+      "label": "Scope Fidelity",
+      "owner_todo": "todo-7",
+      "executable": "real_eval/scripts/validate_ai_researcher_scope.py",
+      "executable_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "argv_template": [
+        "real_eval/scripts/validate_ai_researcher_scope.py",
+        "--baseline-manifest",
+        "real_eval/config/ai_researcher_source.v1.json",
+        "--matrix",
+        "real_eval/config/registry_matrix.json",
+        "--runs-root",
+        "real_eval/runs",
+        "--prompt-auditor",
+        "real_eval/scripts/audit_ai_researcher_prompts.py",
+        "--isolation-validator",
+        "real_eval/scripts/validate_ai_researcher_isolation.py",
+        "--output",
+        "{output_path}"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["baseline_manifest", "matrix", "runs_root"],
+        "properties": {
+          "baseline_manifest": {"type": "string", "description": "Path to baseline source manifest JSON"},
+          "matrix": {"type": "string", "description": "Path to run matrix JSON"},
+          "runs_root": {"type": "string", "description": "Root directory of run outputs"},
+          "prompt_auditor": {"type": "string", "description": "Path to prompt auditor script"},
+          "isolation_validator": {"type": "string", "description": "Path to isolation validator script"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "schema": {"type": "string", "const": "scope-fidelity-validation.v1"},
+          "passed": {"type": "boolean"},
+          "checks": {"type": "object"},
+          "summary": {"type": "object"}
+        },
+        "required": ["schema", "passed", "checks"]
+      },
+      "success_codes": [0],
+      "failure_codes": [1, 2],
+      "timeout_seconds": 300,
+      "description": "F1: Verify scope fidelity — source hashes, run isolation, prompt audit, isolation descriptor"
+    },
+    "F2": {
+      "label": "Runtime Sample",
+      "owner_todo": "todo-8",
+      "executable": "real_eval/scripts/validate_ai_researcher_runtime_sample.py",
+      "executable_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "argv_template": [
+        "real_eval/scripts/validate_ai_researcher_runtime_sample.py",
+        "--matrix",
+        "real_eval/config/registry_matrix.json",
+        "--selection-policy",
+        "one-per-model-distinct-topics",
+        "--verify",
+        "research_idea.json,experiment_trace.json,final_report.md",
+        "--require-gave2-blocked",
+        "--reconcile-running",
+        "--output",
+        "{output_path}"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["matrix"],
+        "properties": {
+          "matrix": {"type": "string", "description": "Path to run matrix JSON"},
+          "selection_policy": {"type": "string", "enum": ["one-per-model-distinct-topics"]},
+          "verify": {"type": "string", "description": "Comma-separated required artifacts"},
+          "require_gave2_blocked": {"type": "boolean"},
+          "reconcile_running": {"type": "boolean"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "schema": {"type": "string", "const": "runtime-sample-validation.v1"},
+          "passed": {"type": "boolean"},
+          "samples": {"type": "array"},
+          "summary": {"type": "object"}
+        },
+        "required": ["schema", "passed", "samples"]
+      },
+      "success_codes": [0],
+      "failure_codes": [1, 2],
+      "timeout_seconds": 120,
+      "description": "F2: Select 3 runtime samples (one per model, distinct topics) and verify artifacts"
+    },
+    "F3": {
+      "label": "Plan Evidence",
+      "owner_todo": "todo-14",
+      "executable": "real_eval/scripts/validate_ai_researcher_plan_evidence.py",
+      "executable_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "argv_template": [
+        "real_eval/scripts/validate_ai_researcher_plan_evidence.py",
+        "--plan",
+        "real_eval/.omo/plans/ai-researcher-repair.json",
+        "--evidence-root",
+        ".omo/evidence/ai-researcher-repair",
+        "--require-todos",
+        "todo-7,todo-8,todo-14",
+        "--output",
+        "{output_path}"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["plan", "evidence_root"],
+        "properties": {
+          "plan": {"type": "string", "description": "Path to plan JSON file"},
+          "evidence_root": {"type": "string", "description": "Root directory of evidence artifacts"},
+          "require_todos": {"type": "string", "description": "Comma-separated todo IDs that MUST have evidence"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "schema": {"type": "string", "const": "plan-evidence-validation.v1"},
+          "passed": {"type": "boolean"},
+          "results": {"type": "array"},
+          "summary": {"type": "object"}
+        },
+        "required": ["schema", "passed", "summary"]
+      },
+      "success_codes": [0],
+      "failure_codes": [1, 2],
+      "timeout_seconds": 120,
+      "description": "F3: Verify every plan todo has a corresponding evidence artifact"
+    },
+    "F4": {
+      "label": "Quality Gate",
+      "owner_todo": "todo-14",
+      "executable": "real_eval/scripts/run_ai_researcher_quality_gate.py",
+      "executable_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "argv_template": [
+        "real_eval/scripts/run_ai_researcher_quality_gate.py",
+        "--pytest-files",
+        "real_eval/tests/test_ai_researcher_final_verifiers.py",
+        "--adapter-policy",
+        "real_eval/adapters/ai_researcher_v1_policy.json",
+        "--image-lock",
+        "real_eval/docker/ai_researcher-images.lock.json",
+        "--shell-patterns",
+        "real_eval/scripts/01_ai_researcher_*.sh,real_eval/scripts/preflight_*.sh",
+        "--output",
+        "{output_path}"
+      ],
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "pytest_files": {"type": "string", "description": "Comma-separated test file paths"},
+          "adapter_policy": {"type": "string", "description": "Path to adapter policy JSON"},
+          "image_lock": {"type": "string", "description": "Path to Docker image lock file"},
+          "shell_patterns": {"type": "string", "description": "Comma-separated glob patterns for shell checks"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "schema": {"type": "string", "const": "quality-gate-report.v1"},
+          "passed": {"type": "boolean"},
+          "gates": {"type": "object"},
+          "summary": {"type": "object"}
+        },
+        "required": ["schema", "passed", "gates"]
+      },
+      "success_codes": [0],
+      "failure_codes": [1, 2],
+      "timeout_seconds": 600,
+      "description": "F4: Run pytest, adapter diff, image lock, and shell syntax checks"
+    }
+  }
+}

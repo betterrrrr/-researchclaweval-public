@@ -1,0 +1,39 @@
+{
+  "tasks": [
+    {
+      "id": "survey",
+      "title": "Survey dataset",
+      "status": "pending",
+      "stage": "Survey",
+      "nextActionPrompt": "Pt.1 Survey \u2014 Explore the PsyDefDetect dataset. The dataset is at /data/PsyDefDetect/PsyDefConv.json (mounted inside container). Read it, describe its structure, size, and key challenges. When done, set this task status to completed."
+    },
+    {
+      "id": "ideation",
+      "title": "Design experiments",
+      "status": "pending",
+      "stage": "Ideation",
+      "nextActionPrompt": "Pt.2 Ideation \u2014 Based on the survey, design 2-4 materially different classification approaches. Write research_idea.json. When done, set this task status to completed."
+    },
+    {
+      "id": "experiment",
+      "title": "Run experiments",
+      "status": "pending",
+      "stage": "Experiment",
+      "nextActionPrompt": "Pt.3 Experiment \u2014 Implement and train all approaches on GPU. Use 5-fold CV. Write experiment_trace.json (strict JSON, no NaN). When done, set status to completed."
+    },
+    {
+      "id": "analysis",
+      "title": "Analyze results",
+      "status": "pending",
+      "stage": "Analysis",
+      "nextActionPrompt": "Pt.4 Analysis \u2014 Evaluate results, select best model. Write final_report.md. When done, set status to completed."
+    },
+    {
+      "id": "paper",
+      "title": "Write report",
+      "status": "pending",
+      "stage": "Paper",
+      "nextActionPrompt": "Pt.5 Paper \u2014 Finalize final_report.md. Verify all 3 deliverables exist. When done, set status to completed."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "campaign_id": "topic1-babylm-kimi-method-free-20260810-v1",
+  "spec_version": "1.0",
+  "frozen_at": null,
+  "status": "pending_admission",
+  "framework_admissions": {
+    "01": "pending",
+    "02": "pending",
+    "03": "pending",
+    "04": "pending",
+    "05": "pending",
+    "06": "pending",
+    "07": "pending"
+  },
+  "runtime_image_digests": {},
+  "admission_evidence_paths": {},
+  "prompt_audit_paths": {}
+}

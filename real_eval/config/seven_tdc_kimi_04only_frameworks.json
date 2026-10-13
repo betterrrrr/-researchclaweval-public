@@ -1,0 +1,17 @@
+{
+  "topic_id": "tdc_admet_tox",
+  "evaluation_variant": "kimi",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "kimi-k2.6",
+  "frameworks": [
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_tdc_admet_tox_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "required_paths": ["AutoResearchClaw", "docs", "automation"],
+      "required_images": ["autoresearchclaw:runtime-ready"]
+    }
+  ]
+}

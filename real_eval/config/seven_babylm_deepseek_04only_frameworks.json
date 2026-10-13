@@ -1,0 +1,17 @@
+{
+  "topic_id": "babylm",
+  "evaluation_variant": "deepseek",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "deepseek-v4-flash",
+  "frameworks": [
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_babylm_gpt_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_babylm_gpt_fullrun.sh",
+      "validator": "autoresearchclaw_babylm_fullrun",
+      "required_paths": ["AutoResearchClaw"],
+      "required_images": ["autoresearchclaw:runtime-ready"]
+    }
+  ]
+}

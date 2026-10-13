@@ -1,0 +1,17 @@
+{
+  "topic_id": "babylm",
+  "evaluation_variant": "kimi",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "kimi-k2.6",
+  "frameworks": [
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_babylm_kimi_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_babylm_kimi_fullrun.sh",
+      "validator": "autoresearchclaw_babylm_fullrun",
+      "required_paths": ["AutoResearchClaw"],
+      "required_images": ["autoresearchclaw:runtime-ready"]
+    }
+  ]
+}

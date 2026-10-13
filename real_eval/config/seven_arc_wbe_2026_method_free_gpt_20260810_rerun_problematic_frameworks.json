@@ -1,0 +1,33 @@
+{
+  "topic_id": "arc_wbe_2026",
+  "evaluation_variant": "gpt",
+  "comparison_mode": "native_framework_orchestration",
+  "campaign_id": "topic3-arc-wbe-gpt-method-free-20260810-rerun-problematic",
+  "campaign_spec": "real_eval/config/topic3_arc_wbe_gpt_method_free_20260809_recovery_v4.json",
+  "campaign_freeze_manifest": "real_eval/config/topic3-arc-wbe-gpt-method-free-20260809-recovery-v4.freeze.json",
+  "model": "gpt-5.4",
+  "campaign_note": "Subset rerun for Topic3 problematic observations after 2026-08-10 audit; native entrypoint, topic-pure, method-free.",
+  "frameworks": [
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/05_deepscientist_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": [
+        "DeepScientist",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "source_dir": "DeepScientist",
+      "native_probe_paths": [
+        "src/deepscientist/cli.py"
+      ],
+      "native_entrypoint": "ds init; ds new; ds run run-experiment --runner codex",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.4 provider",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.4 provider"
+    }
+  ]
+}

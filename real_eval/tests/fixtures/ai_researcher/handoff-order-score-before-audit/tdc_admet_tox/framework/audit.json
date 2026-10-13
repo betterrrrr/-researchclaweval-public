@@ -1,0 +1,12 @@
+{
+  "framework": "AI-Researcher",
+  "topic": "tdc_admet_tox",
+  "status": "failed",
+  "result": "failed",
+  "audit_passed": false,
+  "audit_checks": [
+    {"check": "predictions_format", "passed": true},
+    {"check": "no_hidden_labels_exposure", "passed": false, "detail": "Hidden labels path found in framework config"}
+  ],
+  "created_at": "2026-08-12T12:15:00+00:00"
+}

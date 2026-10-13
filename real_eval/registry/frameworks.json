@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "frameworks": [
+    {
+      "id": "01",
+      "name": "AI-Researcher",
+      "source_env": "RESEARCHCLAWEVAL_AI_RESEARCHER_ROOT",
+      "source_dir": "AI-Researcher",
+      "api_dependencies": [
+        "llm",
+        "literature"
+      ],
+      "supported_topics": [
+        "babylm",
+        "gave2_task2",
+        "arc_wbe_2026",
+        "psydefdetect",
+        "tdc_admet_tox",
+        "mountaincar_continuous"
+      ],
+      "upstream_url": "https://github.com/HKUDS/AI-Researcher.git",
+      "upstream_commit": "f9a6f8480860c193afff600eeffe3defcee8a978",
+      "license_spdx": "NOASSERTION",
+      "adapter_manifest": "adapters/01-ai-researcher/manifest.json"
+    },
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "source_env": "RESEARCHCLAWEVAL_AI_SCIENTIST_V2_ROOT",
+      "source_dir": "AI-Scientist-v2",
+      "api_dependencies": [
+        "llm",
+        "literature"
+      ],
+      "supported_topics": [
+        "babylm",
+        "gave2_task2",
+        "arc_wbe_2026",
+        "psydefdetect",
+        "tdc_admet_tox",
+        "mountaincar_continuous"
+      ],
+      "upstream_url": "https://github.com/SakanaAI/AI-Scientist-v2.git",
+      "upstream_commit": "96bd51617cfdbb494a9fc283af00fe090edfae48",
+      "license_spdx": "LicenseRef-AI-Scientist-Source-Code-1.0",
+      "adapter_manifest": "adapters/02-ai-scientist-v2/manifest.json"
+    },
+    {
+      "id": "03",
+      "name": "ARIS",
+      "source_env": "RESEARCHCLAWEVAL_ARIS_ROOT",
+      "source_dir": "Auto-claude-code-research-in-sleep",
+      "api_dependencies": [
+        "llm"
+      ],
+      "supported_topics": [
+        "babylm",
+        "gave2_task2",
+        "arc_wbe_2026",
+        "psydefdetect",
+        "tdc_admet_tox",
+        "mountaincar_continuous"
+      ],
+      "upstream_url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep.git",
+      "upstream_commit": "590ce825e028d6789ef9844b01b6e8b4ea736077",
+      "license_spdx": "MIT",
+      "adapter_manifest": "adapters/03-aris/manifest.json"
+    },
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "source_env": "RESEARCHCLAWEVAL_AUTORESEARCHCLAW_ROOT",
+      "source_dir": "AutoResearchClaw",
+      "api_dependencies": [
+        "llm",
+        "literature"
+      ],
+      "supported_topics": [
+        "babylm",
+        "gave2_task2",
+        "arc_wbe_2026",
+        "psydefdetect",
+        "tdc_admet_tox",
+        "mountaincar_continuous"
+      ],
+      "upstream_url": "https://github.com/aiming-lab/AutoResearchClaw.git",
+      "upstream_commit": "ea77ec19fefe9198ac1364d2cdb4f9e928cf0705",
+      "license_spdx": "MIT",
+      "adapter_manifest": "adapters/04-autoresearchclaw/manifest.json"
+    },
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "source_env": "RESEARCHCLAWEVAL_DEEPSCIENTIST_ROOT",
+      "source_dir": "DeepScientist",
+      "api_dependencies": [
+        "llm"
+      ],
+      "supported_topics": [
+        "babylm",
+        "gave2_task2",
+        "arc_wbe_2026",
+        "psydefdetect",
+        "tdc_admet_tox",
+        "mountaincar_continuous"
+      ],
+      "upstream_url": "https://github.com/ResearAI/DeepScientist.git",
+      "upstream_commit": "b36624417f0c6b8238ec02db37b94d6db2faa5b0",
+      "license_spdx": "Apache-2.0",
+      "adapter_manifest": "adapters/05-deepscientist/manifest.json"
+    },
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "source_env": "RESEARCHCLAWEVAL_DR_CLAW_ROOT",
+      "source_dir": "dr-claw",
+      "api_dependencies": [
+        "llm"
+      ],
+      "supported_topics": [
+        "babylm",
+        "gave2_task2",
+        "arc_wbe_2026",
+        "psydefdetect",
+        "tdc_admet_tox",
+        "mountaincar_continuous"
+      ],
+      "upstream_url": "https://github.com/OpenLAIR/dr-claw.git",
+      "upstream_commit": "0fab72c75368efa8f248b1d44634fe2354bee686",
+      "license_spdx": "LicenseRef-Combined-GPL-3.0-AGPL-3.0",
+      "adapter_manifest": "adapters/06-dr-claw/manifest.json"
+    },
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "source_env": "RESEARCHCLAWEVAL_EVOSCIENTIST_ROOT",
+      "source_dir": "EvoScientist",
+      "api_dependencies": [
+        "llm"
+      ],
+      "supported_topics": [
+        "babylm",
+        "gave2_task2",
+        "arc_wbe_2026",
+        "psydefdetect",
+        "tdc_admet_tox",
+        "mountaincar_continuous"
+      ],
+      "upstream_url": "https://github.com/EvoScientist/EvoScientist.git",
+      "upstream_commit": "690b903f850454c4ead3b0dda78ec82d02afc646",
+      "license_spdx": "Apache-2.0",
+      "adapter_manifest": "adapters/07-evoscientist/manifest.json"
+    }
+  ]
+}

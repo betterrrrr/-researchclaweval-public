@@ -1,0 +1,114 @@
+diff --git a/docker/requirements.txt b/docker/requirements.txt
+index 0686e41..29e5584 100644
+--- a/docker/requirements.txt
++++ b/docker/requirements.txt
+@@ -16,4 +16,5 @@ matplotlib
+ tokenizers>=0.10.2
+ ftfy
+ regex
+-pycocotools
+\ No newline at end of file
++pycocotools
++docling
+
+diff --git a/benchmark/process/dataset_candidate/psydefdetect/reference_candidates.json b/benchmark/process/dataset_candidate/psydefdetect/reference_candidates.json
+new file mode 100644
+index 0000000..77e9bd9
+--- /dev/null
++++ b/benchmark/process/dataset_candidate/psydefdetect/reference_candidates.json
+@@ -0,0 +1,55 @@
++{
++  "task": "PsyDefDetect psychological defense mechanism classification",
++  "selection_policy": "The Prepare Agent must compare this compact catalog, select at least five useful references, and return its own selection through case_resolved. Do not clone repositories or scan unrelated workspace files during catalog selection. This file is an input candidate pool, not a host selection or experiment result.",
++  "snapshot_path": "/workspace/benchmark/process/dataset_candidate/psydefdetect/reference_candidates.json",
++  "repositories": [
++    {
++      "name": "huggingface/transformers",
++      "url": "https://github.com/huggingface/transformers",
++      "language": "Python",
++      "relevance": "Transformer text classification models and training utilities"
++    },
++    {
++      "name": "UKPLab/sentence-transformers",
++      "url": "https://github.com/UKPLab/sentence-transformers",
++      "language": "Python",
++      "relevance": "Sentence and dialogue representation learning"
++    },
++    {
++      "name": "huggingface/setfit",
++      "url": "https://github.com/huggingface/setfit",
++      "language": "Python",
++      "relevance": "Efficient few-shot text classification"
++    },
++    {
++      "name": "scikit-learn/scikit-learn",
++      "url": "https://github.com/scikit-learn/scikit-learn",
++      "language": "Python",
++      "relevance": "Reproducible sparse text classification baselines"
++    },
++    {
++      "name": "cleanlab/cleanlab",
++      "url": "https://github.com/cleanlab/cleanlab",
++      "language": "Python",
++      "relevance": "Classification diagnostics and label-quality analysis"
++    },
++    {
++      "name": "thunlp/OpenPrompt",
++      "url": "https://github.com/thunlp/OpenPrompt",
++      "language": "Python",
++      "relevance": "Prompt-based text classification"
++    },
++    {
++      "name": "allenai/allennlp",
++      "url": "https://github.com/allenai/allennlp",
++      "language": "Python",
++      "relevance": "NLP classification components and experiment patterns"
++    },
++    {
++      "name": "explosion/spaCy",
++      "url": "https://github.com/explosion/spaCy",
++      "language": "Python",
++      "relevance": "Production NLP pipelines and text categorization"
++    }
++  ]
++}
+
+diff --git a/benchmark/process/dataset_candidate/psydefdetect/defense_mechanism_classification_in_supportive_conversations.tex b/benchmark/process/dataset_candidate/psydefdetect/defense_mechanism_classification_in_supportive_conversations.tex
+new file mode 100644
+index 0000000..d4bdfbd
+--- /dev/null
++++ b/benchmark/process/dataset_candidate/psydefdetect/defense_mechanism_classification_in_supportive_conversations.tex
+@@ -0,0 +1,33 @@
++\documentclass{article}
++\title{PsyDefDetect Local Concept Reference}
++\begin{document}
++\maketitle
++
++\section{Scope}
++This is a benchmark-provided conceptual reference, not a claim of an external
++publication. The authoritative inputs are the mounted PsyDefDetect dataset and
++runtime contract. The task is dialogue-level classification of a target
++help-seeker utterance using its preceding supportive-conversation context.
++
++\section{Labels and metric}
++The nine labels are No Defense, Action Defenses, Major Image-Distorting,
++Disavowal, Minor Image-Distorting, Neurotic, Obsessional, High-Adaptive, and
++Needs More Information. The primary metric is macro-F1 over positive classes
++1 through 8; class 0 is excluded from that macro average.
++
++\section{Experimental considerations}
++Useful baselines include sparse lexical features with a linear classifier and
++context-aware prompting through the injected evaluation model. Dialogue
++context, class imbalance, semantically adjacent defense categories, and output
++schema consistency are central error sources. Experiments must use the fixed
++split and official local scorer. Compare two to four materially different
++experiments, select using recorded score evidence, and immediately deliver the
++selected prediction, score, trace, and report at the workspace root.
++
++\section{Integrity constraints}
++Do not download large model assets or substitute another dataset. Any internal
++LLM experiment must use OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL from
++the injected environment. The framework must perform planning, execution,
++selection, and final delivery itself.
++
++\end{document}

@@ -1,0 +1,12 @@
+{
+  "title": "MountainCarContinuous reinforcement learning experiment",
+  "goal": "Train a continuous-action reinforcement learning agent on the MountainCarContinuous-v0 environment to maximize cumulative reward.",
+  "task": "MountainCarContinuous",
+  "metric": "cumulative reward (higher is better)",
+  "requirements": [
+    "design 2-4 materially different RL approaches (e.g. DDPG, SAC, PPO, or custom)",
+    "train on MountainCarContinuous-v0 using GPU acceleration",
+    "select best policy by highest cumulative reward",
+    "deliver research_idea.json, experiment_trace.json, final_report.md"
+  ]
+}

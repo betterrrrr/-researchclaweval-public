@@ -1,0 +1,14 @@
+diff --git a/EvoScientist/llm/models.py b/EvoScientist/llm/models.py
+index 9eeb1af..77a1cc2 100644
+--- a/EvoScientist/llm/models.py
++++ b/EvoScientist/llm/models.py
+@@ -527,6 +527,9 @@ def get_chat_model(
+     _apply_auto_config(provider, model_id, _is_third_party, kwargs, _original_provider)
+     _apply_openrouter_anthropic_prompt_cache(provider, model_id, kwargs)
+ 
++    if _env_flag_enabled("EVOSCIENTIST_DISABLE_STREAMING"):
++        kwargs["streaming"] = False
++
+     # User-level override for the OpenAI Responses API vs Chat Completions.
+     # When "false", force Chat Completions and drop reasoning (which triggers
+     # the Responses API path in langchain-openai). Only applies to OpenAI.

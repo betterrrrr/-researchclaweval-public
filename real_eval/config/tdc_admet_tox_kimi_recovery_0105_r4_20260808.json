@@ -1,0 +1,44 @@
+{
+    "topic_id": "tdc_admet_tox",
+    "evaluation_variant": "kimi",
+    "comparison_mode": "native_framework_orchestration_recovery",
+    "model": "kimi-k2.6",
+    "recovery_of": "topic5-tdc-admet-tox-kimi-recovery-0105-r3-20260807",
+    "recovery_reason": "r4 rerun: r3 01 died at launch from mis-indented heredoc closer in the wrapper (fixed: EOF at column 0); r3 05 DeepScientist returned empty SSE (codex recorded 0 tokens, no output items) on the first real run-experiment turn while host-relay direct replay of namespace MCP tools succeeded (60 tools, mcp__artifact__get_quest_state call). Host relay now logs upstream summary; this rerun captures the real request/response to isolate the empty-response cause. 01 wrapper also carries TDC_ADMET_TOX_NATIVE_RUN=1 (context bound) and the heredoc fix.",
+    "frameworks": [
+        {
+            "id": "01",
+            "name": "AI-Researcher",
+            "run_dir": "01_ai_researcher_tdc_admet_tox_fullrun",
+            "wrapper": "real_eval/scripts/01_ai_researcher_tdc_admet_tox_fullrun.sh",
+            "validator": "tdc_admet_tox_fullrun",
+            "required_paths": [
+                "AI-Researcher",
+                "docs",
+                "automation"
+            ],
+            "required_images": [
+                "ai-researcher:runtime-ready"
+            ],
+            "native_entrypoint": "research_agent/run_infer_idea.py",
+            "provider_injection": "AI-Researcher OpenAI-compatible client reads the isolated OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL; adapter enforces a context bound (enabled by TDC_ADMET_TOX_NATIVE_RUN=1 in the wrapper), blocks host-scorer paths, and keeps a method-neutral hard budget"
+        },
+        {
+            "id": "05",
+            "name": "DeepScientist",
+            "run_dir": "05_deepscientist_tdc_admet_tox_fullrun",
+            "wrapper": "real_eval/scripts/05_deepscientist_tdc_admet_tox_fullrun.sh",
+            "validator": "tdc_admet_tox_fullrun",
+            "required_paths": [
+                "DeepScientist",
+                "docs",
+                "automation"
+            ],
+            "required_images": [
+                "deepscientist:tdc-runtime-ready"
+            ],
+            "native_entrypoint": "ds init -> ds new -> ds run run-experiment --runner codex",
+            "provider_injection": "official DeepScientist CodexRunner -> kimi relay; relay expands codex 'namespace' MCP tools into chat function tools (mcp__artifact__confirm_baseline/waive_baseline etc.) and maps prefixed calls back to custom responses items, so artifact tools reach the model"
+        }
+    ]
+}

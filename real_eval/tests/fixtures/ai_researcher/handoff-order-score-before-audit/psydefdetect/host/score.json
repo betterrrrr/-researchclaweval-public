@@ -1,0 +1,8 @@
+{
+  "topic": "psydefdetect",
+  "macro_f1_official": 0.76,
+  "metric": "macro_f1_labels_1_8",
+  "scored_by": "host",
+  "contract_approved": true,
+  "created_at": "2026-08-12T12:30:00+00:00"
+}

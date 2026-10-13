@@ -1,0 +1,61 @@
+{
+ "topic_id": "tdc_admet_tox",
+ "evaluation_variant": "kimi",
+ "comparison_mode": "native_framework_orchestration_recovery",
+ "model": "kimi-k2.6",
+ "recovery_of": "topic5-tdc-admet-tox-kimi-recovery-0102030405-fixprovider-20260807 (recovered run ids: topic5-tdc-admet-tox-kimi-recovery-0102030405-fixprovider-20260807-01_ai_researcher_tdc_admet_tox_fullrun, topic5-tdc-admet-tox-kimi-recovery-0102030405-fixprovider-20260807-02_ai_scientist_v2_tdc_admet_tox_fullrun, topic5-tdc-admet-tox-kimi-recovery-0102030405-fixprovider-20260807-03_aris_tdc_admet_tox_fullrun, topic5-tdc-admet-tox-kimi-recovery-0102030405-fixprovider-20260807-04_autoresearchclaw_tdc_admet_tox_fullrun, topic5-tdc-admet-tox-kimi-recovery-0102030405-fixprovider-20260807-05_deepscientist_tdc_admet_tox_fullrun)",
+ "recovery_reason": "fixes: AI-Researcher context-bound adapter file updated on host (re-read text before final write so the injected 'import os' is preserved; previous run used a stale patched copy that lost it -> NameError in core.py); AI-Scientist-v2 topic brief now includes the long-format data schema (sample_id/endpoint/smiles/label) so generated code stops parsing sample_id as float; AutoResearchClaw config stage-9 prompt now demands a bare top-level YAML document without prose prefix, code fence, python dict literal, or plan= assignment (previous run emitted a wrapped python dict that failed YAML parse and paused the pipeline). Only frameworks 01, 02, 04 are rerun; 03 already succeeded and 05 is still running.",
+ "frameworks": [
+  {
+   "id": "01",
+   "name": "AI-Researcher",
+   "run_dir": "01_ai_researcher_tdc_admet_tox_fullrun",
+   "wrapper": "real_eval/scripts/01_ai_researcher_tdc_admet_tox_fullrun.sh",
+   "validator": "tdc_admet_tox_fullrun",
+   "required_paths": [
+    "AI-Researcher",
+    "docs",
+    "automation"
+   ],
+   "required_images": [
+    "ai-researcher:runtime-ready"
+   ],
+   "native_entrypoint": "research_agent/run_infer_idea.py",
+   "provider_injection": "AI-Researcher OpenAI-compatible client reads the isolated OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL; adapter enforces a context bound, blocks host-scorer paths, and keeps a method-neutral hard budget"
+  },
+  {
+   "id": "02",
+   "name": "AI-Scientist-v2",
+   "run_dir": "02_ai_scientist_v2_tdc_admet_tox_fullrun",
+   "wrapper": "real_eval/scripts/02_ai_scientist_v2_tdc_admet_tox_fullrun.sh",
+   "validator": "tdc_admet_tox_fullrun",
+   "required_paths": [
+    "AI-Scientist-v2",
+    "docs",
+    "automation"
+   ],
+   "required_images": [
+    "ai-scientist-v2:runtime-ready"
+   ],
+   "native_entrypoint": "perform_ideation_temp_free.py -> launch_scientist_bfts.py",
+   "provider_injection": "ai_scientist.llm OpenAI-compatible client -> kimi relay; forced named-function tool choice normalized to auto; LLM API errors raise picklable RuntimeError so the worker pool survives"
+  },
+  {
+   "id": "04",
+   "name": "AutoResearchClaw",
+   "run_dir": "04_autoresearchclaw_tdc_admet_tox_fullrun",
+   "wrapper": "real_eval/scripts/04_autoresearchclaw_tdc_admet_tox_fullrun.sh",
+   "validator": "tdc_admet_tox_fullrun",
+   "required_paths": [
+    "AutoResearchClaw",
+    "docs",
+    "automation"
+   ],
+   "required_images": [
+    "autoresearchclaw:runtime-ready"
+   ],
+   "native_entrypoint": "python -m researchclaw.cli run",
+   "provider_injection": "AutoResearchClaw openai-compatible config reads the isolated OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL; topic brief forbids degenerate repair/REFINE loops and requires promoting the best validated configuration"
+  }
+ ]
+}

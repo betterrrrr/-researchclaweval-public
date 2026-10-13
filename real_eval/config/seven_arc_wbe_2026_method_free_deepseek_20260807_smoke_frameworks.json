@@ -1,0 +1,107 @@
+{
+  "topic_id": "arc_wbe_2026",
+  "evaluation_variant": "deepseek",
+  "mode": "smoke",
+  "campaign_id": "topic3-arc-wbe-deepseek-method-free-20260807-v1",
+  "model": "deepseek-v4-flash",
+  "frameworks": [
+    {
+      "id": "01",
+      "name": "AI-Researcher",
+      "run_dir": "01_ai_researcher_arc_wbe_2026_smoke",
+      "wrapper": "real_eval/scripts/01_ai_researcher_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "required_paths": [
+        "AI-Researcher",
+        "automation"
+      ],
+      "required_images": [
+        "ai-researcher:runtime-ready"
+      ]
+    },
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "run_dir": "02_ai_scientist_v2_arc_wbe_2026_smoke",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "automation"
+      ],
+      "required_images": [
+        "ai-scientist-v2:runtime-ready"
+      ]
+    },
+    {
+      "id": "03",
+      "name": "ARIS",
+      "run_dir": "03_aris_arc_wbe_2026_smoke",
+      "wrapper": "real_eval/scripts/03_aris_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "automation"
+      ],
+      "required_images": [
+        "aris:runtime-ready"
+      ]
+    },
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_arc_wbe_2026_smoke",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "required_paths": [
+        "AutoResearchClaw",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ]
+    },
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_arc_wbe_2026_smoke",
+      "wrapper": "real_eval/scripts/05_deepscientist_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "required_paths": [
+        "DeepScientist",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ]
+    },
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_arc_wbe_2026_smoke",
+      "wrapper": "real_eval/scripts/06_drclaw_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "required_paths": [
+        "dr-claw",
+        "automation"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready"
+      ]
+    },
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_arc_wbe_2026_smoke",
+      "wrapper": "real_eval/scripts/07_evoscientist_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "required_paths": [
+        "EvoScientist",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready"
+      ]
+    }
+  ]
+}

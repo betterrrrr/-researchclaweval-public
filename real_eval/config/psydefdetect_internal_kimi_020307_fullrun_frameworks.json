@@ -1,0 +1,31 @@
+{
+  "frameworks": [
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "run_dir": "02_ai_scientist_v2_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["AI-Scientist-v2", "docs", "automation"],
+      "required_images": ["ai-scientist-v2:runtime-ready"]
+    },
+    {
+      "id": "03",
+      "name": "ARIS",
+      "run_dir": "03_aris_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/03_aris_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["Auto-claude-code-research-in-sleep", "docs", "automation"],
+      "required_images": ["aris:runtime-ready"]
+    },
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/07_evoscientist_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["EvoScientist", "docs", "automation"],
+      "required_images": ["evoscientist:runtime-ready", "nvcr.io/nvidia/pytorch:25.11-py3"]
+    }
+  ]
+}

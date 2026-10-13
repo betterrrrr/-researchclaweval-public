@@ -1,0 +1,6 @@
+{
+  "dataset": "PsyDefConv.json",
+  "dataset_path": "/data/PsyDefDetect/PsyDefConv.json",
+  "alternate_location": "/data/PsyDefDetect/",
+  "note": "The dataset file is mounted at /data/PsyDefDetect/ inside the container"
+}

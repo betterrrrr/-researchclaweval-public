@@ -1,0 +1,12 @@
+{
+  "frameworks": [
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "run_dir": "02_ai_scientist_v2_gave2_task2_fullrun",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_gave2_task2_fullrun.sh",
+      "validator": "gave2_fullrun",
+      "required_paths": ["AI-Scientist-v2", "docs", "automation"]
+    }
+  ]
+}

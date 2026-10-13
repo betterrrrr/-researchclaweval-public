@@ -1,0 +1,1028 @@
+{
+  "schema_version": 1,
+  "runs": [
+    {
+      "topic_id": "babylm",
+      "mode": "fullrun",
+      "framework_id": "01",
+      "wrapper": "real_eval/scripts/01_ai_researcher_real_babylm.sh",
+      "validator": "ai_researcher_real",
+      "run_dir": "01_ai_researcher_real_babylm",
+      "required_paths": [
+        "AI-Researcher"
+      ],
+      "required_images": [
+        "ai-researcher:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "babylm",
+      "mode": "fullrun",
+      "framework_id": "02",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_real_babylm.sh",
+      "validator": "ai_scientist_v2",
+      "run_dir": "02_ai_scientist_v2_real_babylm",
+      "required_paths": [
+        "AI-Scientist-v2"
+      ],
+      "required_images": [
+        "ai-scientist-v2:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "babylm",
+      "mode": "fullrun",
+      "framework_id": "03",
+      "wrapper": "real_eval/scripts/03_aris_real_babylm.sh",
+      "validator": "aris",
+      "run_dir": "03_aris_real_babylm",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep"
+      ],
+      "required_images": [
+        "aris:runtime-ready"
+      ],
+      "admission_status": "unsupported_non_native"
+    },
+    {
+      "topic_id": "babylm",
+      "mode": "fullrun",
+      "framework_id": "04",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_babylm_gpt_fullrun.sh",
+      "validator": "autoresearchclaw_babylm_fullrun",
+      "run_dir": "04_autoresearchclaw_babylm_gpt_fullrun",
+      "required_paths": [
+        "AutoResearchClaw"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "babylm",
+      "mode": "fullrun",
+      "framework_id": "05",
+      "wrapper": "real_eval/scripts/05_deepscientist_real_babylm.sh",
+      "validator": "deepscientist",
+      "run_dir": "05_deepscientist_real_babylm",
+      "required_paths": [
+        "DeepScientist"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "admission_status": "unsupported_non_native"
+    },
+    {
+      "topic_id": "babylm",
+      "mode": "fullrun",
+      "framework_id": "06",
+      "wrapper": "real_eval/scripts/06_drclaw_real_babylm.sh",
+      "validator": "drclaw",
+      "run_dir": "06_drclaw_real_babylm",
+      "required_paths": [
+        "dr-claw"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "babylm",
+      "mode": "fullrun",
+      "framework_id": "07",
+      "wrapper": "real_eval/scripts/07_evoscientist_auto_blackwell_babylm.sh",
+      "validator": "evoscientist_auto",
+      "run_dir": "07_evoscientist_real_babylm",
+      "required_paths": [
+        "EvoScientist"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready",
+        "nvcr.io/nvidia/pytorch:25.11-py3"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "input_pack",
+      "framework_id": "01",
+      "wrapper": "real_eval/scripts/01_ai_researcher_arc_wbe_2026_input_pack.sh",
+      "validator": "arc_wbe_2026_input_pack",
+      "run_dir": "01_ai_researcher_arc_wbe_2026_input_pack",
+      "required_paths": [
+        "AI-Researcher",
+        "docs",
+        "automation"
+      ],
+      "required_images": [],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "input_pack",
+      "framework_id": "02",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_arc_wbe_2026_input_pack.sh",
+      "validator": "arc_wbe_2026_input_pack",
+      "run_dir": "02_ai_scientist_v2_arc_wbe_2026_input_pack",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "docs",
+        "automation"
+      ],
+      "required_images": [],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "input_pack",
+      "framework_id": "03",
+      "wrapper": "real_eval/scripts/03_aris_arc_wbe_2026_input_pack.sh",
+      "validator": "arc_wbe_2026_input_pack",
+      "run_dir": "03_aris_arc_wbe_2026_input_pack",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "docs",
+        "automation"
+      ],
+      "required_images": [],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "input_pack",
+      "framework_id": "04",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_input_pack.sh",
+      "validator": "arc_wbe_2026_input_pack",
+      "run_dir": "04_autoresearchclaw_arc_wbe_2026_input_pack",
+      "required_paths": [
+        "AutoResearchClaw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "input_pack",
+      "framework_id": "05",
+      "wrapper": "real_eval/scripts/05_deepscientist_arc_wbe_2026_input_pack.sh",
+      "validator": "arc_wbe_2026_input_pack",
+      "run_dir": "05_deepscientist_arc_wbe_2026_input_pack",
+      "required_paths": [
+        "DeepScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "input_pack",
+      "framework_id": "06",
+      "wrapper": "real_eval/scripts/06_drclaw_arc_wbe_2026_input_pack.sh",
+      "validator": "arc_wbe_2026_input_pack",
+      "run_dir": "06_drclaw_arc_wbe_2026_input_pack",
+      "required_paths": [
+        "dr-claw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "input_pack",
+      "framework_id": "07",
+      "wrapper": "real_eval/scripts/07_evoscientist_arc_wbe_2026_input_pack.sh",
+      "validator": "arc_wbe_2026_input_pack",
+      "run_dir": "07_evoscientist_arc_wbe_2026_input_pack",
+      "required_paths": [
+        "EvoScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "smoke",
+      "framework_id": "01",
+      "wrapper": "real_eval/scripts/01_ai_researcher_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "run_dir": "01_ai_researcher_arc_wbe_2026_smoke",
+      "required_paths": [
+        "AI-Researcher",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-researcher:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "smoke",
+      "framework_id": "02",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "run_dir": "02_ai_scientist_v2_arc_wbe_2026_smoke",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-scientist-v2:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "smoke",
+      "framework_id": "03",
+      "wrapper": "real_eval/scripts/03_aris_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "run_dir": "03_aris_arc_wbe_2026_smoke",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "aris:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "smoke",
+      "framework_id": "04",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "run_dir": "04_autoresearchclaw_arc_wbe_2026_smoke",
+      "required_paths": [
+        "AutoResearchClaw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "smoke",
+      "framework_id": "05",
+      "wrapper": "real_eval/scripts/05_deepscientist_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "run_dir": "05_deepscientist_arc_wbe_2026_smoke",
+      "required_paths": [
+        "DeepScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "smoke",
+      "framework_id": "06",
+      "wrapper": "real_eval/scripts/06_drclaw_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "run_dir": "06_drclaw_arc_wbe_2026_smoke",
+      "required_paths": [
+        "dr-claw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "smoke",
+      "framework_id": "07",
+      "wrapper": "real_eval/scripts/07_evoscientist_arc_wbe_2026_smoke.sh",
+      "validator": "arc_wbe_2026_smoke",
+      "run_dir": "07_evoscientist_arc_wbe_2026_smoke",
+      "required_paths": [
+        "EvoScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready",
+        "nvcr.io/nvidia/pytorch:25.11-py3"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "fullrun",
+      "framework_id": "01",
+      "wrapper": "real_eval/scripts/01_ai_researcher_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "run_dir": "01_ai_researcher_arc_wbe_2026_fullrun",
+      "required_paths": [
+        "AI-Researcher",
+        "docs",
+        "automation"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "fullrun",
+      "framework_id": "02",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "run_dir": "02_ai_scientist_v2_arc_wbe_2026_fullrun",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "docs",
+        "automation"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "fullrun",
+      "framework_id": "03",
+      "wrapper": "real_eval/scripts/03_aris_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "run_dir": "03_aris_arc_wbe_2026_fullrun",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "docs",
+        "automation"
+      ],
+      "admission_status": "unsupported_non_native"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "fullrun",
+      "framework_id": "04",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "run_dir": "04_autoresearchclaw_arc_wbe_2026_fullrun",
+      "required_paths": [
+        "AutoResearchClaw",
+        "docs",
+        "automation"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "fullrun",
+      "framework_id": "05",
+      "wrapper": "real_eval/scripts/05_deepscientist_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "run_dir": "05_deepscientist_arc_wbe_2026_fullrun",
+      "required_paths": [
+        "DeepScientist",
+        "docs",
+        "automation"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "fullrun",
+      "framework_id": "06",
+      "wrapper": "real_eval/scripts/06_drclaw_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "run_dir": "06_drclaw_arc_wbe_2026_fullrun",
+      "required_paths": [
+        "dr-claw",
+        "docs",
+        "automation"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "mode": "fullrun",
+      "framework_id": "07",
+      "wrapper": "real_eval/scripts/07_evoscientist_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "run_dir": "07_evoscientist_arc_wbe_2026_fullrun",
+      "required_paths": [
+        "EvoScientist",
+        "docs",
+        "automation"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "smoke",
+      "framework_id": "01",
+      "wrapper": "real_eval/scripts/01_ai_researcher_psydefdetect_smoke.sh",
+      "validator": "psydefdetect_smoke",
+      "run_dir": "01_ai_researcher_psydefdetect_smoke",
+      "required_paths": [
+        "AI-Researcher",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-researcher:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "smoke",
+      "framework_id": "02",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_psydefdetect_smoke.sh",
+      "validator": "psydefdetect_smoke",
+      "run_dir": "02_ai_scientist_v2_psydefdetect_smoke",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-scientist-v2:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "smoke",
+      "framework_id": "03",
+      "wrapper": "real_eval/scripts/03_aris_psydefdetect_smoke.sh",
+      "validator": "psydefdetect_smoke",
+      "run_dir": "03_aris_psydefdetect_smoke",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "aris:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "smoke",
+      "framework_id": "04",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_psydefdetect_smoke.sh",
+      "validator": "psydefdetect_smoke",
+      "run_dir": "04_autoresearchclaw_psydefdetect_smoke",
+      "required_paths": [
+        "AutoResearchClaw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "smoke",
+      "framework_id": "05",
+      "wrapper": "real_eval/scripts/05_deepscientist_psydefdetect_smoke.sh",
+      "validator": "psydefdetect_smoke",
+      "run_dir": "05_deepscientist_psydefdetect_smoke",
+      "required_paths": [
+        "DeepScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "smoke",
+      "framework_id": "06",
+      "wrapper": "real_eval/scripts/06_drclaw_psydefdetect_smoke.sh",
+      "validator": "psydefdetect_smoke",
+      "run_dir": "06_drclaw_psydefdetect_smoke",
+      "required_paths": [
+        "dr-claw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "smoke",
+      "framework_id": "07",
+      "wrapper": "real_eval/scripts/07_evoscientist_psydefdetect_smoke.sh",
+      "validator": "psydefdetect_smoke",
+      "run_dir": "07_evoscientist_psydefdetect_smoke",
+      "required_paths": [
+        "EvoScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready",
+        "nvcr.io/nvidia/pytorch:25.11-py3"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "fullrun",
+      "framework_id": "01",
+      "wrapper": "real_eval/scripts/01_ai_researcher_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "run_dir": "01_ai_researcher_psydefdetect_fullrun",
+      "required_paths": [
+        "AI-Researcher",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-researcher:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "fullrun",
+      "framework_id": "02",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "run_dir": "02_ai_scientist_v2_psydefdetect_fullrun",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-scientist-v2:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "fullrun",
+      "framework_id": "03",
+      "wrapper": "real_eval/scripts/03_aris_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "run_dir": "03_aris_psydefdetect_fullrun",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "aris:runtime-ready"
+      ],
+      "admission_status": "unsupported_non_native"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "fullrun",
+      "framework_id": "04",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "run_dir": "04_autoresearchclaw_psydefdetect_fullrun",
+      "required_paths": [
+        "AutoResearchClaw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "fullrun",
+      "framework_id": "05",
+      "wrapper": "real_eval/scripts/05_deepscientist_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "run_dir": "05_deepscientist_psydefdetect_fullrun",
+      "required_paths": [
+        "DeepScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "fullrun",
+      "framework_id": "06",
+      "wrapper": "real_eval/scripts/06_drclaw_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "run_dir": "06_drclaw_psydefdetect_fullrun",
+      "required_paths": [
+        "dr-claw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "psydefdetect",
+      "mode": "fullrun",
+      "framework_id": "07",
+      "wrapper": "real_eval/scripts/07_evoscientist_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "run_dir": "07_evoscientist_psydefdetect_fullrun",
+      "required_paths": [
+        "EvoScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready",
+        "nvcr.io/nvidia/pytorch:25.11-py3"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "smoke",
+      "framework_id": "01",
+      "wrapper": "real_eval/scripts/01_ai_researcher_tdc_admet_tox_smoke.sh",
+      "validator": "tdc_admet_tox_smoke",
+      "run_dir": "01_ai_researcher_tdc_admet_tox_smoke",
+      "required_paths": [
+        "AI-Researcher",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-researcher:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "smoke",
+      "framework_id": "02",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_tdc_admet_tox_smoke.sh",
+      "validator": "tdc_admet_tox_smoke",
+      "run_dir": "02_ai_scientist_v2_tdc_admet_tox_smoke",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-scientist-v2:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "smoke",
+      "framework_id": "03",
+      "wrapper": "real_eval/scripts/03_aris_tdc_admet_tox_smoke.sh",
+      "validator": "tdc_admet_tox_smoke",
+      "run_dir": "03_aris_tdc_admet_tox_smoke",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "aris:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "smoke",
+      "framework_id": "04",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_tdc_admet_tox_smoke.sh",
+      "validator": "tdc_admet_tox_smoke",
+      "run_dir": "04_autoresearchclaw_tdc_admet_tox_smoke",
+      "required_paths": [
+        "AutoResearchClaw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "smoke",
+      "framework_id": "05",
+      "wrapper": "real_eval/scripts/05_deepscientist_tdc_admet_tox_smoke.sh",
+      "validator": "tdc_admet_tox_smoke",
+      "run_dir": "05_deepscientist_tdc_admet_tox_smoke",
+      "required_paths": [
+        "DeepScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "smoke",
+      "framework_id": "06",
+      "wrapper": "real_eval/scripts/06_drclaw_tdc_admet_tox_smoke.sh",
+      "validator": "tdc_admet_tox_smoke",
+      "run_dir": "06_drclaw_tdc_admet_tox_smoke",
+      "required_paths": [
+        "dr-claw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "smoke",
+      "framework_id": "07",
+      "wrapper": "real_eval/scripts/07_evoscientist_tdc_admet_tox_smoke.sh",
+      "validator": "tdc_admet_tox_smoke",
+      "run_dir": "07_evoscientist_tdc_admet_tox_smoke",
+      "required_paths": [
+        "EvoScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "fullrun",
+      "framework_id": "01",
+      "wrapper": "real_eval/scripts/01_ai_researcher_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "run_dir": "01_ai_researcher_tdc_admet_tox_fullrun",
+      "required_paths": [
+        "AI-Researcher",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-researcher:runtime-ready",
+        "ai-researcher-exec:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "fullrun",
+      "framework_id": "02",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "run_dir": "02_ai_scientist_v2_tdc_admet_tox_fullrun",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-scientist-v2:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "fullrun",
+      "framework_id": "03",
+      "wrapper": "real_eval/scripts/03_aris_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "run_dir": "03_aris_tdc_admet_tox_fullrun",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "docs",
+        "automation"
+      ],
+      "required_images": [],
+      "admission_status": "unsupported_non_native"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "fullrun",
+      "framework_id": "04",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "run_dir": "04_autoresearchclaw_tdc_admet_tox_fullrun",
+      "required_paths": [
+        "AutoResearchClaw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "fullrun",
+      "framework_id": "05",
+      "wrapper": "real_eval/scripts/05_deepscientist_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "run_dir": "05_deepscientist_tdc_admet_tox_fullrun",
+      "required_paths": [
+        "DeepScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "fullrun",
+      "framework_id": "06",
+      "wrapper": "real_eval/scripts/06_drclaw_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "run_dir": "06_drclaw_tdc_admet_tox_fullrun",
+      "required_paths": [
+        "dr-claw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "mode": "fullrun",
+      "framework_id": "07",
+      "wrapper": "real_eval/scripts/07_evoscientist_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "run_dir": "07_evoscientist_tdc_admet_tox_fullrun",
+      "required_paths": [
+        "EvoScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready"
+      ],
+      "admission_status": "diagnostic"
+    },
+    {
+      "topic_id": "mountaincar_continuous",
+      "mode": "fullrun",
+      "framework_id": "01",
+      "wrapper": "real_eval/scripts/01_ai_researcher_mountaincar_continuous_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "run_dir": "01_ai_researcher_mountaincar_continuous_fullrun",
+      "required_paths": [
+        "AI-Researcher",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-researcher:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "mountaincar_continuous",
+      "mode": "fullrun",
+      "framework_id": "02",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_mountaincar_continuous_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "run_dir": "02_ai_scientist_v2_mountaincar_continuous_fullrun",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "ai-scientist-v2:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "mountaincar_continuous",
+      "mode": "fullrun",
+      "framework_id": "03",
+      "wrapper": "real_eval/scripts/03_aris_mountaincar_continuous_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "run_dir": "03_aris_mountaincar_continuous_fullrun",
+      "required_paths": [
+        "Auto-claude-code-research-in-sleep",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "aris:runtime-ready"
+      ],
+      "admission_status": "unsupported_non_native"
+    },
+    {
+      "topic_id": "mountaincar_continuous",
+      "mode": "fullrun",
+      "framework_id": "04",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_mountaincar_continuous_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "run_dir": "04_autoresearchclaw_mountaincar_continuous_fullrun",
+      "required_paths": [
+        "AutoResearchClaw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "mountaincar_continuous",
+      "mode": "fullrun",
+      "framework_id": "05",
+      "wrapper": "real_eval/scripts/05_deepscientist_mountaincar_continuous_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "run_dir": "05_deepscientist_mountaincar_continuous_fullrun",
+      "required_paths": [
+        "DeepScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "mountaincar_continuous",
+      "mode": "fullrun",
+      "framework_id": "06",
+      "wrapper": "real_eval/scripts/06_drclaw_mountaincar_continuous_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "run_dir": "06_drclaw_mountaincar_continuous_fullrun",
+      "required_paths": [
+        "dr-claw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready-mountaincar"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    },
+    {
+      "topic_id": "mountaincar_continuous",
+      "mode": "fullrun",
+      "framework_id": "07",
+      "wrapper": "real_eval/scripts/07_evoscientist_mountaincar_continuous_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "run_dir": "07_evoscientist_mountaincar_continuous_fullrun",
+      "required_paths": [
+        "EvoScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready"
+      ],
+      "admission_status": "candidate_requires_runtime_evidence"
+    }
+  ]
+}

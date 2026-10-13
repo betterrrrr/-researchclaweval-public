@@ -1,0 +1,15 @@
+# ============================================================================
+# ResearchClawEval — Provider Configuration Template
+# Copy this file and fill in your API credentials:
+#   cp provider.example.toml my_provider.toml
+#   export PROVIDER_CONFIG=$PWD/my_provider.toml
+# ============================================================================
+
+# Your OpenAI-compatible API endpoint
+base_url = "https://api.your-provider.com"
+
+# Your API key (bearer token)
+experimental_bearer_token = "sk-your-api-key-here"
+
+# Model name to use for evaluation
+model = "gpt-5.4"

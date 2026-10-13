@@ -1,0 +1,25 @@
+{
+  "topic_id": "psydefdetect",
+  "evaluation_variant": "gpt6luna",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "GPT-6-Luna",
+  "frameworks": [
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/07_evoscientist_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": [
+        "EvoScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready"
+      ],
+      "native_entrypoint": "evoscientist --use-cwd --auto-mode",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-6-Luna provider (paratera relay)"
+    }
+  ]
+}

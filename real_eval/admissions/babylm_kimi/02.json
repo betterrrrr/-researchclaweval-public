@@ -1,0 +1,1 @@
+{"id": "02", "name": "AI-Scientist-v2", "runtime_image": "ai-scientist-v2:runtime-ready", "source_dir": "AI-Scientist-v2", "native_probe_paths": ["ai_scientist/perform_ideation_temp_free.py", "launch_scientist_bfts.py"]}

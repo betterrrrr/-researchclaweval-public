@@ -1,0 +1,19 @@
+{
+  "framework": "AI-Researcher",
+  "topic": "babylm",
+  "selected_experiment": "exp_02",
+  "best_validation_perplexity": 11.2,
+  "all_experiments": [
+    {"id": "exp_01", "validation_perplexity": 12.5},
+    {"id": "exp_02", "validation_perplexity": 11.2}
+  ],
+  "training_config": {
+    "model": "transformer",
+    "layers": 6,
+    "heads": 8,
+    "hidden_dim": 256,
+    "epochs": 10,
+    "batch_size": 32
+  },
+  "created_at": "2026-08-12T12:00:00+00:00"
+}

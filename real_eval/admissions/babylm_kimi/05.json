@@ -1,0 +1,1 @@
+{"id": "05", "name": "DeepScientist", "runtime_image": "deepscientist:runtime-ready", "source_dir": "DeepScientist", "native_probe_paths": ["src/deepscientist/cli.py"]}

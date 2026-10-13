@@ -1,0 +1,25 @@
+name: New Framework Adapter
+description: Propose a pinned native integration for a research-agent framework.
+title: "[Adapter] "
+labels: [adapter]
+body:
+  - type: input
+    id: upstream
+    attributes:
+      label: Upstream repository and commit
+    validations:
+      required: true
+  - type: input
+    id: entrypoint
+    attributes:
+      label: Documented native entrypoint
+    validations:
+      required: true
+  - type: textarea
+    id: ownership
+    attributes:
+      label: Native ownership evidence
+      description: Explain how the framework owns planning, experiments, selection, and delivery.
+    validations:
+      required: true
+

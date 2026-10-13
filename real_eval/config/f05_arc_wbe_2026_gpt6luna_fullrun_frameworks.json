@@ -1,0 +1,29 @@
+{
+  "topic_id": "arc_wbe_2026",
+  "evaluation_variant": "gpt6luna",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "GPT-6-Luna",
+  "frameworks": [
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/05_deepscientist_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": [
+        "DeepScientist",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "source_dir": "DeepScientist",
+      "native_probe_paths": [
+        "src/deepscientist/cli.py"
+      ],
+      "native_entrypoint": "ds init; ds new; ds run run-experiment --runner codex",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.6-Luna provider (bianxie)",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.6-Luna provider (bianxie)"
+    }
+  ]
+}

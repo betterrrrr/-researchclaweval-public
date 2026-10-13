@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "researchclaweval"
+version = "0.1.0"
+description = "Native-execution evaluation contracts and adapters for research-agent frameworks"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {file = "LICENSE"}
+authors = [{name = "ResearchClawEval Contributors"}]
+keywords = ["research-agents", "evaluation", "benchmark", "reproducibility"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = ["jsonschema[format]>=4.23,<5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<9", "ruff>=0.9,<1"]
+arc = ["datasets>=3,<5", "numpy>=1.26,<3", "pyarrow>=17,<22"]
+tdc = ["numpy>=1.26,<3", "rdkit>=2023.9.5", "scikit-learn>=1.5,<2"]
+
+[project.scripts]
+rceval = "researchclaweval.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["researchclaweval", "framework_evaluator"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "real_eval/tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+# The trees below are evaluation assets carried over from the evaluation runs
+# rather than library code: a mix of upstream framework patches, runtime
+# adapters, and contract tests written against those assets. They are excluded
+# for the same reason automation/scripts and real_eval/scripts already are.
+extend-exclude = [
+  "automation/scripts",
+  "framework_evaluator",
+  "real_eval/scripts",
+  "real_eval/adapters",
+  "real_eval/codex_relay",
+  "real_eval/evaluation",
+  "real_eval/tests",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+

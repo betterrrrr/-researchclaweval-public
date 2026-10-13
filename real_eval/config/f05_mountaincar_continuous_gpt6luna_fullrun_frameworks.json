@@ -1,0 +1,32 @@
+{
+  "topic_id": "mountaincar_continuous",
+  "evaluation_variant": "gpt6luna",
+  "comparison_mode": "native_framework_orchestration",
+  "campaign_id": "topic-mountaincar-continuous-gpt-method-free-20260815-v1",
+  "campaign_spec": "real_eval/config/topic_mountaincar_continuous_gpt_method_free_20260815_v1.json",
+  "campaign_freeze_manifest": "real_eval/config/topic-mountaincar-continuous-gpt-method-free-20260815-v1.freeze.json",
+  "model": "GPT-6-Luna",
+  "frameworks": [
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_mountaincar_continuous_fullrun",
+      "wrapper": "real_eval/scripts/05_deepscientist_mountaincar_continuous_fullrun.sh",
+      "validator": "mountaincar_continuous_fullrun",
+      "required_paths": [
+        "DeepScientist",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "source_dir": "DeepScientist",
+      "native_probe_paths": [
+        "src/deepscientist/cli.py"
+      ],
+      "native_entrypoint": "ds init; ds new; ds run run-experiment --runner codex",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.4 provider",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.4 provider"
+    }
+  ]
+}

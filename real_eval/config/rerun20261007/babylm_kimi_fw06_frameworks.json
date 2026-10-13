@@ -1,0 +1,29 @@
+{
+  "topic_id": "babylm",
+  "evaluation_variant": "kimi",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "Kimi-K2.6",
+  "frameworks": [
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_babylm_gpt6luna_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_babylm_gpt6luna_fullrun.sh",
+      "validator": "babylm_gpt6luna_fullrun",
+      "required_paths": [
+        "dr-claw"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready"
+      ],
+      "source_dir": "dr-claw",
+      "native_probe_paths": [
+        "server/cli.js"
+      ],
+      "native_entrypoint": "node server/cli.js chat --model GPT-6-Luna",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated Kimi-K2.6 provider (paratera)"
+    }
+  ],
+  "_generated_by": "gen_rerun_configs.py (2026-10-07 rerun per gpt6 playbook)",
+  "_template": "seven_babylm_gpt6luna_fullrun_frameworks.json"
+}

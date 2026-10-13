@@ -1,0 +1,33 @@
+{
+  "topic_id": "topic2",
+  "evaluation_variant": "kimi",
+  "comparison_mode": "native_framework_orchestration",
+  "campaign_id": "topic-mountaincar-continuous-kimi-recovery-06-20260819-v1",
+  "campaign_spec": "real_eval/config/seven_topic2_kimi_06only_frameworks.json",
+  "campaign_freeze_manifest": "real_eval/config/topic-mountaincar-continuous-kimi-recovery-06-20260819-v1.freeze.json",
+  "model": "kimi-k2.6",
+  "frameworks": [
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_topic2_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_topic2_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "required_paths": [
+        "dr-claw",
+        "automation"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready"
+      ],
+      "source_dir": "dr-claw",
+      "native_probe_paths": [
+        "server/cli.js"
+      ],
+      "native_entrypoint": "node server/cli.js chat --model gpt-5.4",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated kimi-k2.6 relay",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated kimi-k2.6 relay"
+    }
+  ],
+  "provider_config": "api/codex_kimi_k27_code_relay_container.toml"
+}

@@ -1,0 +1,30 @@
+{
+  "topic_id": "babylm",
+  "evaluation_variant": "gpt6luna",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "GPT-6-Luna",
+  "frameworks": [
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_babylm_gpt6luna_fullrun",
+      "wrapper": "real_eval/scripts/07_evoscientist_babylm_gpt6luna_fullrun.sh",
+      "validator": "babylm_gpt6luna_fullrun",
+      "required_paths": [
+        "EvoScientist"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready"
+      ],
+      "source_dir": "EvoScientist",
+      "native_probe_paths": [
+        "EvoScientist/__main__.py"
+      ],
+      "native_entrypoint": "evoscientist --use-cwd --auto-mode",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-6-Luna provider (paratera relay)"
+    }
+  ],
+  "campaign_id": "topic1-babylm-gpt-method-free-20260810-v1",
+  "campaign_spec": "real_eval/config/topic1_babylm_gpt_method_free_20260810_v1.json",
+  "campaign_freeze_manifest": "real_eval/config/topic1-babylm-gpt-method-free-20260810-v1.freeze.json"
+}

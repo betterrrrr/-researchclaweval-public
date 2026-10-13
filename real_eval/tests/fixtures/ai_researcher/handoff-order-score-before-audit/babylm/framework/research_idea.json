@@ -1,0 +1,13 @@
+{
+  "framework": "AI-Researcher",
+  "topic": "babylm",
+  "hypothesis": "Smaller transformer models with optimized tokenization can achieve competitive perplexity on BabyLM",
+  "method_rationale": "Parameter-efficient transformers reduce overfitting on limited data",
+  "expected_failure_modes": "Underfitting if model is too small",
+  "comparison_logic": "Compare word-level validation perplexity across model sizes",
+  "source_artifact": "stage-08/hypotheses.md",
+  "idea_locked_before_experiments": true,
+  "lock_event_id": "babylm-research-idea-v1",
+  "locked_at": "2026-08-12T10:00:00+00:00",
+  "created_at": "2026-08-12T10:00:00+00:00"
+}

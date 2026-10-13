@@ -1,0 +1,31 @@
+{
+  "topic_id": "mountaincar_continuous",
+  "evaluation_variant": "deepseek",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "DeepSeek-V4-Flash",
+  "frameworks": [
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_mountaincar_continuous_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_mountaincar_continuous_fullrun.sh",
+      "validator": "mountaincar_continuous_fullrun",
+      "required_paths": [
+        "AutoResearchClaw",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "source_dir": "AutoResearchClaw",
+      "native_probe_paths": [
+        "researchclaw/cli.py"
+      ],
+      "native_entrypoint": "python -m researchclaw.cli run",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated DeepSeek-V4-Flash provider (paratera)",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated DeepSeek-V4-Flash provider (paratera)"
+    }
+  ],
+  "_generated_by": "gen_rerun_configs.py (2026-10-07 rerun per gpt6 playbook)",
+  "_template": "seven_mountaincar_continuous_gpt6luna_fullrun_frameworks.json"
+}

@@ -1,0 +1,25 @@
+{
+  "topic_label": "GAVE2-Task2",
+  "dataset_root": "data/gave2/task2",
+  "visible_source": "GAVE2_preliminary",
+  "contract_file": "automation/gave2_task2_contract.md",
+  "files": [
+    "AI-Researcher/benchmark/final/medical_image_analysis/gave2_task2_multimodal_av_segmentation.json",
+    "AI-Scientist-v2/ai_scientist/ideas/gave2_task2_topic.md",
+    "AI-Scientist-v2/ai_scientist/ideas/my_research_topic.md",
+    "Auto-claude-code-research-in-sleep/.aris-codex-project/RESEARCH_BRIEF.md",
+    "Auto-claude-code-research-in-sleep/RESEARCH_BRIEF.md",
+    "AutoResearchClaw/config.arc.yaml",
+    "AutoResearchClaw/topic.txt",
+    "DeepScientist/DEEPSCIENTIST_BRIEF.md",
+    "EvoScientist/EVOSCIENTIST_BRIEF.md",
+    "EvoScientist/gave2_task2_start_message.txt",
+    "automation/gave2_task2_contract.md",
+    "docs/gave2_data_layout.md",
+    "docs/gave2_metric_spec.md",
+    "docs/gave2_submission_spec.md",
+    "docs/gave2_task2_summary.md",
+    "dr-claw/research_brief.json",
+    "dr-claw/tasks.json"
+  ]
+}

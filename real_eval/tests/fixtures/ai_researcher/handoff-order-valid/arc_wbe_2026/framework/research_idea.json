@@ -1,0 +1,13 @@
+{
+  "framework": "AI-Researcher",
+  "topic": "arc_wbe_2026",
+  "hypothesis": "Ensemble of white-box estimators improves accuracy on ARC-WBE-2026 challenge",
+  "method_rationale": "White-box estimation benefits from diverse model architectures",
+  "expected_failure_modes": "High variance if ensemble members are too similar",
+  "comparison_logic": "Compare single estimator vs ensemble on validation set",
+  "source_artifact": "stage-08/hypotheses.md",
+  "idea_locked_before_experiments": true,
+  "lock_event_id": "arc-research-idea-v1",
+  "locked_at": "2026-08-12T10:00:00+00:00",
+  "created_at": "2026-08-12T10:00:00+00:00"
+}

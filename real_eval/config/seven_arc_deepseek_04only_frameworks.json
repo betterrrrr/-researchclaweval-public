@@ -1,0 +1,17 @@
+{
+  "topic_id": "arc_wbe_2026",
+  "evaluation_variant": "deepseek",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "deepseek-v4-flash",
+  "frameworks": [
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": ["AutoResearchClaw", "automation"],
+      "required_images": ["autoresearchclaw:runtime-ready"]
+    }
+  ]
+}

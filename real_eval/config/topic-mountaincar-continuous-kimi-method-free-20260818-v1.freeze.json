@@ -1,0 +1,18 @@
+{
+  "campaign_id": "topic-mountaincar-continuous-kimi-method-free-20260818-v1",
+  "spec_version": "1.0",
+  "frozen_at": "2026-08-18T22:25:18.653538+08:00",
+  "status": "pending_admission",
+  "framework_admissions": {
+    "1": "pending",
+    "2": "pending",
+    "3": "pending",
+    "4": "pending",
+    "5": "pending",
+    "6": "pending",
+    "7": "pending"
+  },
+  "runtime_image_digests": {},
+  "admission_evidence_paths": {},
+  "prompt_audit_paths": {}
+}

@@ -1,0 +1,24 @@
+{
+  "topic_id": "tdc_admet_tox",
+  "evaluation_variant": "gpt56luna",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "gpt-5.6-luna",
+  "frameworks": [
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_tdc_admet_tox_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "required_paths": [
+        "AutoResearchClaw",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ]
+    }
+  ],
+  "recovery_of": "topic5-tdc-admet-tox-gpt56luna-native-20260817-v1"
+}

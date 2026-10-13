@@ -1,0 +1,1 @@
+{"id": "04", "name": "AutoResearchClaw", "runtime_image": "autoresearchclaw:runtime-ready", "source_dir": "AutoResearchClaw", "native_probe_paths": ["researchclaw/cli.py"]}

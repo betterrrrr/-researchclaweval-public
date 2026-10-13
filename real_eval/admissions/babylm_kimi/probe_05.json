@@ -1,0 +1,42 @@
+{
+  "framework_id": "05",
+  "all_passed": true,
+  "checks": {
+    "native_entrypoint": {
+      "check": "native_entrypoint",
+      "passed": true,
+      "missing": []
+    },
+    "topic_inputs": {
+      "check": "topic_inputs",
+      "passed": true,
+      "txt_files": [
+        "bnc_spoken.train.txt",
+        "childes.train.txt",
+        "gutenberg.train.txt",
+        "open_subtitles.train.txt",
+        "simple_wiki.train.txt",
+        "switchboard.train.txt"
+      ]
+    },
+    "workspace_write": {
+      "check": "workspace_write",
+      "passed": true
+    },
+    "scorer_dependencies": {
+      "check": "scorer_dependencies",
+      "passed": true,
+      "results": "no_scorer_to_check"
+    },
+    "relay_request": {
+      "check": "relay_request",
+      "passed": true,
+      "response_id": "chatcmpl-2af4a532-9b0d-9d59-85f1-c5480d6c198b",
+      "content_preview": "admission-probe-ok"
+    }
+  },
+  "model_id": "kimi-k2.6",
+  "container_base_url": "http://host.docker.internal:8787/v1",
+  "runtime_image": "deepscientist:runtime-ready",
+  "runtime_image_digest": "sha256:b119227470b4d24fa800c975434aa9260fc6ae992d4b5cf9a7c7f5c882705ec0"
+}

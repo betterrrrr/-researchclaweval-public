@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "framework_id": "01",
+  "name": "AI-Researcher",
+  "upstream_url": "https://github.com/HKUDS/AI-Researcher.git",
+  "upstream_commit": "f9a6f8480860c193afff600eeffe3defcee8a978",
+  "license_spdx": "NOASSERTION",
+  "native_entrypoint": "python run_infer_idea.py --category <topic>",
+  "native_entrypoint_source": "research_agent/run_infer_idea.py",
+  "admission_status": "candidate_requires_runtime_evidence",
+  "supported_topics": ["babylm", "gave2_task2", "arc_wbe_2026", "psydefdetect", "tdc_admet_tox"],
+  "required_env": ["OPENAI_BASE_URL", "OPENAI_API_KEY", "OPENAI_MODEL"],
+  "required_images": ["ai-researcher:runtime-ready"],
+  "patches": ["patches/0001-public-evaluation-adapter.patch"]
+}

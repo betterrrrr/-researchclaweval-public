@@ -1,0 +1,73 @@
+{
+  "standard_version": "1.0",
+  "campaign_id": "topic5-tdc-admet-tox-gpt-native-20260808-v4",
+  "files": {
+    "real_eval/config/topic5-tdc-admet-tox-gpt-native-20260808-v4.json": "6c5aee4aa1acb31847a40452961aab746c299a21a10956180c931d6541243f46",
+    "real_eval/standards/native_evaluation_standard.v1.json": "b4b40595215919146318be2aae5bd0068ac83da31a9578243ffe10564fc092d1",
+    "automation/tdc_admet_tox_contract.md": "6c5631b01340577415aed59746c4f8de4af1265760cd27a056f8b1880ddd0905",
+    "automation/scripts/generate_tdc_admet_tox_native_inputs.py": "20e9a27207eb11b297544768a32c2d3320984cf591a2df82e958c831954579d8",
+    "automation/scripts/run_tdc_admet_tox_host_score.py": "097a3048fc4bc159bab04a0612235c8f2d3a969cdcfe077d0cd5e52641524aab",
+    "real_eval/scripts/validate_framework_run.py": "130e4d4ee209fe835637cbd908feca2419cabb4e501730bb6159e35cd2bb0993",
+    "api/codex_gpt54_shubiaobiao.toml": "8d50b873ffff9ab73faec175b412fb30843802b2fc8894038b8d55d1b60c5cec",
+    "real_eval/scripts/preflight_seven_serial_tdc_admet_tox.py": "3d28a174be4a14cd02810eba3641610f8f5df1e5fa4eabf3312a4f2ae8ec9e3c",
+    "AI-Researcher/README.md": "cd27ac5ee215541fb7f42461dc2c5cb64aaf70a4a5767ee3714f92c922c6f242",
+    "real_eval/scripts/01_ai_researcher_tdc_admet_tox_fullrun.sh": "3b39dd25e089eb529b67120be4bab19e319285d014aa8133a90123b862e6ae53",
+    "real_eval/scripts/run_seven_serial_tdc_admet_tox_gpt_smoke.sh": "06b582e7a8767978cb4e1b2155e665dcd604f33f4afbf3fef658d09defecf799",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_01_admission.json": "afe561a350832413bb8009a35887d77a628e8852f31661e1ea9674b7407e4009",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_01_prompt_audit.json": "af665b314d6bda93c19e3f71b06ad2c9d1dcb0a29801fbecb2a385ad64d69e63",
+    "AI-Scientist-v2/README.md": "ed4ae4b9353641dff469679f14cbffd6547f7a6137b9d5b397f3be9a367b4e82",
+    "real_eval/scripts/02_ai_scientist_v2_tdc_admet_tox_fullrun.sh": "1ff3684884f512c30e23ca017c43c5ee70be89038b0b366ad6e2b9caef97b814",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_02_admission.json": "6a77d584c9ddfed3ecc424ea415bbc4bf1593ebafb5085e90830a00297782a97",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_02_prompt_audit.json": "506376654a7bc3072c593340f7d942e6c7ebc965b54949ce1181614e69c5fd31",
+    "Auto-claude-code-research-in-sleep/skills/skills-codex/README.md": "ff739ab1aad80bda696b6b40611972b53244012ee29ec41b66153233187beb35",
+    "real_eval/scripts/03_aris_tdc_admet_tox_fullrun.sh": "f6e41185bf13fea5ca6dcbf2fba16b4552e8aab7200f26c66f824f07722e25ee",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_03_admission.json": "650a56b7b2ec6528b4b261f82c7744fdbc2968a07783b1f30558f6e7af3dacb2",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_03_prompt_audit.json": "55a9304b6caa77c07543d67372ded58d5540a36a6cd8eb6ba7289fc7053e917f",
+    "AutoResearchClaw/README.md": "29d0a7f12f860927c25220ec651fc2d1dc57ebb95a108aef04a4c2e5f66f58e5",
+    "real_eval/scripts/04_autoresearchclaw_tdc_admet_tox_fullrun.sh": "7685404a2d7d73eba55529cfd6e7881013319b25e4446ef20957faaf96b29245",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_04_admission.json": "381ca6dff15f090b97aedcd722271d1bf26c8449cfcbececed9136d3bfe88b99",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_04_prompt_audit.json": "6a39f1f795e75e881103b45258c768bf6ac33e880915315f95d59cfe7146922d",
+    "DeepScientist/README.md": "2e3c9098a342875ddc641c796dbb3592b08a19110f7c1aad4d18b43624a728d5",
+    "real_eval/scripts/05_deepscientist_tdc_admet_tox_fullrun.sh": "0fe3b6a5fc965f261394fc60963a02b7099bb98891a60c5735c0508a0cfe4301",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_05_admission.json": "0ddd8d05091a41b916727b6e236b2ff6ece19db5bb2f219bf297f1ae9b1d3ae6",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_05_prompt_audit.json": "58a9a1999dd99ecfdd75050a4d1f4c243c96812622de87deb99a7918d010844c",
+    "dr-claw/README.md": "87363fbfc1c90a5dd9da9267d2e317d63b1f63a96f3acbba3537a179fed7013f",
+    "real_eval/scripts/06_drclaw_tdc_admet_tox_fullrun.sh": "5155ac9da9ac159fdd62219a23a4bce109053172cc4c76d9ee5b5ae273981547",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_06_admission.json": "fd176f7d2d4f90cc257391d45bc5004a2d6705f0bde0b8921c99284911713db3",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_06_prompt_audit.json": "8d6ea55597301667a44cf881c4dbbac0ca4b48c23f0f6f321d54694100ee6d55",
+    "EvoScientist/README.md": "59de49aa42e83f475416a4f65f2b23c91d46f0c7ef721bde970ffccc7228dc5f",
+    "real_eval/scripts/07_evoscientist_tdc_admet_tox_fullrun.sh": "368ce68d6ed14c508c1587f764fea118e8d8564ffe05c9f429cafc1d7e63e51b",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_07_admission.json": "8bc95162c88ca30ec020b193a1b02d39ab345792f414d806038d3f51a309ca80",
+    "real_eval/config/campaign_evidence/topic5-tdc-admet-tox-gpt-native-20260808-v4/framework_07_prompt_audit.json": "d8c03232845dfa8d5d69e8269f844a6c425dfcf33e758cd260eb1b4a946fe4fe"
+  },
+  "framework_images": {
+    "01": {
+      "runtime_image": "ai-researcher:runtime-ready",
+      "runtime_image_digest": "sha256:ace1299b07974a7807b8b36b351250d1ad9e0ffca0dd491c24c055033f258aa5"
+    },
+    "02": {
+      "runtime_image": "ai-scientist-v2:runtime-ready",
+      "runtime_image_digest": "sha256:11eb66e8fe4b9b836061618cf7c77cb1d86f44edd64160c8627d6cca75b6b913"
+    },
+    "03": {
+      "runtime_image": "aris:runtime-ready",
+      "runtime_image_digest": "sha256:e037d2d56eb1f15aee868e4133906f7a7ba2c573b02b1b0a5ac50a8b6d7deb35"
+    },
+    "04": {
+      "runtime_image": "autoresearchclaw:runtime-ready",
+      "runtime_image_digest": "sha256:4ca72e60102d6a59beaefe449452059ea8a850d128661e3b34c4a82de1508f6e"
+    },
+    "05": {
+      "runtime_image": "deepscientist:tdc-runtime-ready",
+      "runtime_image_digest": "sha256:0f97672c0d7c34d6a5c03c9fc225041ee953bea28d0ee227165a13ebc3dd1180"
+    },
+    "06": {
+      "runtime_image": "dr-claw:runtime-ready",
+      "runtime_image_digest": "sha256:4d10e6bbfda9743f8e8c409190d180d9262998f278518ba09cc366b5e0c3ae4d"
+    },
+    "07": {
+      "runtime_image": "evoscientist:runtime-ready",
+      "runtime_image_digest": "sha256:7532eadd3696c469b0be655c707c3e4ff0bdeb2ab32277101035024fda4e0795"
+    }
+  }
+}

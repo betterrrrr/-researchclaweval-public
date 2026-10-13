@@ -1,0 +1,314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "real_eval/schemas/ai_researcher_outcome.v1.json",
+  "title": "AI Researcher Outcome v1",
+  "description": "Closed outcome schema for AI researcher run reconciliation. Every reconciler verdict SHALL produce a document conforming to this schema. All objects forbid additionalProperties.",
+
+  "type": "object",
+  "required": [
+    "schema_version",
+    "outcome",
+    "classifier_version",
+    "dimensions",
+    "precedence_winner",
+    "failures",
+    "evidence_pointers"
+  ],
+  "additionalProperties": false,
+
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "ai_researcher_outcome.v1",
+      "description": "Literal schema version identifier that MUST match the $id leaf."
+    },
+
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "blocked_dataset_unavailable",
+        "blocked_authority_unverifiable",
+        "blocked_benchmark_authorization",
+        "unsupported_native_entrypoint",
+        "failed_admission",
+        "failed_engineering",
+        "failed_contract",
+        "failed_native_research",
+        "scored",
+        "finished",
+        "failed_interrupted",
+        "failed_reconciliation_unavailable",
+        "inconclusive_unknown_termination"
+      ],
+      "description": "Singular terminal outcome for this run. The precedence winner determines which value is chosen when multiple predicates match."
+    },
+
+    "classifier_version": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9._-]+$",
+      "description": "Classifier version string (e.g. 'reconcile.v1') identifying the reconciler logic that produced this outcome."
+    },
+
+    "dimensions": {
+      "type": "object",
+      "required": ["lifecycle", "integrity", "capability", "outcome"],
+      "additionalProperties": false,
+      "properties": {
+        "lifecycle": {
+          "type": "object",
+          "required": ["phase", "journal_present", "journal_nonce", "probes"],
+          "additionalProperties": false,
+          "properties": {
+            "phase": {
+              "type": "string",
+              "enum": [
+                "admission",
+                "preparation",
+                "engineering",
+                "research",
+                "scoring",
+                "finished",
+                "interrupted",
+                "unknown"
+              ],
+              "description": "Last observed lifecycle phase of the run."
+            },
+            "journal_present": {
+              "type": "boolean",
+              "description": "Whether an atomic journal file was found at launch time."
+            },
+            "journal_nonce": {
+              "type": ["string", "null"],
+              "description": "Launch nonce from the journal, or null if absent."
+            },
+            "probes": {
+              "type": "object",
+              "required": ["t0", "t15", "t30"],
+              "additionalProperties": false,
+              "properties": {
+                "t0": {
+                  "type": ["object", "null"],
+                  "additionalProperties": false,
+                  "description": "Probe snapshot at monotonic t=0s.",
+                  "properties": {
+                    "wall_clock": { "type": "string", "format": "date-time" },
+                    "monotonic_offset_s": { "type": "number" },
+                    "pid": { "type": ["integer", "null"] },
+                    "proc_start_time": { "type": ["string", "null"] },
+                    "cgroup_available": { "type": "boolean" },
+                    "daemon_socket_inode": { "type": ["integer", "null"] },
+                    "event_cursor": { "type": ["string", "null"] },
+                    "receipt_digest": { "type": "string" }
+                  },
+                  "required": ["wall_clock", "monotonic_offset_s", "receipt_digest"]
+                },
+                "t15": {
+                  "type": ["object", "null"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "wall_clock": { "type": "string", "format": "date-time" },
+                    "monotonic_offset_s": { "type": "number" },
+                    "pid": { "type": ["integer", "null"] },
+                    "proc_start_time": { "type": ["string", "null"] },
+                    "cgroup_available": { "type": "boolean" },
+                    "daemon_socket_inode": { "type": ["integer", "null"] },
+                    "event_cursor": { "type": ["string", "null"] },
+                    "receipt_digest": { "type": "string" }
+                  },
+                  "required": ["wall_clock", "monotonic_offset_s", "receipt_digest"]
+                },
+                "t30": {
+                  "type": ["object", "null"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "wall_clock": { "type": "string", "format": "date-time" },
+                    "monotonic_offset_s": { "type": "number" },
+                    "pid": { "type": ["integer", "null"] },
+                    "proc_start_time": { "type": ["string", "null"] },
+                    "cgroup_available": { "type": "boolean" },
+                    "daemon_socket_inode": { "type": ["integer", "null"] },
+                    "event_cursor": { "type": ["string", "null"] },
+                    "receipt_digest": { "type": "string" }
+                  },
+                  "required": ["wall_clock", "monotonic_offset_s", "receipt_digest"]
+                }
+              },
+              "description": "Three monotonic probe snapshots at t=0s, t=15s, t=30s, each with a receipt digest for cross-comparison. A probe is null if the reconciler could not obtain it."
+            }
+          }
+        },
+
+        "integrity": {
+          "type": "object",
+          "required": ["journal_verified", "receipts_match", "trap_cas_used", "state_consistent"],
+          "additionalProperties": false,
+          "properties": {
+            "journal_verified": {
+              "type": "boolean",
+              "description": "Whether the journal was cryptographically or structurally verified."
+            },
+            "receipts_match": {
+              "type": "boolean",
+              "description": "Whether all three probe receipts match, indicating a stable process."
+            },
+            "trap_cas_used": {
+              "type": "boolean",
+              "description": "Whether the trap-based compare-and-swap mechanism was used for state transition."
+            },
+            "state_consistent": {
+              "type": "boolean",
+              "description": "Overall assessment of state consistency across journal, probes, and receipts."
+            }
+          }
+        },
+
+        "capability": {
+          "type": "object",
+          "required": ["admission_passed", "engineering_completed", "contract_met", "native_research_completed"],
+          "additionalProperties": false,
+          "properties": {
+            "admission_passed": {
+              "type": "boolean",
+              "description": "Whether the AI researcher passed the admission gate."
+            },
+            "engineering_completed": {
+              "type": "boolean",
+              "description": "Whether the engineering phase completed (handoff from codegen)."
+            },
+            "contract_met": {
+              "type": "boolean",
+              "description": "Whether the run satisfied its contract obligations."
+            },
+            "native_research_completed": {
+              "type": "boolean",
+              "description": "Whether the native research phase completed."
+            }
+          }
+        },
+
+        "outcome": {
+          "type": "object",
+          "required": ["precedence_applied", "has_failures", "score_available", "termination_known"],
+          "additionalProperties": false,
+          "properties": {
+            "precedence_applied": {
+              "type": "boolean",
+              "description": "Whether the total precedence from the Acceptance policy was applied."
+            },
+            "has_failures": {
+              "type": "boolean",
+              "description": "Whether at least one failure predicate was recorded."
+            },
+            "score_available": {
+              "type": "boolean",
+              "description": "Whether a numeric score exists in the run output."
+            },
+            "termination_known": {
+              "type": "boolean",
+              "description": "Whether the termination condition is known (not inconclusive)."
+            }
+          }
+        }
+      },
+      "description": "Four-dimensional evaluation of the run: lifecycle phase tracking, integrity of state transitions, capability gate progression, and outcome classification attributes."
+    },
+
+    "precedence_winner": {
+      "type": "string",
+      "enum": [
+        "blocked_dataset_unavailable",
+        "blocked_authority_unverifiable",
+        "blocked_benchmark_authorization",
+        "unsupported_native_entrypoint",
+        "failed_admission",
+        "failed_engineering",
+        "failed_contract",
+        "failed_native_research",
+        "scored",
+        "finished",
+        "failed_interrupted",
+        "failed_reconciliation_unavailable",
+        "inconclusive_unknown_termination"
+      ],
+      "description": "The outcome value that won the total precedence ordering. Applied exactly once per reconciliation."
+    },
+
+    "failures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["predicate", "label", "triggered", "evidence_path"],
+        "additionalProperties": false,
+        "properties": {
+          "predicate": {
+            "type": "string",
+            "description": "Name of the failure predicate that was evaluated."
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable label for this predicate."
+          },
+          "triggered": {
+            "type": "boolean",
+            "description": "Whether this predicate evaluated to true (failure detected)."
+          },
+          "evidence_path": {
+            "type": ["string", "null"],
+            "description": "Relative path to evidence file for this predicate, or null if none."
+          }
+        }
+      },
+      "description": "Every failure predicate evaluated during reconciliation, with its trigger status and evidence pointer.",
+      "minItems": 1
+    },
+
+    "evidence_pointers": {
+      "type": "object",
+      "required": ["journal", "probe_receipts", "predicate_evaluations", "outcome_record"],
+      "additionalProperties": false,
+      "properties": {
+        "journal": {
+          "type": "string",
+          "description": "Path to the persisted journal file."
+        },
+        "probe_receipts": {
+          "type": "string",
+          "description": "Path to the probe receipts aggregate file."
+        },
+        "predicate_evaluations": {
+          "type": "string",
+          "description": "Path to the serialized predicate evaluation log."
+        },
+        "outcome_record": {
+          "type": "string",
+          "description": "Path to the final outcome record."
+        }
+      }
+    },
+
+    "metadata": {
+      "type": "object",
+      "required": ["reconciled_at", "reconciler_version", "runs_root", "run_id"],
+      "additionalProperties": false,
+      "properties": {
+        "reconciled_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 timestamp when reconciliation completed."
+        },
+        "reconciler_version": {
+          "type": "string",
+          "description": "Version identifier of the reconciler script."
+        },
+        "runs_root": {
+          "type": "string",
+          "description": "Path to the runs root directory used for this reconciliation."
+        },
+        "run_id": {
+          "type": "string",
+          "description": "Identifier of the run that was reconciled."
+        }
+      }
+    }
+  }
+}

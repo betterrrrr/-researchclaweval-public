@@ -1,0 +1,12 @@
+{
+  "title": "PsyDefDetect psychological defense detection experiment",
+  "goal": "Train a model to detect psychological defense mechanisms in text. Maximize Macro-F1 score.",
+  "metric": "Macro-F1 score (higher is better)",
+  "requirements": [
+    "design 2-4 materially different text classification approaches",
+    "train on the PsyDefDetect dataset using GPU acceleration",
+    "select best model by highest Macro-F1 score",
+    "deliver research_idea.json, experiment_trace.json, final_report.md"
+  ],
+  "dataset_path": "/data/PsyDefDetect"
+}

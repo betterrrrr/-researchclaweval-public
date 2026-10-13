@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "framework_id": "07",
+  "name": "EvoScientist",
+  "upstream_url": "https://github.com/EvoScientist/EvoScientist.git",
+  "upstream_commit": "690b903f850454c4ead3b0dda78ec82d02afc646",
+  "license_spdx": "Apache-2.0",
+  "native_entrypoint": "evoscientist --use-cwd --auto-mode",
+  "native_entrypoint_source": "EvoScientist/cli.py",
+  "admission_status": "candidate_requires_runtime_evidence",
+  "supported_topics": ["babylm", "gave2_task2", "arc_wbe_2026", "psydefdetect"],
+  "required_env": ["OPENAI_BASE_URL", "OPENAI_API_KEY", "OPENAI_MODEL"],
+  "required_images": ["evoscientist:runtime-ready", "nvcr.io/nvidia/pytorch:25.11-py3"],
+  "patches": ["patches/0001-disable-streaming-for-relay-compatibility.patch"]
+}

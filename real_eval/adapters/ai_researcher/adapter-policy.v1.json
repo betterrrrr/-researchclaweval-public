@@ -1,0 +1,288 @@
+{
+  "policy_version": "v1",
+  "policy_id": "ai_researcher_tdc_admet_tox_adapter_v1",
+  "description": "Closed policy for the AI-Researcher TDC-ADMET-Tox runtime adapter. Only the operations listed below are permitted. Any diff not covered by an entry violates the policy.",
+  "source_adapter_path": "real_eval/adapters/ai_researcher/install_runtime_adapter.py",
+  "source_adapter_sha256": "07b6214a1eb9176318483f497b4156b005333a9551d23df1e7452c8f4bfe4e1c",
+  "allowed_operation_categories": [
+    "canonical_imports",
+    "dataset_mount",
+    "local_command_server",
+    "relay_env",
+    "context_truncation",
+    "schema_tools"
+  ],
+  "forbidden_operation_categories": [
+    "hardcoded_prepare",
+    "agent_prompt_replacement",
+    "method_baseline_strategy",
+    "host_handoff_promotion",
+    "score_creation",
+    "hidden_label_access"
+  ],
+  "native_source_sha256": {
+    "research_agent/inno/environment/utils.py": "9a487086b6f6fd89d279b691d77817fcfad485e386b64ca62c241ea6e7e679d5",
+    "research_agent/inno/environment/docker_env.py": "d56b86a3f63dab58e38a4989cfdfb8c7cda6dcffac3eb7cc44a04a94359ecc64",
+    "research_agent/inno/environment/browser_env.py": "ad43c110816243064809f5f1dc73e2b26666d285772670f2f062866e443acf3e",
+    "research_agent/inno/tools/__init__.py": "680d52cc97c47f7deb8b9f85a40fb0e0913dc4696c4b32ccdc50541e6ccfbca1",
+    "research_agent/inno/agents/__init__.py": "21d5e7b4d3f4ad903aa91dd84fda96d75f8faad1074919e4ac1ef234341dfc36",
+    "research_agent/run_infer_idea.py": "09ccb25f0c497547983963cda4d5861767d724b7c4fbd1300a8a42c7ab4fa106",
+    "research_agent/inno/environment/markdown_browser/mdconvert.py": "a78e94b2dfb84433519fca3eb37940287486a997d15e36b38f6b37019aa4e105",
+    "research_agent/inno/environment/markdown_browser/requests_markdown_browser.py": "0acdb8912eb9d9965270f8e4abf1a024e89eb614053a68406cce758214da8244",
+    "research_agent/constant.py": "f33b9510406dc6eff94080aa092020998543a66386c4108f0fcb4a32e10a7a54"
+  },
+  "entries": [
+    {
+      "rule_id": "IMP-UTILS-01",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/utils.py",
+      "qualified_symbol": "run_command_in_container",
+      "ast_edit_kind": "import_rewrite",
+      "before": "from inno.util import run_command_in_container",
+      "after": "from research_agent.inno.util import run_command_in_container"
+    },
+    {
+      "rule_id": "IMP-UTILS-02",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/utils.py",
+      "qualified_symbol": "DOCKER_WORKPLACE_NAME",
+      "ast_edit_kind": "import_rewrite",
+      "before": "from constant import DOCKER_WORKPLACE_NAME",
+      "after": "from research_agent.constant import DOCKER_WORKPLACE_NAME"
+    },
+    {
+      "rule_id": "IMP-DOCKER-01",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/docker_env.py",
+      "qualified_symbol": "BASE_IMAGES, AI_USER, GITHUB_AI_TOKEN, GPUS, PLATFORM",
+      "ast_edit_kind": "import_rewrite",
+      "before": "from constant import BASE_IMAGES, AI_USER, GITHUB_AI_TOKEN, GPUS, PLATFORM",
+      "after": "from research_agent.constant import BASE_IMAGES, AI_USER, GITHUB_AI_TOKEN, GPUS, PLATFORM"
+    },
+    {
+      "rule_id": "IMP-BROWSER-01",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/browser_env.py",
+      "qualified_symbol": "read_file",
+      "ast_edit_kind": "import_rewrite",
+      "before": "from inno.io_utils import read_file",
+      "after": "from research_agent.inno.io_utils import read_file"
+    },
+    {
+      "rule_id": "IMP-BROWSER-02",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/browser_env.py",
+      "qualified_symbol": "_get_page_markdown",
+      "ast_edit_kind": "import_rewrite",
+      "before": "from inno.environment.mdconvert import _get_page_markdown",
+      "after": "from research_agent.inno.environment.mdconvert import _get_page_markdown"
+    },
+    {
+      "rule_id": "IMP-BROWSER-03",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/browser_env.py",
+      "qualified_symbol": "convert_cookies_to_python",
+      "ast_edit_kind": "import_rewrite",
+      "before": "from inno.environment.browser_cookies import convert_cookies_to_python",
+      "after": "from research_agent.inno.environment.browser_cookies import convert_cookies_to_python"
+    },
+    {
+      "rule_id": "IMP-BROWSER-04",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/browser_env.py",
+      "qualified_symbol": "COOKIES_LIST",
+      "ast_edit_kind": "import_rewrite",
+      "before": "from inno.environment.cookies_data import COOKIES_LIST",
+      "after": "from research_agent.inno.environment.cookies_data import COOKIES_LIST"
+    },
+    {
+      "rule_id": "IMP-REQBROWSER-01",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/markdown_browser/requests_markdown_browser.py",
+      "qualified_symbol": "PaperMemory",
+      "ast_edit_kind": "import_rewrite",
+      "before": "from inno.memory.paper_memory import PaperMemory",
+      "after": "from research_agent.inno.memory.paper_memory import PaperMemory"
+    },
+    {
+      "rule_id": "IMP-REQBROWSER-02",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/markdown_browser/requests_markdown_browser.py",
+      "qualified_symbol": "API_BASE_URL",
+      "ast_edit_kind": "import_rewrite",
+      "before": "from constant import API_BASE_URL",
+      "after": "from research_agent.constant import API_BASE_URL"
+    },
+    {
+      "rule_id": "TOOLS-INIT-01",
+      "operation_category": "schema_tools",
+      "target_path": "research_agent/inno/tools/__init__.py",
+      "qualified_symbol": "import_tools_recursively (call site)",
+      "ast_edit_kind": "expression_replace",
+      "before_hash": "sha256:680d52cc97c47f7deb8b9f85a40fb0e0913dc4696c4b32ccdc50541e6ccfbca1",
+      "after": "for module_name in (\n    \"terminal_tools\",\n    \"inner\",\n    \"inno_tools.planning_tools\",\n    \"inno_tools.web_tools\",\n):\n    importlib.import_module(f\"research_agent.inno.tools.{module_name}\")"
+    },
+    {
+      "rule_id": "AGENTS-INIT-01",
+      "operation_category": "schema_tools",
+      "target_path": "research_agent/inno/agents/__init__.py",
+      "qualified_symbol": "import_agents_recursively (call site)",
+      "ast_edit_kind": "expression_replace",
+      "before_hash": "sha256:21d5e7b4d3f4ad903aa91dd84fda96d75f8faad1074919e4ac1ef234341dfc36",
+      "after": "for module_name in (\n    \"inno_agent.exp_analyser\",\n    \"inno_agent.idea_agent\",\n    \"inno_agent.judge_agent\",\n    \"inno_agent.ml_agent\",\n    \"inno_agent.plan_agent\",\n    \"inno_agent.prepare_agent\",\n    \"inno_agent.survey_agent\",\n):\n    importlib.import_module(f\"research_agent.inno.agents.{module_name}\")"
+    },
+    {
+      "rule_id": "DATASET-SETUP-01",
+      "operation_category": "dataset_mount",
+      "target_path": "research_agent/inno/environment/utils.py",
+      "qualified_symbol": "setup_dataset",
+      "ast_edit_kind": "whole_body_template",
+      "template_path": "real_eval/adapters/ai_researcher/install_runtime_adapter.py",
+      "template_sha256": "07b6214a1eb9176318483f497b4156b005333a9551d23df1e7452c8f4bfe4e1c"
+    },
+    {
+      "rule_id": "DOCKER-WORKSPACE-01",
+      "operation_category": "local_command_server",
+      "target_path": "research_agent/inno/environment/docker_env.py",
+      "qualified_symbol": "DockerEnv.__init__ (docker_workplace assignment)",
+      "ast_edit_kind": "expression_replace",
+      "before": "self.docker_workplace = f\"/{config.workplace_name}\"",
+      "after": "self.docker_workplace = \"/workspace\" if config.workplace_name == \".\" else f\"/{config.workplace_name}\"\n        self._server_process = None"
+    },
+    {
+      "rule_id": "DOCKER-INIT-01",
+      "operation_category": "local_command_server",
+      "target_path": "research_agent/inno/environment/docker_env.py",
+      "qualified_symbol": "DockerEnv.init_container",
+      "ast_edit_kind": "whole_body_template",
+      "template_path": "real_eval/adapters/ai_researcher/install_runtime_adapter.py",
+      "template_sha256": "07b6214a1eb9176318483f497b4156b005333a9551d23df1e7452c8f4bfe4e1c"
+    },
+    {
+      "rule_id": "DOCKER-WAIT-01",
+      "operation_category": "relay_env",
+      "target_path": "research_agent/inno/environment/docker_env.py",
+      "qualified_symbol": "DockerEnv.wait_for_container_ready",
+      "ast_edit_kind": "whole_body_template",
+      "template_path": "real_eval/adapters/ai_researcher/install_runtime_adapter.py",
+      "template_sha256": "07b6214a1eb9176318483f497b4156b005333a9551d23df1e7452c8f4bfe4e1c"
+    },
+    {
+      "rule_id": "DOCKER-STOP-01",
+      "operation_category": "relay_env",
+      "target_path": "research_agent/inno/environment/docker_env.py",
+      "qualified_symbol": "DockerEnv.stop_container",
+      "ast_edit_kind": "whole_body_template",
+      "template_path": "real_eval/adapters/ai_researcher/install_runtime_adapter.py",
+      "template_sha256": "07b6214a1eb9176318483f497b4156b005333a9551d23df1e7452c8f4bfe4e1c"
+    },
+    {
+      "rule_id": "FLOW-OFFLINE-META-01",
+      "operation_category": "context_truncation",
+      "target_path": "research_agent/run_infer_idea.py",
+      "qualified_symbol": "load_instance (arxiv metadata)",
+      "ast_edit_kind": "expression_replace",
+      "before": "    arxiv_url = eval_instance[\"url\"]\n    meta = get_arxiv_paper_meta(arxiv_url)\n    if meta is None:\n        date = \"2024-01-01\"\n    else:\n        date = meta[\"published\"].strftime(\"%Y-%m-%d\")",
+      "after": "    arxiv_url = eval_instance[\"url\"]\n    if eval_instance.get(\"instance_id\") == \"tdc_admet_tox\":\n        date = \"2024-01-01\"\n    else:\n        meta = get_arxiv_paper_meta(arxiv_url)\n        if meta is None:\n            date = \"2024-01-01\"\n        else:\n            date = meta[\"published\"].strftime(\"%Y-%m-%d\")"
+    },
+    {
+      "rule_id": "FLOW-OFFLINE-CODE-01",
+      "operation_category": "context_truncation",
+      "target_path": "research_agent/run_infer_idea.py",
+      "qualified_symbol": "InnoFlow.forward (github_search call)",
+      "ast_edit_kind": "expression_replace",
+      "before": "github_result = self.git_search({\"metadata\": metadata})",
+      "after": "github_result = (\n            \"Use the mounted contract, validation scorer, and framework workspace only.\"\n            if category == \"tdc_admet_tox\"\n            else self.git_search({\"metadata\": metadata})\n        )"
+    },
+    {
+      "rule_id": "FLOW-IDEA-NUM-01",
+      "operation_category": "context_truncation",
+      "target_path": "research_agent/run_infer_idea.py",
+      "qualified_symbol": "IDEA_NUM (assignment)",
+      "ast_edit_kind": "expression_replace",
+      "before": "IDEA_NUM = 5",
+      "after": "IDEA_NUM = 2 if category == \"tdc_admet_tox\" else 5"
+    },
+    {
+      "rule_id": "FLOW-WORKSPACE-ROOT-01",
+      "operation_category": "context_truncation",
+      "target_path": "research_agent/run_infer_idea.py",
+      "qualified_symbol": "main (local_root assignment)",
+      "ast_edit_kind": "expression_replace",
+      "before": "local_root = os.path.join(os.getcwd(),\"workplace_paper\" , f\"task_{instance_id}\" + \"_\" + COMPLETION_MODEL.replace(\"/\", \"__\"),  args.workplace_name)",
+      "after": "local_root = \"/workspace\"\n    args.workplace_name = \".\""
+    },
+    {
+      "rule_id": "FLOW-FILE-BROWSER-01",
+      "operation_category": "context_truncation",
+      "target_path": "research_agent/run_infer_idea.py",
+      "qualified_symbol": "main (file_env instantiation)",
+      "ast_edit_kind": "expression_replace",
+      "before": "file_env = RequestsMarkdownBrowser(viewport_size=1024 * 4, local_root=env_config.local_root, workplace_name=env_config.workplace_name, downloads_folder=os.path.join(env_config.local_root, env_config.workplace_name, \"downloads\"))",
+      "after": "file_env = RequestsMarkdownBrowser(viewport_size=1024 * 4, local_root=\"/\", workplace_name=\"workspace\", downloads_folder=\"/workspace/downloads\")"
+    },
+    {
+      "rule_id": "FLOW-CLEANUP-01",
+      "operation_category": "local_command_server",
+      "target_path": "research_agent/run_infer_idea.py",
+      "qualified_symbol": "main (asyncio.run call)",
+      "ast_edit_kind": "expression_replace",
+      "before": "asyncio.run(flow(instance_path=args.instance_path, task_level=args.task_level, local_root=local_root, workplace_name=args.workplace_name, max_iter_times=args.max_iter_times, category=args.category, references = references))",
+      "after": "try:\n        asyncio.run(flow(instance_path=args.instance_path, task_level=args.task_level, local_root=local_root, workplace_name=args.workplace_name, max_iter_times=args.max_iter_times, category=args.category, references=references))\n    finally:\n        if category == \"tdc_admet_tox\":\n            code_env.stop_container()\n"
+    },
+    {
+      "rule_id": "FLOW-MAIN-CALL-01",
+      "operation_category": "context_truncation",
+      "target_path": "research_agent/run_infer_idea.py",
+      "qualified_symbol": "main (__main__ call)",
+      "ast_edit_kind": "expression_replace",
+      "before": "main(args, \"\")\n",
+      "after": "main(args, references=\"\")\n"
+    },
+    {
+      "rule_id": "CONST-PLATFORM-01",
+      "operation_category": "context_truncation",
+      "target_path": "research_agent/constant.py",
+      "qualified_symbol": "PLATFORM (constant)",
+      "ast_edit_kind": "expression_replace",
+      "before": "(no PLATFORM assignment)",
+      "after": "PLATFORM = os.getenv(\"PLATFORM\", \"linux/amd64\")\n"
+    },
+    {
+      "rule_id": "MDCONVERT-DOCLING-01",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/markdown_browser/mdconvert.py",
+      "qualified_symbol": "DocLingDocumentConverter (import)",
+      "ast_edit_kind": "import_rewrite",
+      "before": "from docling.document_converter import DocumentConverter as DocLingDocumentConverter",
+      "after": "try:\n    from docling.document_converter import DocumentConverter as DocLingDocumentConverter\nexcept ModuleNotFoundError:\n    DocLingDocumentConverter = None"
+    },
+    {
+      "rule_id": "MDCONVERT-PDF-FALLBACK-01",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/markdown_browser/mdconvert.py",
+      "qualified_symbol": "PdfConverter.convert (docling usage)",
+      "ast_edit_kind": "expression_replace",
+      "before": "        if DocLingDocumentConverter is None:\n            return None\n        converter = DocLingDocumentConverter()\n        result = converter.convert(local_path)\n        text_content = result.document.export_to_markdown()",
+      "after": "        if DocLingDocumentConverter is None:\n            text_content = pdfminer.high_level.extract_text(local_path)\n        else:\n            converter = DocLingDocumentConverter()\n            result = converter.convert(local_path)\n            text_content = result.document.export_to_markdown()"
+    },
+    {
+      "rule_id": "PAPER-MEMORY-INIT-01",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/markdown_browser/requests_markdown_browser.py",
+      "qualified_symbol": "RequestsMarkdownBrowser.__init__ (PaperMemory init)",
+      "ast_edit_kind": "expression_replace",
+      "before": "        platform = 'OpenAI'\n        self._memory = PaperMemory(project_path=\"./paper_db\", db_name=\".paper_memory_\" + platform, platform=platform, api_key=os.getenv(\"OPENAI_API_KEY\"), embedding_model='text-embedding-3-small')",
+      "after": "        self._memory = None"
+    },
+    {
+      "rule_id": "PAPER-MEMORY-USE-01",
+      "operation_category": "canonical_imports",
+      "target_path": "research_agent/inno/environment/markdown_browser/requests_markdown_browser.py",
+      "qualified_symbol": "RequestsMarkdownBrowser.retrieve_on_page (PaperMemory use)",
+      "ast_edit_kind": "expression_replace",
+      "before": "        if self._memory.count(collection) == 0:\n            self._memory.add_paper_content(paper_content=self.page_content, collection=collection)\n        query_results = self._memory.query_paper_content(query_text=question, collection=collection, n_results=5)",
+      "after": "        if self._memory is None:\n            platform = \"default\"\n            self._memory = PaperMemory(\n                project_path=\"./paper_db\",\n                db_name=\".paper_memory_\" + platform,\n                platform=platform,\n                api_key=os.getenv(\"OPENAI_API_KEY\"),\n                embedding_model=\"text-embedding-3-small\",\n            )\n        if self._memory.count(collection) == 0:\n            self._memory.add_paper_content(paper_content=self.page_content, collection=collection)\n        query_results = self._memory.query_paper_content(\n            query_text=question, collection=collection, n_results=5\n        )"
+    }
+  ]
+}

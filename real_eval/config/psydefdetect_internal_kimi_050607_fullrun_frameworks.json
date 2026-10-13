@@ -1,0 +1,31 @@
+{
+  "frameworks": [
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/05_deepscientist_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["DeepScientist", "docs", "automation"],
+      "required_images": ["deepscientist:runtime-ready"]
+    },
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["dr-claw", "docs", "automation"],
+      "required_images": ["dr-claw:runtime-ready"]
+    },
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_psydefdetect_fullrun",
+      "wrapper": "real_eval/scripts/07_evoscientist_psydefdetect_fullrun.sh",
+      "validator": "psydefdetect_fullrun",
+      "required_paths": ["EvoScientist", "docs", "automation"],
+      "required_images": ["evoscientist:runtime-ready", "nvcr.io/nvidia/pytorch:25.11-py3"]
+    }
+  ]
+}

@@ -1,0 +1,347 @@
+{
+  "spec_version": "1.0",
+  "campaign": {
+    "campaign_id": "topic3-arc-wbe-deepseek-method-free-20260807-v3",
+    "comparison_mode": "synchronized_primary",
+    "recovery_policy": "separate_campaign",
+    "primary_attempt_policy": "one_fresh_attempt_per_framework",
+    "freeze_manifest": "real_eval/config/topic3-arc-wbe-deepseek-method-free-20260807-v3.freeze.json",
+    "framework_ids": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07"
+    ],
+    "experiment_budget": {
+      "minimum": 2,
+      "maximum": 4
+    },
+    "timeout_seconds": 7200,
+    "fresh_run_root_required": true
+  },
+  "topic_adapter": {
+    "topic_id": "arc_wbe_2026",
+    "contract_file": "automation/arc_wbe_2026_contract.md",
+    "dataset_env": "ARC_WBE_2026_DATASET_ROOT",
+    "framework_dataset_mount": "/data/arc_wbe_2026",
+    "input_generator": "automation/scripts/generate_arc_wbe_2026_native_inputs.py",
+    "official_scorer": "automation/scripts/run_arc_wbe_2026_local_score.py",
+    "run_validator": "real_eval/scripts/validate_framework_run.py",
+    "selection_score_policy": "framework_visible_validation_only",
+    "official_score_owner": "host",
+    "primary_metric": "adjusted_final_layer_score_minimize",
+    "required_trace_fields": [
+      "framework_native_execution",
+      "consumed_topic_input",
+      "workspace_trace_root",
+      "framework_internal_model",
+      "framework_internal_api_base_url",
+      "experiments",
+      "selected_experiment_id",
+      "idea_artifact",
+      "idea_locked_before_experiments"
+    ],
+    "required_framework_artifacts": [
+      "research_idea.json",
+      "estimator.py",
+      "submission.json",
+      "experiment_trace.json",
+      "final_report.md"
+    ],
+    "official_score_artifact": "score.json",
+    "host_only_inputs": [
+      "official_labels",
+      "official_score_runtime"
+    ],
+    "framework_visible_inputs": [
+      "projected_weights_schema",
+      "contract",
+      "input_manifest",
+      "validation_policy"
+    ],
+    "shared_prompt_sources": [
+      "automation/arc_wbe_2026_contract.md",
+      "automation/arc_wbe_2026_execution_budget.md",
+      "automation/scripts/generate_arc_wbe_2026_native_inputs.py"
+    ]
+  },
+  "model_adapter": {
+    "variant": "deepseek",
+    "model_id": "deepseek-v4-flash",
+    "provider_config": "api/codex_deepseek_v4_flash_bianxie_relay_container.toml",
+    "wire_protocol": "responses",
+    "container_base_url": "http://host.docker.internal:8788/v1",
+    "required_env": [
+      "OPENAI_BASE_URL",
+      "OPENAI_API_KEY",
+      "OPENAI_MODEL"
+    ],
+    "relay_preflight": "real_eval/scripts/preflight_arc_wbe_2026_deepseek_relay.sh",
+    "public_provider_forbidden": true,
+    "effective_model_evidence_required": true,
+    "runtime_policy": {
+      "compact_experiment_ledger_required": true,
+      "runtime_package_install_forbidden": true,
+      "remote_request_budget": null,
+      "minimum_batch_size": null
+    }
+  },
+  "ownership": {
+    "framework_responsibilities": [
+      "planning",
+      "experiment_design",
+      "experiment_execution",
+      "comparison",
+      "selection",
+      "analysis",
+      "final_artifact_delivery"
+    ],
+    "host_responsibilities": [
+      "input_projection",
+      "lifecycle_management",
+      "official_scoring",
+      "output_validation",
+      "packaging"
+    ],
+    "host_artifact_backfill_forbidden": true
+  },
+  "ideation_policy": {
+    "framework_owns_method_choice": true,
+    "host_method_prescription_forbidden": true,
+    "prescribed_methods": [],
+    "idea_artifact": "research_idea.json",
+    "idea_locked_before_experiments": true,
+    "allowed_host_constraints": [
+      "topic_question",
+      "data_visibility",
+      "train_validation_split",
+      "official_metric",
+      "compute_budget",
+      "wall_clock_budget",
+      "request_budget",
+      "experiment_count_range",
+      "available_dependencies",
+      "network_policy",
+      "safety_policy",
+      "output_schema"
+    ],
+    "forbidden_host_constraints": [
+      "algorithm_family",
+      "feature_representation",
+      "model_architecture",
+      "hyperparameters",
+      "experiment_sequence",
+      "selected_method"
+    ]
+  },
+  "workspace_policy": {
+    "runtime_workspace": "/workspace",
+    "fresh_physical_workspace_required": true,
+    "dataset_read_only": true,
+    "contract_read_only": true,
+    "repository_root_writable_mount_forbidden": true
+  },
+  "framework_adapters": [
+    {
+      "framework_id": "01",
+      "status": "admitted",
+      "native_entrypoint": "python research_agent/run_infer_idea.py",
+      "entrypoint_source": "AI-Researcher/README.md",
+      "fullrun_wrapper": "real_eval/scripts/01_ai_researcher_arc_wbe_2026_fullrun.sh",
+      "runtime_image": "ai-researcher:runtime-ready",
+      "runtime_image_digest": "sha256:ace1299b07974a7807b8b36b351250d1ad9e0ffca0dd491c24c055033f258aa5",
+      "executor_kind": "framework_cli",
+      "provider_injection": "native client reads OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL from the isolated DeepSeek relay adapter",
+      "provider_env": [
+        "OPENAI_BASE_URL",
+        "OPENAI_API_KEY",
+        "OPENAI_MODEL"
+      ],
+      "native_log_marker": "AI_RESEARCHER_NATIVE_INFER_IDEA",
+      "same_image_smoke": "real_eval/scripts/01_ai_researcher_arc_wbe_2026_smoke.sh",
+      "prompt_sources": [
+        "real_eval/scripts/01_ai_researcher_arc_wbe_2026_fullrun.sh"
+      ],
+      "prompt_audit": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_01_prompt_audit.json",
+      "admission_evidence": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_01_admission.json",
+      "blocker": null
+    },
+    {
+      "framework_id": "02",
+      "status": "admitted",
+      "native_entrypoint": "python ai_scientist/perform_ideation_temp_free.py; python launch_scientist_bfts.py",
+      "entrypoint_source": "AI-Scientist-v2/README.md",
+      "fullrun_wrapper": "real_eval/scripts/02_ai_scientist_v2_arc_wbe_2026_fullrun.sh",
+      "runtime_image": "ai-scientist-v2:runtime-ready",
+      "runtime_image_digest": "sha256:11eb66e8fe4b9b836061618cf7c77cb1d86f44edd64160c8627d6cca75b6b913",
+      "executor_kind": "framework_cli",
+      "provider_injection": "native client reads OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL from the isolated DeepSeek relay adapter",
+      "provider_env": [
+        "OPENAI_BASE_URL",
+        "OPENAI_API_KEY",
+        "OPENAI_MODEL"
+      ],
+      "native_log_marker": "AI_SCIENTIST_V2_NATIVE_BFTS",
+      "same_image_smoke": "real_eval/scripts/02_ai_scientist_v2_arc_wbe_2026_smoke.sh",
+      "prompt_sources": [
+        "real_eval/scripts/02_ai_scientist_v2_arc_wbe_2026_fullrun.sh"
+      ],
+      "prompt_audit": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_02_prompt_audit.json",
+      "admission_evidence": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_02_admission.json",
+      "blocker": null
+    },
+    {
+      "framework_id": "03",
+      "status": "admitted",
+      "native_entrypoint": "ARIS /experiment-bridge official skill",
+      "entrypoint_source": "Auto-claude-code-research-in-sleep/README.md",
+      "fullrun_wrapper": "real_eval/scripts/03_aris_arc_wbe_2026_fullrun.sh",
+      "runtime_image": "aris:runtime-ready",
+      "runtime_image_digest": "sha256:e037d2d56eb1f15aee868e4133906f7a7ba2c573b02b1b0a5ac50a8b6d7deb35",
+      "executor_kind": "official_framework_skill",
+      "provider_injection": "native client reads OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL from the isolated DeepSeek relay adapter",
+      "provider_env": [
+        "OPENAI_BASE_URL",
+        "OPENAI_API_KEY",
+        "OPENAI_MODEL"
+      ],
+      "native_log_marker": "ARIS_NATIVE_EXPERIMENT_BRIDGE",
+      "same_image_smoke": "real_eval/scripts/03_aris_arc_wbe_2026_smoke.sh",
+      "prompt_sources": [
+        "real_eval/scripts/03_aris_arc_wbe_2026_fullrun.sh"
+      ],
+      "prompt_audit": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_03_prompt_audit.json",
+      "admission_evidence": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_03_admission.json",
+      "blocker": null
+    },
+    {
+      "framework_id": "04",
+      "status": "admitted",
+      "native_entrypoint": "python -m researchclaw.cli run",
+      "entrypoint_source": "AutoResearchClaw/README.md",
+      "fullrun_wrapper": "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_fullrun.sh",
+      "runtime_image": "autoresearchclaw:runtime-ready",
+      "runtime_image_digest": "sha256:4ca72e60102d6a59beaefe449452059ea8a850d128661e3b34c4a82de1508f6e",
+      "executor_kind": "framework_cli",
+      "provider_injection": "native client reads OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL from the isolated DeepSeek relay adapter",
+      "provider_env": [
+        "OPENAI_BASE_URL",
+        "OPENAI_API_KEY",
+        "OPENAI_MODEL"
+      ],
+      "native_log_marker": "AUTORESEARCHCLAW_NATIVE_RUN",
+      "same_image_smoke": "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_smoke.sh",
+      "prompt_sources": [
+        "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_fullrun.sh"
+      ],
+      "prompt_audit": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_04_prompt_audit.json",
+      "admission_evidence": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_04_admission.json",
+      "blocker": null
+    },
+    {
+      "framework_id": "05",
+      "status": "admitted",
+      "native_entrypoint": "ds init; ds new; ds run run-experiment --runner codex",
+      "entrypoint_source": "DeepScientist/README.md",
+      "fullrun_wrapper": "real_eval/scripts/05_deepscientist_arc_wbe_2026_fullrun.sh",
+      "runtime_image": "deepscientist:runtime-ready",
+      "runtime_image_digest": "sha256:b119227470b4d24fa800c975434aa9260fc6ae992d4b5cf9a7c7f5c882705ec0",
+      "executor_kind": "framework_cli",
+      "provider_injection": "native client reads OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL from the isolated DeepSeek relay adapter",
+      "provider_env": [
+        "OPENAI_BASE_URL",
+        "OPENAI_API_KEY",
+        "OPENAI_MODEL"
+      ],
+      "native_log_marker": "DEEPSCIENTIST_NATIVE_CODEX_RUNNER",
+      "same_image_smoke": "real_eval/scripts/05_deepscientist_arc_wbe_2026_smoke.sh",
+      "prompt_sources": [
+        "real_eval/scripts/05_deepscientist_arc_wbe_2026_fullrun.sh"
+      ],
+      "prompt_audit": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_05_prompt_audit.json",
+      "admission_evidence": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_05_admission.json",
+      "blocker": null
+    },
+    {
+      "framework_id": "06",
+      "status": "admitted",
+      "native_entrypoint": "node server/cli.js chat --model deepseek-v4-flash",
+      "entrypoint_source": "dr-claw/README.md",
+      "fullrun_wrapper": "real_eval/scripts/06_drclaw_arc_wbe_2026_fullrun.sh",
+      "runtime_image": "dr-claw:runtime-ready",
+      "runtime_image_digest": "sha256:4d10e6bbfda9743f8e8c409190d180d9262998f278518ba09cc366b5e0c3ae4d",
+      "executor_kind": "framework_cli",
+      "provider_injection": "native client reads OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL from the isolated DeepSeek relay adapter",
+      "provider_env": [
+        "OPENAI_BASE_URL",
+        "OPENAI_API_KEY",
+        "OPENAI_MODEL"
+      ],
+      "native_log_marker": "DRCLAW_NATIVE_CHAT",
+      "same_image_smoke": "real_eval/scripts/06_drclaw_arc_wbe_2026_smoke.sh",
+      "prompt_sources": [
+        "real_eval/scripts/06_drclaw_arc_wbe_2026_fullrun.sh"
+      ],
+      "prompt_audit": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_06_prompt_audit.json",
+      "admission_evidence": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_06_admission.json",
+      "blocker": null
+    },
+    {
+      "framework_id": "07",
+      "status": "admitted",
+      "native_entrypoint": "evoscientist --use-cwd --auto-mode",
+      "entrypoint_source": "EvoScientist/README.md",
+      "fullrun_wrapper": "real_eval/scripts/07_evoscientist_arc_wbe_2026_fullrun.sh",
+      "runtime_image": "evoscientist:runtime-ready",
+      "runtime_image_digest": "sha256:7532eadd3696c469b0be655c707c3e4ff0bdeb2ab32277101035024fda4e0795",
+      "executor_kind": "framework_cli",
+      "provider_injection": "native client reads OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL from the isolated DeepSeek relay adapter",
+      "provider_env": [
+        "OPENAI_BASE_URL",
+        "OPENAI_API_KEY",
+        "OPENAI_MODEL"
+      ],
+      "native_log_marker": "EVOSCIENTIST_NATIVE_CLI",
+      "same_image_smoke": "real_eval/scripts/07_evoscientist_arc_wbe_2026_smoke.sh",
+      "prompt_sources": [
+        "real_eval/scripts/07_evoscientist_arc_wbe_2026_fullrun.sh"
+      ],
+      "prompt_audit": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_07_prompt_audit.json",
+      "admission_evidence": "real_eval/config/campaign_evidence/topic3-arc-wbe-deepseek-method-free-20260807-v3/framework_07_admission.json",
+      "blocker": null
+    }
+  ],
+  "reporting": {
+    "outcome_dimensions": [
+      "native_compliance",
+      "research_completed",
+      "scored",
+      "contract_complete",
+      "engineering_complete"
+    ],
+    "result_views": [
+      "synchronized_primary",
+      "best_completed_native"
+    ],
+    "missing_score_value": "N/A",
+    "separate_model_tables": true,
+    "recovery_runs_labeled": true,
+    "idea_evaluation": {
+      "enabled": true,
+      "artifact": "research_idea.json",
+      "blind_to_framework_identity": true,
+      "judge_sees_experiment_results": false,
+      "separate_from_task_score": true,
+      "dimensions": [
+        "novelty",
+        "hypothesis_clarity",
+        "technical_soundness",
+        "feasibility",
+        "experimental_discrimination"
+      ]
+    }
+  }
+}

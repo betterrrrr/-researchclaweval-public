@@ -1,0 +1,79 @@
+{
+  "standard_version": "1.0",
+  "campaign_id": "topic4-method-free-kimi-20260806-recovery4",
+  "files": {
+    "real_eval/config/psydefdetect_method_free_kimi_recovery4_20260806.json": "0d9be9c4b8ae05d8c4452e5348d16ed5b853ae6f4f4292d3c94d57b4d4452f13",
+    "real_eval/standards/native_evaluation_standard.v1.json": "c48e3a2193d09e4ad6921fb8ee20c0cd0998be18f7418b6b63ad91818d072546",
+    "automation/psydefdetect_contract.md": "225d20108a8ee571445907d5c332d43887748dbf46d52b155419b5559952e06f",
+    "automation/scripts/generate_psydefdetect_native_inputs.py": "ed32c4d7284b2cad5cd722bc48d8ad787765309e62f7092d7a356993f5c99708",
+    "automation/scripts/run_psydefdetect_local_score.py": "9c27dc61e2d1341b124abf6544640893544d2831b45baa556c0701a4593084b6",
+    "real_eval/scripts/validate_framework_run.py": "c8a4aa782bb67948e0f4329e898265725ed642e67e38b0f4616e8da7aac05da3",
+    "api/codex_kimi_k27_code_relay_container.toml": "5e40b2b73a742f6eaed7f6510c636b48126d64309224abce1994ef9f42275fe2",
+    "real_eval/scripts/preflight_psydefdetect_kimi_relay.sh": "5dcba1344ed54d3de05e64c56beb62c0cc07df6ba0281d5bc207b57a7d5b9e7a",
+    "AI-Researcher/README.md": "cd27ac5ee215541fb7f42461dc2c5cb64aaf70a4a5767ee3714f92c922c6f242",
+    "real_eval/scripts/01_ai_researcher_psydefdetect_fullrun.sh": "bbafe55fc882d69c37ce53d22ef832e43c5efb8cf4f7cb98a390a2f5d7a5d6d5",
+    "real_eval/scripts/01_ai_researcher_psydefdetect_smoke.sh": "563e1c663a6c7dc0a7cfc25015309061d32a85ac1f249806b87d61c77f073baf",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_01_admission.json": "891033f34a39bd0510d3408be0cdf9969b585c6a2662df5eb1c5d09970af5e89",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_01_prompt_audit.json": "309bd30cfb778c4b31d961399279497a87bd44cda73528e7372a3dd73458833d",
+    "AI-Scientist-v2/README.md": "ed4ae4b9353641dff469679f14cbffd6547f7a6137b9d5b397f3be9a367b4e82",
+    "real_eval/scripts/02_ai_scientist_v2_psydefdetect_fullrun.sh": "ec172bbdb2a675b5ca7492d673dddfc43a45233c2e4856e2b5bf514204b22bc2",
+    "real_eval/scripts/02_ai_scientist_v2_psydefdetect_smoke.sh": "8d22388c06da873654e69789f30e315fa596321e21ef4c4b3dffeee8c4294fe3",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_02_admission.json": "de56fa69f2d800e51122424c6162aaf047f3ae87a03a0e33f7e4c031130d68ea",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_02_prompt_audit.json": "7aaec6db5111b3cef2b811998275e0be1def7f4a56e9b8122f89037876c0c7e8",
+    "Auto-claude-code-research-in-sleep/README.md": "702611dad4de771de42ebd8470f77be63426e4c2760d0ba30b1d9d0f3ffe02d5",
+    "real_eval/scripts/03_aris_psydefdetect_fullrun.sh": "b3a94553584bb77c87f725ab4cd40ae492bb2e2364c2d5cd51525cc3ee28f9a0",
+    "real_eval/scripts/03_aris_psydefdetect_smoke.sh": "fc18a180c823f61f7cbbc878724d741ac82dfe2956967aeed475a2c7241b806e",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_03_admission.json": "8b1d429882c26527d765df80c6331b3f6c5a9ffcf1e839085ada5b157bec2ca4",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_03_prompt_audit.json": "3fbe5a3b6354f6065a3bf85850146b28547d9a39680dfe9b0dba2f7844a6e289",
+    "AutoResearchClaw/README.md": "29d0a7f12f860927c25220ec651fc2d1dc57ebb95a108aef04a4c2e5f66f58e5",
+    "real_eval/scripts/04_autoresearchclaw_psydefdetect_fullrun.sh": "7dcae528c2b2218249d4a2ad02238afd2cf8d4fb630083f8b3d1d30b4e862e54",
+    "real_eval/scripts/04_autoresearchclaw_psydefdetect_smoke.sh": "b24d532a18ef081e9133ee1216b8054ac2b2c08ec9fcbd599b5ab77ded54c85e",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_04_admission.json": "a5499f704c057ba35a3b04b492bb3215d851d6d97c0cba70db08cff187e7d00f",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_04_prompt_audit.json": "5c15d03aa90250a1f3e1509731243dff7c4c55e0496caa0743cb7c6e41781569",
+    "DeepScientist/README.md": "2e3c9098a342875ddc641c796dbb3592b08a19110f7c1aad4d18b43624a728d5",
+    "real_eval/scripts/05_deepscientist_psydefdetect_fullrun.sh": "a572299898a0db58f821bd428bca06f2681fcea9859b5d176b9dc691444aae42",
+    "real_eval/scripts/05_deepscientist_psydefdetect_smoke.sh": "3b0892e6fdb151c6842f4369bf2acb2da815ad26e6101133e406fa1864eedda4",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_05_admission.json": "951b6cae97b2cdbbf75fef2095d9ac2233df5153713342d5015af685da2fe8dc",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_05_prompt_audit.json": "94b476848f1e0dabc687cf197ec73a5205a51ff7beba55e3185b8445f5925954",
+    "dr-claw/README.md": "87363fbfc1c90a5dd9da9267d2e317d63b1f63a96f3acbba3537a179fed7013f",
+    "real_eval/scripts/06_drclaw_psydefdetect_fullrun.sh": "2c58c89f93b02abecfc620faae3ad3aa8fb0302e7f1d170320d64d11cca244aa",
+    "real_eval/scripts/06_drclaw_psydefdetect_smoke.sh": "04a77653992d034002f72abf2798e53dfba9a9b658404a04dff6624cc8f9343f",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_06_admission.json": "830e96729d517d5b0f1316531c7e1411f90a4284b069f15ce4445e5804649e4f",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_06_prompt_audit.json": "9166dc2288f1afd36b169b185cf5cd86da4c32fddc1d3ba67c8035b3c306d159",
+    "EvoScientist/README.md": "59de49aa42e83f475416a4f65f2b23c91d46f0c7ef721bde970ffccc7228dc5f",
+    "real_eval/scripts/07_evoscientist_psydefdetect_fullrun.sh": "c0cedee52cff2281e46030515df6a785e60db48eda61f04d77b63ff4dc53de4c",
+    "real_eval/scripts/07_evoscientist_psydefdetect_smoke.sh": "76dd36d0cb599fd8422169d916f9ddf7199197dc3748b2fd2ca0cc6189e917cf",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_07_admission.json": "42a0899e208a8c6744a648fc061047e17e0b605aa7ed628a6926195df5c99e57",
+    "real_eval/config/campaign_evidence/topic4-method-free-kimi-20260806-recovery4/framework_07_prompt_audit.json": "16450e218809755992d2bb5c757ebc8151e6d5f71fa369e7a2a40fe06fb91889"
+  },
+  "framework_images": {
+    "01": {
+      "runtime_image": "ai-researcher:runtime-ready",
+      "runtime_image_digest": "sha256:ace1299b07974a7807b8b36b351250d1ad9e0ffca0dd491c24c055033f258aa5"
+    },
+    "02": {
+      "runtime_image": "ai-scientist-v2:runtime-ready",
+      "runtime_image_digest": "sha256:11eb66e8fe4b9b836061618cf7c77cb1d86f44edd64160c8627d6cca75b6b913"
+    },
+    "03": {
+      "runtime_image": "aris:runtime-ready",
+      "runtime_image_digest": "sha256:e037d2d56eb1f15aee868e4133906f7a7ba2c573b02b1b0a5ac50a8b6d7deb35"
+    },
+    "04": {
+      "runtime_image": "autoresearchclaw:runtime-ready",
+      "runtime_image_digest": "sha256:4ca72e60102d6a59beaefe449452059ea8a850d128661e3b34c4a82de1508f6e"
+    },
+    "05": {
+      "runtime_image": "deepscientist:runtime-ready",
+      "runtime_image_digest": "sha256:b119227470b4d24fa800c975434aa9260fc6ae992d4b5cf9a7c7f5c882705ec0"
+    },
+    "06": {
+      "runtime_image": "dr-claw:runtime-ready",
+      "runtime_image_digest": "sha256:4d10e6bbfda9743f8e8c409190d180d9262998f278518ba09cc366b5e0c3ae4d"
+    },
+    "07": {
+      "runtime_image": "evoscientist:runtime-ready",
+      "runtime_image_digest": "sha256:7532eadd3696c469b0be655c707c3e4ff0bdeb2ab32277101035024fda4e0795"
+    }
+  }
+}

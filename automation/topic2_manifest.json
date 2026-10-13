@@ -1,0 +1,27 @@
+{
+  "topic_label": "MountainCar-Continuous",
+  "topic_id": "topic2",
+  "upstream_repo": "facebookresearch/MLGym",
+  "upstream_commit": "9d40c1b5035202018cd7091fb4e83a9c68b377c0",
+  "upstream_task": "rlMountainCarContinuous",
+  "dataset_env": "MOUNTAINCAR_CONTINUOUS_DATASET_ROOT",
+  "dataset_root": "data/topic2",
+  "contract_file": "automation/topic2_contract.md",
+  "execution_budget_file": "automation/topic2_execution_budget.md",
+  "files": [
+    "data/topic2/src/train.py",
+    "data/topic2/src/policy.py",
+    "data/topic2/src/networks.py",
+    "data/topic2/src/helpers.py",
+    "data/topic2/src/config.yaml",
+    "data/topic2/src/__init__.py",
+    "data/topic2/protected/evaluate.py",
+    "data/topic2/requirements.txt",
+    "data/topic2/upstream_commit.txt",
+    "data/topic2/benchmark_manifest.json",
+    "automation/topic2_contract.md",
+    "automation/topic2_execution_budget.md",
+    "automation/scripts/generate_topic2_native_inputs.py",
+    "automation/scripts/run_topic2_host_score.py"
+  ]
+}

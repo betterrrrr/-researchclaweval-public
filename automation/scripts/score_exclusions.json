@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "updated": "2026-10-12",
+  "why": "被裁定**不可入账**的单格分数。管线读取本文件后，会把这些 run 的官方分与轨迹一并置空并标注原因 —— 不是静默丢弃：表里会留 `basis_trajectory: excluded_*` 与 `exclusion_reason`，行也仍在，便于复核。",
+  "how_to_add": "只登记**有决定性证据**的：占位符 0 / 非官方 metric / 数据集或划分与 canonical 不符（见 docs/evaluation_metrics.md §8 与 score-provenance 三类污染）。证据不足的不要往这里放。",
+  "scope_meaning": {
+    "score": "只废**官方分**：这个数字不是该 topic 官方指标（或它本身是占位符），但该 run 自己的轨迹/判官证据仍可用。",
+    "both": "分数与**轨迹一起废**：连实验点上的同族指标都是在非 canonical 的数据/划分上算的，整条曲线的量级都不可比。"
+  },
+  "exclusions": [
+    {
+      "run_dir": "topic3-arc-wbe-kimi-native-20260730-143935",
+      "unit_dir": "03_aris_arc_wbe_2026_fullrun",
+      "framework": "03",
+      "topic": "arc",
+      "model": "Kimi-K2.6",
+      "recorded_score": 0.0,
+      "class": "placeholder_zero",
+      "scope": "score",
+      "found": "2026-10-12",
+      "evidence": [
+        "`workspace/score.json` = `{\"score\": 0.0, \"score_source\": \"local_official_eval\", \"evaluation_status\": \"framework_native_execution\", \"note\": \"Score placeholder - actual scoring requires whestbench official evaluation\"}`。",
+        "arc 方向是**越小越好**，0 会被「每格最优」自动选成**全表 arc 冠军** —— 2026-10-12 重算冠军时实测确实如此。"
+      ],
+      "action": "官方分置空；该格真实最优为 0.0665（`runs/arc-kimi-1787178653/workspace/score.json`，`score_source: official_adapter_whest_run`）",
+      "precedent": "三类污染之①（占位符）"
+    },
+    {
+      "run_dir": "ds-full-topic2-deepseek-20260820-111225",
+      "framework": "05",
+      "topic": "mc",
+      "model": "DeepSeek-V4",
+      "recorded_score": 87.85,
+      "class": "non_official_metric",
+      "scope": "score",
+      "found": "2026-10-12",
+      "evidence": [
+        "`workspace/score.json` = `{\"score\": 87.85, \"metric\": \"best_final_return\", \"note\": \"best final_return from launch log, not Average Reward Mean. 4 stages complete, PPO reward shaping.\", \"score_source\": \"mountaincar-deepseek-launch.log\"}`。",
+        "mc 的官方指标是 **Average Reward Mean**；`best_final_return` 与之不可比 —— 87.85 会把该格从 -0.0105272 抬到接近冠军（2026-10-12 重算冠军时实测排到 mc 第 2）。"
+      ],
+      "action": "官方分置空；该格真实最优为 -0.0105272（`official_evaluate_py`）",
+      "precedent": "三类污染之②（非官方 metric）"
+    },
+    {
+      "run_dir": "01_ai_researcher__psydefdetect__deepseek-v4-flash__fullrun_psydef_01_ds_20260907_054702",
+      "framework": "01",
+      "topic": "psydef",
+      "model": "DeepSeek-V4",
+      "recorded_score": 0.18522677845993957,
+      "class": "split_not_canonical",
+      "scope": "both",
+      "found": "2026-10-12",
+      "evidence": [
+        "该 run 的 workspace/predictions.jsonl（=predictions_exp1.jsonl = predictions_exp2.jsonl，三份 md5 相同）共 472 条；与 canonical 划分比对：**仅 76 条属 canonical eval，396 条属 canonical train**。",
+        "该 run 的 workspace/score_exp1.json / score_exp2.json 自记 `eval_record_count: 472`、`split_manifest` 指向 `/workspace/project/data/psydefdetect/psydefdetect_split.json`（框架自己的划分）—— 而 canonical 是 461 eval / 1875 train。",
+        "决定性证据是**载荷**而非结构：该 run 交付的 workspace/automation/psydefdetect_split.json **sha256 等于 canonical**（2fa82b8f…），只看这个文件会把它判成合规。",
+        "全库扫描 121 份 psydef 载荷，只有这一份含 canonical-train 记录（其余 120 份都是精确 461/0）。",
+        "框架自用的那份划分文件**未随包交付**，故无法进一步核其训练集成员；但评测基底已与 canonical 不同 ⇒ 该数字与其它 psydef 格**不是同一个测量**。"
+      ],
+      "action": "官方分与轨迹一并置空（同格只有这一个 run，故该格暂无有效分）",
+      "precedent": "与 DeepScientist×psydef×Kimi 的 0.9498（替身数据 + 记录级划分）同类，按既有口径剔除"
+    }
+  ]
+}

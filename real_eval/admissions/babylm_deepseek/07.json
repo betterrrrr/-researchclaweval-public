@@ -1,0 +1,1 @@
+{"id": "07", "name": "EvoScientist", "runtime_image": "evoscientist:runtime-ready", "source_dir": "EvoScientist", "native_probe_paths": ["EvoScientist/__main__.py"]}

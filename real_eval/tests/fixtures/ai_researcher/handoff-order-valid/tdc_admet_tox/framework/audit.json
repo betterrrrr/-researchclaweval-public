@@ -1,0 +1,14 @@
+{
+  "framework": "AI-Researcher",
+  "topic": "tdc_admet_tox",
+  "status": "passed",
+  "result": "passed",
+  "audit_passed": true,
+  "audit_checks": [
+    {"check": "predictions_format", "passed": true},
+    {"check": "trace_completeness", "passed": true},
+    {"check": "no_hidden_labels_exposure", "passed": true},
+    {"check": "no_host_fields_in_framework", "passed": true}
+  ],
+  "created_at": "2026-08-12T12:15:00+00:00"
+}

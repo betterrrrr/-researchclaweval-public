@@ -1,0 +1,29 @@
+{
+  "er": {
+    "events": [
+      {
+        "evidence": "<逐字抄的原文，含时间戳或字段名>",
+        "category": "tool_error | environment | dependency | timeout | contract_violation | other",
+        "disposition": "recovered_verified | recovered_unverified | unrecovered | ignored",
+        "impact": "none | partial | cascading",
+        "note": "<一句话说明判定依据>"
+      }
+    ],
+    "log_lines_total": 0,
+    "notes": "<口径边界的说明，可留空>"
+  },
+  "cc": {
+    "stages_required": [
+      "<阶段名>"
+    ],
+    "stages": [
+      {
+        "name": "<阶段名>",
+        "completed": true,
+        "evidence": "<逐字抄的原文>",
+        "note": "<一句话说明判定依据>"
+      }
+    ],
+    "notes": "<口径边界的说明，可留空>"
+  }
+}

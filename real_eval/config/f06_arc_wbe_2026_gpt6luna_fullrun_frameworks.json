@@ -1,0 +1,29 @@
+{
+  "topic_id": "arc_wbe_2026",
+  "evaluation_variant": "gpt6luna",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "GPT-6-Luna",
+  "frameworks": [
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": [
+        "dr-claw",
+        "automation"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready-arc3"
+      ],
+      "source_dir": "dr-claw",
+      "native_probe_paths": [
+        "server/cli.js"
+      ],
+      "native_entrypoint": "node server/cli.js chat --model GPT-6-Luna",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-6-Luna provider (paratera relay)",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-6-Luna provider (paratera relay)"
+    }
+  ]
+}

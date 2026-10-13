@@ -1,0 +1,18 @@
+{
+  "topic_id": "tdc_admet_tox",
+  "evaluation_variant": "gpt",
+  "comparison_mode": "native_framework_orchestration_recovery",
+  "model": "gpt-5.4",
+  "recovery_of": "topic5-tdc-admet-tox-gpt-native-20260804-114500",
+  "frameworks": [
+    {
+      "id": "03",
+      "name": "ARIS",
+      "run_dir": "03_aris_tdc_admet_tox_fullrun",
+      "wrapper": "real_eval/scripts/03_aris_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "required_paths": ["Auto-claude-code-research-in-sleep", "docs", "automation"],
+      "required_images": ["aris:runtime-ready"]
+    }
+  ]
+}

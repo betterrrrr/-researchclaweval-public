@@ -1,0 +1,42 @@
+{
+  "framework_id": "01",
+  "all_passed": true,
+  "checks": {
+    "native_entrypoint": {
+      "check": "native_entrypoint",
+      "passed": true,
+      "missing": []
+    },
+    "topic_inputs": {
+      "check": "topic_inputs",
+      "passed": true,
+      "txt_files": [
+        "bnc_spoken.train.txt",
+        "childes.train.txt",
+        "gutenberg.train.txt",
+        "open_subtitles.train.txt",
+        "simple_wiki.train.txt",
+        "switchboard.train.txt"
+      ]
+    },
+    "workspace_write": {
+      "check": "workspace_write",
+      "passed": true
+    },
+    "scorer_dependencies": {
+      "check": "scorer_dependencies",
+      "passed": true,
+      "results": "no_scorer_to_check"
+    },
+    "relay_request": {
+      "check": "relay_request",
+      "passed": true,
+      "response_id": "chatcmpl-2eb0e628-d511-952f-a481-db8a6739407f",
+      "content_preview": ""
+    }
+  },
+  "model_id": "deepseek-v4-flash",
+  "container_base_url": "http://172.17.0.1:8788/v1",
+  "runtime_image": "ai-researcher:runtime-ready",
+  "runtime_image_digest": "sha256:9f0c3af054008586b76025681006037339b2a5653319b97c54416c5d846f0d37"
+}

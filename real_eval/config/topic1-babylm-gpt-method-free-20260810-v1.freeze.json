@@ -1,0 +1,9 @@
+{
+  "spec_version": "1.0",
+  "campaign_id": "topic1-babylm-gpt-method-free-20260810-v1",
+  "frozen_at": null,
+  "framework_image_digests": {},
+  "prompt_audit_hashes": {},
+  "admission_evidence_hashes": {},
+  "status": "pending_freeze"
+}

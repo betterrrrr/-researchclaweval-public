@@ -1,0 +1,23 @@
+{
+  "topic_id": "tdc_admet_tox",
+  "evaluation_variant": "gpt6luna",
+  "comparison_mode": "native_framework_orchestration",
+  "model": "GPT-6-Luna",
+  "frameworks": [
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_tdc_admet_tox_fullrun",
+      "wrapper": "real_eval/scripts/07_evoscientist_tdc_admet_tox_fullrun.sh",
+      "validator": "tdc_admet_tox_fullrun",
+      "required_paths": [
+        "EvoScientist",
+        "docs",
+        "automation"
+      ],
+      "required_images": [
+        "evoscientist:runtime-ready"
+      ]
+    }
+  ]
+}

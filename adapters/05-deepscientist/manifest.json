@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "framework_id": "05",
+  "name": "DeepScientist",
+  "upstream_url": "https://github.com/ResearAI/DeepScientist.git",
+  "upstream_commit": "b36624417f0c6b8238ec02db37b94d6db2faa5b0",
+  "license_spdx": "Apache-2.0",
+  "native_entrypoint": "ds run run-experiment",
+  "native_entrypoint_source": "src/deepscientist/cli.py",
+  "admission_status": "candidate_requires_runtime_evidence",
+  "supported_topics": ["babylm", "gave2_task2", "arc_wbe_2026", "psydefdetect"],
+  "required_env": ["OPENAI_BASE_URL", "OPENAI_API_KEY", "OPENAI_MODEL"],
+  "required_images": ["deepscientist:runtime-ready"],
+  "patches": []
+}

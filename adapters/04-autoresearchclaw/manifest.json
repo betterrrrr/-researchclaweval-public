@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "framework_id": "04",
+  "name": "AutoResearchClaw",
+  "upstream_url": "https://github.com/aiming-lab/AutoResearchClaw.git",
+  "upstream_commit": "ea77ec19fefe9198ac1364d2cdb4f9e928cf0705",
+  "license_spdx": "MIT",
+  "native_entrypoint": "python -m researchclaw.cli run",
+  "native_entrypoint_source": "researchclaw/cli.py",
+  "admission_status": "candidate_requires_runtime_evidence",
+  "supported_topics": ["babylm", "gave2_task2", "arc_wbe_2026", "psydefdetect"],
+  "required_env": ["OPENAI_BASE_URL", "OPENAI_API_KEY", "OPENAI_MODEL"],
+  "required_images": ["autoresearchclaw:runtime-ready"],
+  "patches": ["patches/0001-redact-http-error-logging.patch"]
+}

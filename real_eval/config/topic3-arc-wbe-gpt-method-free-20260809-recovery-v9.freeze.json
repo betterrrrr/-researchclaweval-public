@@ -1,0 +1,63 @@
+{
+  "standard_version": "1.0",
+  "campaign_id": "topic3-arc-wbe-gpt-method-free-20260809-recovery-v9",
+  "files": {
+    "real_eval/config/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9.json": "aec0cbdf2f2dbd1c2aa3c848de0dd00b74fdfaa1a4b418162d158b08bcc49f2a",
+    "real_eval/standards/native_evaluation_standard.v1.json": "b4b40595215919146318be2aae5bd0068ac83da31a9578243ffe10564fc092d1",
+    "automation/arc_white_box_estimation_2026_contract.md": "745b90784bbbdc8ba6176e5b9edc1e11ea3885d1a99e236052ba0e6818db5d0e",
+    "automation/scripts/generate_arc_wbe_2026_native_inputs.py": "9718f3f4c0362204a7e28004c6c12c55dc0715c34ab622d69a62af800d7c082f",
+    "automation/scripts/run_arc_wbe_2026_local_score.py": "861b89296c4c92e63694f0933cf4bde58377f4e683721db18452c75b6a7ed32f",
+    "real_eval/scripts/validate_framework_run.py": "8f1de1c0b9e36a74a78f1334fd0d369c6098b70714a9b41a65f241066dfde949",
+    "api/codex_gpt54_shubiaobiao.toml": "8d50b873ffff9ab73faec175b412fb30843802b2fc8894038b8d55d1b60c5cec",
+    "real_eval/scripts/preflight_arc_wbe_2026_gpt.sh": "7d91e7c087db53802a28230492e8a6d5887d67a340011ecec77582f3d9ed0a19",
+    "automation/arc_wbe_2026_execution_budget.md": "63a4d3561d91a25efc44c1274e007415f1ea615cbd76bf0cf75be76dbdac4444",
+    "automation/scripts/generate_arc_wbe_2026_weights_only_dataset.py": "4d5fae6937709cfb3132b239232edad4cff1f949db267dc8b5dc0ebf501587b3",
+    "Auto-claude-code-research-in-sleep/README.md": "702611dad4de771de42ebd8470f77be63426e4c2760d0ba30b1d9d0f3ffe02d5",
+    "real_eval/scripts/03_aris_arc_wbe_2026_fullrun.sh": "389ee2aaddf57f01122701cfe885d35e85eee01d5428cbed6e5488c457e80ea3",
+    "real_eval/scripts/03_aris_arc_wbe_2026_smoke.sh": "acb76519d3cf1600ace673edecc172c287011ea01ef9f5097e0f660d85df4181",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9/framework_03_admission.json": "fb0c01a18133c9daf2c754803cd9adf286a7d45671e1b448ad4c830f72e31eef",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9/framework_03_prompt_audit.json": "de3545d4f8f76af51546601fac720fd303d3f1e209110a67b02d3643cc565923",
+    "AutoResearchClaw/README.md": "29d0a7f12f860927c25220ec651fc2d1dc57ebb95a108aef04a4c2e5f66f58e5",
+    "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_fullrun.sh": "7e80a59987cf737a3bdafeb46a51322ebb2508d90ccd746e898ae5f96bf4a1ee",
+    "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_smoke.sh": "838268d122759d48a3dc2b8a38b319c79b35b8d90bb11e16793a3399daa7190f",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9/framework_04_admission.json": "2672c4af52043922c53fee8ac481864765dce3dea19eccd5e5b6869293bc4ce1",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9/framework_04_prompt_audit.json": "94fa454c212e9d79a9389cbc4f9851fbe83ec05a59ea3d69f7fe97217ae1063d",
+    "DeepScientist/README.md": "2e3c9098a342875ddc641c796dbb3592b08a19110f7c1aad4d18b43624a728d5",
+    "real_eval/scripts/05_deepscientist_arc_wbe_2026_fullrun.sh": "5042670a9e3ba81084f1cc25c586cb5cdcbf0208a96a7074db276e7c8a896fd4",
+    "real_eval/scripts/05_deepscientist_arc_wbe_2026_smoke.sh": "c449d8a83c2d235d7663bd850b394573d462fd9d5963ce115a11d2d8ea4168bb",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9/framework_05_admission.json": "1d33bc7cf1690e894a0bf7a2acdda069a976b4472fedd91a78a6cdce5b1fb440",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9/framework_05_prompt_audit.json": "d617439431b413e89a2cae4721f1f97456df0ace7df3dde8c0c47fe1104bb1d8",
+    "dr-claw/README.md": "87363fbfc1c90a5dd9da9267d2e317d63b1f63a96f3acbba3537a179fed7013f",
+    "real_eval/scripts/06_drclaw_arc_wbe_2026_fullrun.sh": "c91d6ad0b23cbac02cdab9500c2b75712191bb5af87fdd5fc8763d99d48010a3",
+    "real_eval/scripts/06_drclaw_arc_wbe_2026_smoke.sh": "cbabd6d4c07abaa2d55e96f4b48ce3757d6574e7438c6a7078f154b4969a0a10",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9/framework_06_admission.json": "e97cb367981c4b81a02ba0f58fa93edfdb7c5bcd7b08fcba696864747be90309",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9/framework_06_prompt_audit.json": "ddd4ce035a924d70a2106b5c6b8db6b511712fdfa99afc84ae92aa052038a21f",
+    "EvoScientist/README.md": "59de49aa42e83f475416a4f65f2b23c91d46f0c7ef721bde970ffccc7228dc5f",
+    "real_eval/scripts/07_evoscientist_arc_wbe_2026_fullrun.sh": "5a944e506e6a193d4b1669efc92fe57dbe9cc233453302d54c3fdd626c47bbae",
+    "real_eval/scripts/07_evoscientist_arc_wbe_2026_smoke.sh": "04e82ba5aac739b9380626e11f04441b9a508363a17ef9cc3ba156629e652640",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9/framework_07_admission.json": "22000dcfd10b6007d41ea883f0ffae3cce7a7e7d556687ff9e5590d91cf19e6e",
+    "real_eval/config/campaign_evidence/topic3-arc-wbe-gpt-method-free-20260809-recovery-v9/framework_07_prompt_audit.json": "7b877f5df47a542aa343f183ee0b4c0fc478be572237910fcd5dcd5a37bbf5bb"
+  },
+  "framework_images": {
+    "03": {
+      "runtime_image": "aris:runtime-ready",
+      "runtime_image_digest": "sha256:e037d2d56eb1f15aee868e4133906f7a7ba2c573b02b1b0a5ac50a8b6d7deb35"
+    },
+    "04": {
+      "runtime_image": "autoresearchclaw:runtime-ready",
+      "runtime_image_digest": "sha256:4ca72e60102d6a59beaefe449452059ea8a850d128661e3b34c4a82de1508f6e"
+    },
+    "05": {
+      "runtime_image": "deepscientist:runtime-ready",
+      "runtime_image_digest": "sha256:b119227470b4d24fa800c975434aa9260fc6ae992d4b5cf9a7c7f5c882705ec0"
+    },
+    "06": {
+      "runtime_image": "dr-claw:runtime-ready",
+      "runtime_image_digest": "sha256:4d10e6bbfda9743f8e8c409190d180d9262998f278518ba09cc366b5e0c3ae4d"
+    },
+    "07": {
+      "runtime_image": "evoscientist:runtime-ready",
+      "runtime_image_digest": "sha256:7532eadd3696c469b0be655c707c3e4ff0bdeb2ab32277101035024fda4e0795"
+    }
+  }
+}

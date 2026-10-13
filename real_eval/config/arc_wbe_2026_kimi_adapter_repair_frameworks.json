@@ -1,0 +1,27 @@
+{
+  "topic_id": "arc_wbe_2026",
+  "comparison_mode": "native_framework_orchestration_adapter_repair",
+  "model": "kimi-k2.6",
+  "frameworks": [
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "run_dir": "02_ai_scientist_v2_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": ["AI-Scientist-v2", "docs", "automation"],
+      "native_entrypoint": "perform_ideation_temp_free.py -> launch_scientist_bfts.py",
+      "kimi_injection": "ai_scientist.llm OpenAI-compatible client"
+    },
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": ["AutoResearchClaw", "docs", "automation"],
+      "native_entrypoint": "python -m researchclaw.cli run",
+      "kimi_injection": "openai-compatible config and injected environment"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "topic_id": "babylm",
+  "evaluation_variant": "gpt",
+  "comparison_mode": "native_framework_orchestration",
+  "campaign_id": "topic1-babylm-gpt-method-free-20260810-v1",
+  "campaign_spec": "real_eval/config/topic1_babylm_gpt_method_free_20260810_v1.json",
+  "campaign_freeze_manifest": "real_eval/config/topic1-babylm-gpt-method-free-20260810-v1.freeze.json",
+  "model": "gpt-5.4",
+  "frameworks": [
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_babylm_gpt_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_babylm_gpt_fullrun.sh",
+      "validator": "babylm_gpt_fullrun",
+      "required_paths": [
+        "AutoResearchClaw"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "source_dir": "AutoResearchClaw",
+      "native_probe_paths": [
+        "researchclaw/cli.py"
+      ],
+      "native_entrypoint": "python -m researchclaw.cli run",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated gpt-5.4 provider"
+    }
+  ]
+}

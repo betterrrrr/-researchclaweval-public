@@ -1,0 +1,235 @@
+diff --git a/server/cli-chat.js b/server/cli-chat.js
+index e74b8bc..1677189 100644
+--- a/server/cli-chat.js
++++ b/server/cli-chat.js
+@@ -16,10 +16,10 @@ import { exec } from 'child_process';
+ import { promisify } from 'util';
+ import spawnAsync from './utils/spawnAsync.js';
+ import { safePath } from './utils/safePath.js';
++import { getOpenRouterBaseUrl, getOpenRouterProviderHeaders } from './utils/openrouterConfig.js';
+ 
+ const execAsync = promisify(exec);
+ 
+-const OPENROUTER_BASE_URL = 'https://openrouter.ai/api/v1';
+ const MAX_AGENT_TURNS = 25;
+ const BASH_TIMEOUT_MS = 120_000;
+ const MAX_OUTPUT_CHARS = 80_000;
+@@ -280,19 +280,18 @@ async function executeTool(name, args, workingDir) {
+ 
+ // ── Streaming API call ────────────────────────────────────────────────────────
+ 
+-async function streamApiCall(apiKey, model, messages, tools) {
++async function streamApiCall(baseUrl, apiKey, model, messages, tools) {
+   const body = { model, messages, stream: true, stream_options: { include_usage: true } };
+   if (tools?.length) {
+     body.tools = tools;
+     body.tool_choice = 'auto';
+   }
+-  return fetch(`${OPENROUTER_BASE_URL}/chat/completions`, {
++  return fetch(`${baseUrl}/chat/completions`, {
+     method: 'POST',
+     headers: {
+       Authorization: `Bearer ${apiKey}`,
+       'Content-Type': 'application/json',
+-      'HTTP-Referer': 'https://github.com/OpenLAIR/dr-claw',
+-      'X-Title': 'Dr. Claw CLI',
++      ...getOpenRouterProviderHeaders(baseUrl, 'Dr. Claw CLI'),
+     },
+     body: JSON.stringify(body),
+   });
+@@ -352,8 +351,11 @@ async function consumeStream(response, onText) {
+ // ── Main chat loop ────────────────────────────────────────────────────────────
+ 
+ export async function startChat(options = {}) {
+-  const apiKey = options.key || process.env.OPENROUTER_API_KEY;
+-  const model = options.model || process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4';
++  const apiKey = options.key || process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
++  const model = options.model || process.env.OPENAI_MODEL || process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4';
++  const baseUrl = getOpenRouterBaseUrl({
++    OPENROUTER_BASE_URL: options.baseUrl || process.env.OPENAI_BASE_URL || process.env.OPENROUTER_BASE_URL,
++  });
+   const workingDir = process.cwd();
+ 
+   if (!apiKey) {
+@@ -368,6 +370,7 @@ export async function startChat(options = {}) {
+   console.log(styled(c.bold, `  Dr. Claw Chat — ${modelShort}`));
+   console.log(styled(c.dim, `  ─────────────────────────────────────`));
+   console.log(styled(c.gray, `  Model:     ${model}`));
++  console.log(styled(c.gray, `  Base URL:  ${baseUrl}`));
+   console.log(styled(c.gray, `  Directory: ${workingDir}`));
+   console.log(styled(c.gray, `  Tools:     Read, Write, Edit, Bash, Glob, Grep, LS, WebSearch`));
+   console.log(styled(c.dim, `  Type "exit" or Ctrl+C to quit.\n`));
+@@ -389,42 +392,59 @@ export async function startChat(options = {}) {
+ 
+   const messages = [{ role: 'system', content: systemPrompt }];
+ 
++  let turnInProgress = false;
++  let inputClosed = false;
++  let shuttingDown = false;
++
++  const finish = () => {
++    if (shuttingDown) return;
++    shuttingDown = true;
++    console.log(styled(c.dim, '\n  Goodbye!\n'));
++    rl.close();
++    process.exit(0);
++  };
++
+   const ask = () => {
+     rl.prompt();
+     rl.once('line', async (line) => {
+       const input = line.trim();
+       if (!input) { ask(); return; }
+       if (input.toLowerCase() === 'exit' || input.toLowerCase() === 'quit') {
+-        console.log(styled(c.dim, '\n  Goodbye!\n'));
+-        rl.close();
+-        process.exit(0);
++        finish();
++        return;
+       }
+ 
++      turnInProgress = true;
+       messages.push({ role: 'user', content: input });
+       process.stdout.write('\n');
+ 
+       try {
+-        await agentLoop(apiKey, model, messages, workingDir);
++        await agentLoop(baseUrl, apiKey, model, messages, workingDir);
+       } catch (err) {
+         console.error(styled(c.red, `\n  Error: ${err.message}\n`));
+       }
+ 
++      turnInProgress = false;
+       process.stdout.write('\n');
+-      ask();
++      if (inputClosed) {
++        finish();
++      } else {
++        ask();
++      }
+     });
+   };
+ 
+   rl.on('close', () => {
+-    console.log(styled(c.dim, '\n  Goodbye!\n'));
+-    process.exit(0);
++    inputClosed = true;
++    if (!turnInProgress) finish();
+   });
+ 
+   ask();
+ }
+ 
+-async function agentLoop(apiKey, model, messages, workingDir) {
++async function agentLoop(baseUrl, apiKey, model, messages, workingDir) {
+   for (let turn = 0; turn < MAX_AGENT_TURNS; turn++) {
+-    const response = await streamApiCall(apiKey, model, messages, TOOL_SCHEMAS);
++    const response = await streamApiCall(baseUrl, apiKey, model, messages, TOOL_SCHEMAS);
+ 
+     if (!response.ok) {
+       const errText = await response.text().catch(() => '');
+diff --git a/server/openrouter.js b/server/openrouter.js
+index 2ceee04..4a61ec8 100644
+--- a/server/openrouter.js
++++ b/server/openrouter.js
+@@ -25,10 +25,10 @@ import { buildMemoryBlock } from './utils/memoryPrompt.js';
+ import { COMPUTE_GUARD_BLOCK } from './utils/computeGuardPrompt.js';
+ import { expandSkillCommand } from './utils/skillExpander.js';
+ import { safePath } from './utils/safePath.js';
++import { getOpenRouterBaseUrl, getOpenRouterProviderHeaders } from './utils/openrouterConfig.js';
+ 
+ const execAsync = promisify(exec);
+ 
+-const OPENROUTER_BASE_URL = 'https://openrouter.ai/api/v1';
+ const MAX_AGENT_TURNS = 30;
+ const BASH_TIMEOUT_MS = 120_000;
+ const MAX_OUTPUT_CHARS = 100_000;
+@@ -496,19 +496,18 @@ async function loadHistory(sessionId) {
+ // Streaming API call + response parser
+ // ---------------------------------------------------------------------------
+ 
+-async function streamApiCall(apiKey, model, messages, tools, signal) {
++async function streamApiCall(baseUrl, apiKey, model, messages, tools, signal) {
+   const body = { model, messages, stream: true, stream_options: { include_usage: true } };
+   if (tools?.length) {
+     body.tools = tools;
+     body.tool_choice = 'auto';
+   }
+-  return fetch(`${OPENROUTER_BASE_URL}/chat/completions`, {
++  return fetch(`${baseUrl}/chat/completions`, {
+     method: 'POST',
+     headers: {
+       Authorization: `Bearer ${apiKey}`,
+       'Content-Type': 'application/json',
+-      'HTTP-Referer': 'https://github.com/OpenLAIR/dr-claw',
+-      'X-Title': 'Dr. Claw',
++      ...getOpenRouterProviderHeaders(baseUrl, 'Dr. Claw'),
+     },
+     body: JSON.stringify(body),
+     signal,
+@@ -592,7 +591,12 @@ export async function queryOpenRouter(command, options = {}, ws) {
+   } = options;
+ 
+   const workingDirectory = cwd || projectPath || process.cwd();
+-  const apiKey = env?.OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY;
++  const apiKey = env?.OPENAI_API_KEY || env?.OPENROUTER_API_KEY
++    || process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
++  const baseUrl = getOpenRouterBaseUrl({
++    OPENROUTER_BASE_URL: options.baseUrl || env?.OPENAI_BASE_URL || env?.OPENROUTER_BASE_URL
++      || process.env.OPENAI_BASE_URL || process.env.OPENROUTER_BASE_URL,
++  });
+ 
+   if (!apiKey) {
+     sendMessage(ws, {
+@@ -696,7 +700,7 @@ export async function queryOpenRouter(command, options = {}, ws) {
+       console.log(`[OpenRouter] Turn ${turn}/${MAX_AGENT_TURNS} · model=${model} · msgs=${messages.length}`);
+ 
+       const response = await streamApiCall(
+-        apiKey, model, messages,
++        baseUrl, apiKey, model, messages,
+         noToolFallback ? [] : tools,
+         abortController.signal,
+       );
+
+diff --git a/server/utils/openrouterConfig.js b/server/utils/openrouterConfig.js
+new file mode 100644
+index 0000000..80506fd
+--- /dev/null
++++ b/server/utils/openrouterConfig.js
+@@ -0,0 +1,36 @@
++const DEFAULT_OPENROUTER_BASE_URL = 'https://openrouter.ai/api/v1';
++const OPENROUTER_REFERER = 'https://github.com/OpenLAIR/dr-claw';
++
++export { DEFAULT_OPENROUTER_BASE_URL };
++
++export function normalizeOpenRouterBaseUrl(baseUrl = DEFAULT_OPENROUTER_BASE_URL) {
++  const candidate = String(baseUrl || '').trim() || DEFAULT_OPENROUTER_BASE_URL;
++  const parsed = new URL(candidate);
++  if (!['http:', 'https:'].includes(parsed.protocol)) {
++    throw new Error('OpenRouter base URL must start with http:// or https://');
++  }
++  return parsed.toString().replace(/\/$/, '');
++}
++
++export function getOpenRouterBaseUrl(env = process.env) {
++  try {
++    return normalizeOpenRouterBaseUrl(env?.OPENROUTER_BASE_URL);
++  } catch {
++    return DEFAULT_OPENROUTER_BASE_URL;
++  }
++}
++
++export function isOfficialOpenRouterBaseUrl(baseUrl) {
++  try {
++    const { hostname } = new URL(normalizeOpenRouterBaseUrl(baseUrl));
++    return hostname === 'openrouter.ai' || hostname.endsWith('.openrouter.ai');
++  } catch {
++    return false;
++  }
++}
++
++export function getOpenRouterProviderHeaders(baseUrl, title = 'Dr. Claw') {
++  return isOfficialOpenRouterBaseUrl(baseUrl)
++    ? { 'HTTP-Referer': OPENROUTER_REFERER, 'X-Title': title }
++    : {};
++}

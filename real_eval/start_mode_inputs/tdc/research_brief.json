@@ -1,0 +1,11 @@
+{
+  "title": "TDC-ADMET-Tox molecular property prediction experiment",
+  "goal": "Train models to predict ADMET/Tox properties of molecules. Maximize Macro-AUROC score.",
+  "metric": "Macro-AUROC (higher is better)",
+  "requirements": [
+    "design 2-4 materially different molecular property prediction approaches",
+    "train on TDC ADMET-Tox benchmark dataset using GPU acceleration",
+    "select best model by highest Macro-AUROC",
+    "deliver research_idea.json, experiment_trace.json, final_report.md"
+  ]
+}

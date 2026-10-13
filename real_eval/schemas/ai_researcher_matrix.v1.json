@@ -1,0 +1,317 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "real_eval/schemas/ai_researcher_matrix.v1.json",
+  "title": "AI Researcher Matrix v1",
+  "description": "Closed matrix schema for native-evaluation admissions tracking. Each entry is a discriminated oneOf on attempt_kind. All objects forbid additionalProperties.",
+
+  "type": "object",
+  "required": [
+    "schema_version",
+    "campaign_id",
+    "topic_id",
+    "model_id",
+    "primary_cells",
+    "entries",
+    "metadata"
+  ],
+  "additionalProperties": false,
+
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "ai_researcher_matrix.v1",
+      "description": "Literal schema version identifier that MUST match the $id leaf."
+    },
+
+    "campaign_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Campaign identifier from the freeze manifest."
+    },
+
+    "topic_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Topic identifier (e.g. babylm, arc_wbe_2026, psydefdetect, tdc_admet_tox)."
+    },
+
+    "model_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Model variant identifier (e.g. deepseek-v4-flash, gpt-4o, kimi-k2.6)."
+    },
+
+    "primary_cells": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "uniqueItems": true,
+      "description": "Exactly 15 unique (framework_id, attempt_kind) pairs enumerating every cell in the 7-framework matrix across all attempt kinds.",
+      "items": {
+        "type": "array",
+        "prefixItems": [
+          {
+            "type": "string",
+            "pattern": "^[0-9]{2}$",
+            "description": "Framework identifier (01-07)."
+          },
+          {
+            "type": "string",
+            "enum": ["primary", "admission_only", "excluded"],
+            "description": "Attempt kind discriminator."
+          }
+        ],
+        "minItems": 2,
+        "maxItems": 2,
+        "additionalItems": false,
+        "description": "A single (framework_id, attempt_kind) pair."
+      }
+    },
+
+    "entries": {
+      "type": "array",
+      "minItems": 7,
+      "description": "One entry per framework, each discriminated by attempt_kind via oneOf.",
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/entry_primary" },
+          { "$ref": "#/$defs/entry_admission_only" },
+          { "$ref": "#/$defs/entry_excluded" }
+        ]
+      }
+    },
+
+    "metadata": {
+      "type": "object",
+      "required": [
+        "created_at",
+        "validator_version",
+        "schema_version_used",
+        "source_manifest"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 timestamp when the matrix was generated."
+        },
+        "validator_version": {
+          "type": "string",
+          "description": "Version identifier of the validating script."
+        },
+        "schema_version_used": {
+          "type": "string",
+          "const": "ai_researcher_matrix.v1",
+          "description": "The schema version the matrix conforms to."
+        },
+        "source_manifest": {
+          "type": "string",
+          "description": "Relative path to the freeze manifest used to generate this matrix."
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "entry_primary": {
+      "title": "Primary Attempt",
+      "description": "A framework with a completed primary run, including full admission, prompt, isolation, provenance, outcome, and optional score references.",
+      "type": "object",
+      "required": [
+        "framework_id",
+        "attempt_kind",
+        "primary_run_id",
+        "admission_ref",
+        "prompt_audit_ref",
+        "isolation_ref",
+        "provenance_ref",
+        "outcome_ref",
+        "score_applicable",
+        "score_ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "framework_id": {
+          "type": "string",
+          "pattern": "^[0-9]{2}$",
+          "description": "Framework identifier (01-07)."
+        },
+        "attempt_kind": {
+          "const": "primary",
+          "description": "Discriminator value for primary attempts."
+        },
+        "primary_run_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Non-null run identifier for the primary attempt."
+        },
+        "admission_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to the admission evidence record."
+        },
+        "prompt_audit_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to the prompt audit record."
+        },
+        "isolation_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to the isolation verification record."
+        },
+        "provenance_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to the provenance record."
+        },
+        "outcome_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to the outcome record conforming to ai_researcher_outcome.v1."
+        },
+        "score_applicable": {
+          "type": "boolean",
+          "description": "Whether a score is applicable for this framework run."
+        },
+        "score_ref": {
+          "oneOf": [
+            { "type": "string", "minLength": 1 },
+            { "type": "null" }
+          ],
+          "description": "Relative path to the score record, or null if score_applicable is false or score is not yet available."
+        }
+      }
+    },
+
+    "entry_admission_only": {
+      "title": "Admission-Only Attempt",
+      "description": "A framework that passed admission but was not dispatched as a primary run. Has an authoritative blocked status, no run or provenance, and no score.",
+      "type": "object",
+      "required": [
+        "framework_id",
+        "attempt_kind",
+        "primary_run_id",
+        "admission_ref",
+        "prompt_audit_ref",
+        "isolation_ref",
+        "provenance_ref",
+        "outcome_ref",
+        "score_applicable",
+        "score_ref",
+        "blocked_status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "framework_id": {
+          "type": "string",
+          "pattern": "^[0-9]{2}$",
+          "description": "Framework identifier (01-07)."
+        },
+        "attempt_kind": {
+          "const": "admission_only",
+          "description": "Discriminator value for admission-only attempts."
+        },
+        "primary_run_id": {
+          "type": "null",
+          "description": "No primary run was dispatched."
+        },
+        "admission_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to the admission evidence record."
+        },
+        "prompt_audit_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to the prompt audit record."
+        },
+        "isolation_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to the isolation verification record."
+        },
+        "provenance_ref": {
+          "type": "null",
+          "description": "No provenance record for an undispatched attempt."
+        },
+        "outcome_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to the outcome record, typically reflecting the blocked terminal status."
+        },
+        "score_applicable": {
+          "const": false,
+          "description": "Score is not applicable for an undispatched attempt."
+        },
+        "score_ref": {
+          "type": "null",
+          "description": "No score record for an undispatched attempt."
+        },
+        "blocked_status": {
+          "type": "string",
+          "enum": [
+            "blocked_dataset_unavailable",
+            "blocked_authority_unverifiable",
+            "blocked_benchmark_authorization",
+            "unsupported_native_entrypoint"
+          ],
+          "description": "Authoritative blocked status that prevented primary dispatch."
+        }
+      }
+    },
+
+    "entry_excluded": {
+      "title": "Excluded Attempt",
+      "description": "A framework that was excluded from the campaign entirely, with a classified reason and no admission or run artifacts.",
+      "type": "object",
+      "required": [
+        "framework_id",
+        "attempt_kind",
+        "primary_run_id",
+        "provenance_ref",
+        "score_ref",
+        "reason",
+        "outcome_ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "framework_id": {
+          "type": "string",
+          "pattern": "^[0-9]{2}$",
+          "description": "Framework identifier (01-07)."
+        },
+        "attempt_kind": {
+          "const": "excluded",
+          "description": "Discriminator value for excluded attempts."
+        },
+        "primary_run_id": {
+          "type": "null",
+          "description": "No primary run was dispatched."
+        },
+        "provenance_ref": {
+          "type": "null",
+          "description": "No provenance record for an excluded attempt."
+        },
+        "score_ref": {
+          "type": "null",
+          "description": "No score record for an excluded attempt."
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "unsupported_native_entrypoint",
+            "blocked_benchmark_authorization"
+          ],
+          "description": "Classified reason for exclusion."
+        },
+        "outcome_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path to the outcome record, reflecting the exclusion reason as the terminal outcome."
+        }
+      }
+    }
+  }
+}

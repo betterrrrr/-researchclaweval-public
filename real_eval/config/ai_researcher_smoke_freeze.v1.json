@@ -1,0 +1,167 @@
+{
+  "standard_version": "1.0",
+  "spec_version": "1.0",
+  "matrix_id": "ai_researcher_smoke_matrix_v1",
+  "description": "Same-image smoke matrix for AI-Researcher: 5 topics × 3 models = 15 cells. Each cell runs the topic's smoke script with the model's runtime image, proving the image is functional before full-run dispatch.",
+  "created_at": "2026-08-12T00:00:00Z",
+  "generated_by": "ai_researcher_smoke_freeze.v1.json",
+  "topics": [
+    {
+      "topic_id": "babylm",
+      "topic_label": "BabyLM-10M",
+      "contract_file": "automation/babylm_method_free_contract.md",
+      "dataset_env": "BABYLM_DATASET_ROOT",
+      "input_generator": "automation/scripts/generate_babylm_native_inputs.py",
+      "smoke_script_template": "real_eval/scripts/{framework_slug}_babylm_smoke.sh",
+      "container_name_suffix": "babylm",
+      "disable_gpu": false
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "topic_label": "ARC-WBE-2026",
+      "contract_file": "automation/arc_wbe_2026_contract.md",
+      "dataset_env": "ARC_WBE_2026_DATASET_ROOT",
+      "input_generator": "automation/scripts/generate_arc_wbe_2026_native_inputs.py",
+      "smoke_script_template": "real_eval/scripts/{framework_slug}_arc_wbe_2026_smoke.sh",
+      "container_name_suffix": "arc_wbe_2026",
+      "disable_gpu": true
+    },
+    {
+      "topic_id": "psydefdetect",
+      "topic_label": "PsyDefDetect",
+      "contract_file": "automation/psydefdetect_contract.md",
+      "dataset_env": "PSYDEFDETECT_DATASET_ROOT",
+      "input_generator": null,
+      "smoke_script_template": "real_eval/scripts/{framework_slug}_psydefdetect_smoke.sh",
+      "container_name_suffix": "psydefdetect",
+      "disable_gpu": true
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "topic_label": "TDC-ADMET-Tox",
+      "contract_file": "automation/tdc_admet_tox_contract.md",
+      "dataset_env": "TDC_ADMET_TOX_DATASET_ROOT",
+      "input_generator": "automation/scripts/generate_tdc_admet_tox_native_inputs.py",
+      "smoke_script_template": "real_eval/scripts/{framework_slug}_tdc_admet_tox_smoke.sh",
+      "container_name_suffix": "tdc_admet_tox",
+      "disable_gpu": true
+    },
+    {
+      "topic_id": "gave2_task2",
+      "topic_label": "GAVE2-Task2",
+      "contract_file": "automation/gave2_task2_contract.md",
+      "dataset_env": "GAVE2_DATASET_ROOT",
+      "input_generator": null,
+      "smoke_script_template": "real_eval/scripts/{framework_slug}_gave2_task2_smoke.sh",
+      "container_name_suffix": "gave2_task2",
+      "disable_gpu": true
+    }
+  ],
+  "models": [
+    {
+      "variant": "gpt",
+      "model_id": "gpt-5.4",
+      "provider_config": "api/codex_gpt54_shubiaobiao.toml",
+      "wire_protocol": "responses",
+      "container_base_url": "https://api.openai.com",
+      "public_provider_forbidden": false,
+      "runtime_image_tag_suffix": "",
+      "provider_file_exists": true
+    },
+    {
+      "variant": "deepseek",
+      "model_id": "deepseek-v4-flash",
+      "provider_config": "api/codex_deepseek_v4_flash_bianxie.toml",
+      "wire_protocol": "chat_completions",
+      "container_base_url": "https://api.deepseek.com",
+      "public_provider_forbidden": false,
+      "runtime_image_tag_suffix": "",
+      "provider_file_exists": true
+    },
+    {
+      "variant": "kimi",
+      "model_id": "kimi-k2.6",
+      "provider_config": "api/codex_kimi_k27_code_relay_container.toml",
+      "wire_protocol": "chat_completions",
+      "container_base_url": "http://host.docker.internal:8787",
+      "public_provider_forbidden": true,
+      "runtime_image_tag_suffix": "",
+      "provider_file_exists": true
+    }
+  ],
+  "frameworks": [
+    {
+      "id": "01",
+      "name": "AI-Researcher",
+      "slug": "01_ai_researcher",
+      "runtime_image": "ai-researcher:runtime-ready",
+      "runtime_image_digest": "sha256:ace1299b07974a7807b8b36b351250d1ad9e0ffca0dd491c24c055033f258aa5",
+      "required_paths": ["AI-Researcher", "automation"]
+    },
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "slug": "02_ai_scientist_v2",
+      "runtime_image": "ai-scientist-v2:runtime-ready",
+      "runtime_image_digest": "sha256:11eb66e8fe4b9b836061618cf7c77cb1d86f44edd64160c8627d6cca75b6b913",
+      "required_paths": ["AI-Scientist-v2", "automation"]
+    },
+    {
+      "id": "03",
+      "name": "ARIS",
+      "slug": "03_aris",
+      "runtime_image": "aris:runtime-ready",
+      "runtime_image_digest": "sha256:e037d2d56eb1f15aee868e4133906f7a7ba2c573b02b1b0a5ac50a8b6d7deb35",
+      "required_paths": ["Auto-claude-code-research-in-sleep", "automation"]
+    },
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "slug": "04_autoresearchclaw",
+      "runtime_image": "autoresearchclaw:runtime-ready",
+      "runtime_image_digest": "sha256:4ca72e60102d6a59beaefe449452059ea8a850d128661e3b34c4a82de1508f6e",
+      "required_paths": ["AutoResearchClaw", "automation"]
+    },
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "slug": "05_deepscientist",
+      "runtime_image": "deepscientist:runtime-ready",
+      "runtime_image_digest": "sha256:b119227470b4d24fa800c975434aa9260fc6ae992d4b5cf9a7c7f5c882705ec0",
+      "required_paths": ["DeepScientist", "automation"]
+    },
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "slug": "06_drclaw",
+      "runtime_image": "dr-claw:runtime-ready",
+      "runtime_image_digest": "sha256:4d10e6bbfda9743f8e8c409190d180d9262998f278518ba09cc366b5e0c3ae4d",
+      "required_paths": ["dr-claw", "automation"]
+    },
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "slug": "07_evoscientist",
+      "runtime_image": "evoscientist:runtime-ready",
+      "runtime_image_digest": "sha256:7532eadd3696c469b0be655c707c3e4ff0bdeb2ab32277101035024fda4e0795",
+      "required_paths": ["EvoScientist", "automation"]
+    }
+  ],
+  "cells": [
+    {"cell_id": "babylm_gpt", "topic": "babylm", "model": "gpt"},
+    {"cell_id": "babylm_deepseek", "topic": "babylm", "model": "deepseek"},
+    {"cell_id": "babylm_kimi", "topic": "babylm", "model": "kimi"},
+    {"cell_id": "arc_wbe_2026_gpt", "topic": "arc_wbe_2026", "model": "gpt"},
+    {"cell_id": "arc_wbe_2026_deepseek", "topic": "arc_wbe_2026", "model": "deepseek"},
+    {"cell_id": "arc_wbe_2026_kimi", "topic": "arc_wbe_2026", "model": "kimi"},
+    {"cell_id": "psydefdetect_gpt", "topic": "psydefdetect", "model": "gpt"},
+    {"cell_id": "psydefdetect_deepseek", "topic": "psydefdetect", "model": "deepseek"},
+    {"cell_id": "psydefdetect_kimi", "topic": "psydefdetect", "model": "kimi"},
+    {"cell_id": "tdc_admet_tox_gpt", "topic": "tdc_admet_tox", "model": "gpt"},
+    {"cell_id": "tdc_admet_tox_deepseek", "topic": "tdc_admet_tox", "model": "deepseek"},
+    {"cell_id": "tdc_admet_tox_kimi", "topic": "tdc_admet_tox", "model": "kimi"},
+    {"cell_id": "gave2_task2_gpt", "topic": "gave2_task2", "model": "gpt"},
+    {"cell_id": "gave2_task2_deepseek", "topic": "gave2_task2", "model": "deepseek"},
+    {"cell_id": "gave2_task2_kimi", "topic": "gave2_task2", "model": "kimi"}
+  ]
+}

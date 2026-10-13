@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "framework_id": "03",
+  "name": "ARIS",
+  "upstream_url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep.git",
+  "upstream_commit": "590ce825e028d6789ef9844b01b6e8b4ea736077",
+  "license_spdx": "MIT",
+  "native_entrypoint": null,
+  "native_entrypoint_source": "README.md",
+  "admission_status": "unsupported_non_native",
+  "supported_topics": ["babylm", "gave2_task2", "arc_wbe_2026", "psydefdetect"],
+  "required_env": ["OPENAI_BASE_URL", "OPENAI_API_KEY", "OPENAI_MODEL"],
+  "required_images": ["aris:runtime-ready"],
+  "patches": []
+}

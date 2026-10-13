@@ -1,0 +1,10 @@
+{
+  "topic": "babylm",
+  "metric": "validation_perplexity",
+  "value": 12.5,
+  "official": true,
+  "scored_by": "host",
+  "research_idea": "INVALID: host should not create framework-authored research_idea field",
+  "experiment_trace": "INVALID: host should not create framework-authored experiment_trace field",
+  "created_at": "2026-08-12T12:30:00+00:00"
+}

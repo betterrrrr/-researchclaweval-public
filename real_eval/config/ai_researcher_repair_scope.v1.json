@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "description": "AI-Researcher repair scope – approved source files and historical run descriptor scope. This file is a placeholder/configuration; the baseline capture script (capture_ai_researcher_repair_baseline.py) populates the actual hashes.",
+  "scope": {
+    "source_includes": [
+      "research_agent/run_infer_idea.py",
+      "research_agent/inno/**/*.py",
+      "research_agent/workflow/**/*.py",
+      "research_agent/agents/**/*.py",
+      "research_agent/tools/**/*.py",
+      "research_agent/environment/**/*.py",
+      "docker/Dockerfile",
+      "docker/requirements.txt",
+      "README.md"
+    ],
+    "source_excludes": [
+      "**/__pycache__/**",
+      "**/*.pyc",
+      "**/.git/**",
+      "**/node_modules/**",
+      "**/terminal_tmp/**",
+      "**/workplace*/**",
+      "**/logs/**",
+      "**/cache*/**"
+    ],
+    "run_descriptor_patterns": [
+      "fullrun_manifest.json",
+      "experiment_trace.json",
+      "research_idea.json",
+      "final_report.md",
+      "score.json",
+      "submission.json",
+      "state.json",
+      "logs/e2e.log"
+    ],
+    "run_artifact_patterns": [
+      "**/final_report.md",
+      "**/submission.json",
+      "**/submission.csv",
+      "**/score.json",
+      "**/experiment_trace.json",
+      "**/research_idea.json",
+      "**/predictions.csv",
+      "**/predictions.jsonl",
+      "**/fullrun_manifest.json",
+      "**/state.json"
+    ],
+    "run_name_prefixes": [
+      "01_",
+      "topic",
+      "ai_researcher",
+      "ai-researcher"
+    ]
+  }
+}

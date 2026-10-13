@@ -1,0 +1,194 @@
+{
+  "format_version": "1.0",
+  "standard_version": "1.0",
+  "campaign_id": "ai_researcher_fullrun_freeze.v1",
+  "description": "Frozen spec for the AI-Researcher fullrun matrix across all runnable topics/models. 12 runnable cells + 3 GAVE2/excluded cells. One synchronized fresh fullrun per cell.",
+  "frozen_at": "2026-08-12T00:00:00+08:00",
+  "models": {
+    "gpt-5.4": {
+      "model_id": "gpt-5.4",
+      "provider_config": "api/codex_gpt54_shubiaobiao.toml",
+      "wire_protocol": "responses",
+      "relay_required": false
+    },
+    "deepseek-v4-flash": {
+      "model_id": "deepseek-v4-flash",
+      "provider_config": "api/codex_deepseek_v4_flash_bianxie.toml",
+      "wire_protocol": "chat",
+      "relay_required": true,
+      "relay_container_config": "api/codex_deepseek_v4_flash_bianxie_relay_container.toml"
+    },
+    "kimi-k2.6": {
+      "model_id": "kimi-k2.6",
+      "provider_config": "api/codex_kimi_k27_code_relay_container.toml",
+      "wire_protocol": "responses",
+      "relay_required": true,
+      "relay_host_config": "api/codex_kimi_k27_code_relay_host.toml"
+    }
+  },
+  "topics": [
+    {
+      "topic_id": "babylm",
+      "label": "BabyLM-10M",
+      "contract_file": "automation/babylm_contract.md",
+      "dataset_env": "BABYLM_DATASET_ROOT",
+      "status": "runnable",
+      "cells": [
+        { "topic_id": "babylm", "model_id": "gpt-5.4",        "status": "runnable" },
+        { "topic_id": "babylm", "model_id": "deepseek-v4-flash", "status": "runnable" },
+        { "topic_id": "babylm", "model_id": "kimi-k2.6",     "status": "runnable" }
+      ]
+    },
+    {
+      "topic_id": "gave2_task2",
+      "label": "GAVE2-Task2",
+      "contract_file": "automation/gave2_task2_contract.md",
+      "dataset_env": "GAVE2_DATASET_ROOT",
+      "status": "excluded",
+      "blocked_reason": "Local data/gave2/task2/ exists but is empty; no current dataset is available.",
+      "cells": [
+        { "topic_id": "gave2_task2", "model_id": "gpt-5.4",        "status": "excluded", "reason": "Dataset unavailable" },
+        { "topic_id": "gave2_task2", "model_id": "deepseek-v4-flash", "status": "excluded", "reason": "Dataset unavailable" },
+        { "topic_id": "gave2_task2", "model_id": "kimi-k2.6",     "status": "excluded", "reason": "Dataset unavailable" }
+      ]
+    },
+    {
+      "topic_id": "arc_wbe_2026",
+      "label": "ARC-WBE-2026",
+      "contract_file": "automation/arc_white_box_estimation_2026_contract.md",
+      "dataset_env": "ARC_WBE_2026_DATASET_ROOT",
+      "status": "runnable",
+      "cells": [
+        { "topic_id": "arc_wbe_2026", "model_id": "gpt-5.4",        "status": "runnable" },
+        { "topic_id": "arc_wbe_2026", "model_id": "deepseek-v4-flash", "status": "runnable" },
+        { "topic_id": "arc_wbe_2026", "model_id": "kimi-k2.6",     "status": "runnable" }
+      ]
+    },
+    {
+      "topic_id": "psydefdetect",
+      "label": "PsyDefDetect",
+      "contract_file": "automation/psydefdetect_contract.md",
+      "dataset_env": "PSYDEFDETECT_DATASET_ROOT",
+      "status": "runnable",
+      "cells": [
+        { "topic_id": "psydefdetect", "model_id": "gpt-5.4",        "status": "runnable" },
+        { "topic_id": "psydefdetect", "model_id": "deepseek-v4-flash", "status": "runnable" },
+        { "topic_id": "psydefdetect", "model_id": "kimi-k2.6",     "status": "runnable" }
+      ]
+    },
+    {
+      "topic_id": "tdc_admet_tox",
+      "label": "TDC-ADMET-Tox",
+      "contract_file": "automation/tdc_admet_tox_contract.md",
+      "dataset_env": "TDC_ADMET_TOX_DATASET_ROOT",
+      "status": "runnable",
+      "cells": [
+        { "topic_id": "tdc_admet_tox", "model_id": "gpt-5.4",        "status": "runnable" },
+        { "topic_id": "tdc_admet_tox", "model_id": "deepseek-v4-flash", "status": "runnable" },
+        { "topic_id": "tdc_admet_tox", "model_id": "kimi-k2.6",     "status": "runnable" }
+      ]
+    }
+  ],
+  "matrix_summary": {
+    "total_cells": 15,
+    "runnable_cells": 12,
+    "excluded_cells": 3,
+    "runnable_breakdown": {
+      "babylm": 3,
+      "arc_wbe_2026": 3,
+      "psydefdetect": 3,
+      "tdc_admet_tox": 3
+    },
+    "excluded_breakdown": {
+      "gave2_task2": 3
+    },
+    "per_model": {
+      "gpt-5.4":        { "runnable": 4, "excluded": 1 },
+      "deepseek-v4-flash": { "runnable": 4, "excluded": 1 },
+      "kimi-k2.6":     { "runnable": 4, "excluded": 1 }
+    }
+  },
+  "frameworks": [
+    {
+      "framework_id": "01",
+      "name": "AI-Researcher",
+      "source_env": "RESEARCHCLAWEVAL_AI_RESEARCHER_ROOT",
+      "source_dir": "AI-Researcher",
+      "runtime_image": "ai-researcher:runtime-ready",
+      "runtime_image_digest": "sha256:ace1299b07974a7807b8b36b351250d1ad9e0ffca0dd491c24c055033f258aa5"
+    },
+    {
+      "framework_id": "02",
+      "name": "AI-Scientist-v2",
+      "source_env": "RESEARCHCLAWEVAL_AI_SCIENTIST_V2_ROOT",
+      "source_dir": "AI-Scientist-v2",
+      "runtime_image": "ai-scientist-v2:runtime-ready",
+      "runtime_image_digest": "sha256:11eb66e8fe4b9b836061618cf7c77cb1d86f44edd64160c8627d6cca75b6b913"
+    },
+    {
+      "framework_id": "03",
+      "name": "ARIS",
+      "source_env": "RESEARCHCLAWEVAL_ARIS_ROOT",
+      "source_dir": "Auto-claude-code-research-in-sleep",
+      "runtime_image": "aris:runtime-ready",
+      "runtime_image_digest": "sha256:e037d2d56eb1f15aee868e4133906f7a7ba2c573b02b1b0a5ac50a8b6d7deb35"
+    },
+    {
+      "framework_id": "04",
+      "name": "AutoResearchClaw",
+      "source_env": "RESEARCHCLAWEVAL_AUTORESEARCHCLAW_ROOT",
+      "source_dir": "AutoResearchClaw",
+      "runtime_image": "autoresearchclaw:runtime-ready",
+      "runtime_image_digest": "sha256:4ca72e60102d6a59beaefe449452059ea8a850d128661e3b34c4a82de1508f6e"
+    },
+    {
+      "framework_id": "05",
+      "name": "DeepScientist",
+      "source_env": "RESEARCHCLAWEVAL_DEEPSCIENTIST_ROOT",
+      "source_dir": "DeepScientist",
+      "runtime_image": "deepscientist:runtime-ready",
+      "runtime_image_digest": "sha256:b119227470b4d24fa800c975434aa9260fc6ae992d4b5cf9a7c7f5c882705ec0"
+    },
+    {
+      "framework_id": "06",
+      "name": "Dr. Claw",
+      "source_env": "RESEARCHCLAWEVAL_DR_CLAW_ROOT",
+      "source_dir": "dr-claw",
+      "runtime_image": "dr-claw:runtime-ready",
+      "runtime_image_digest": "sha256:4d10e6bbfda9743f8e8c409190d180d9262998f278518ba09cc366b5e0c3ae4d"
+    },
+    {
+      "framework_id": "07",
+      "name": "EvoScientist",
+      "source_env": "RESEARCHCLAWEVAL_EVOSCIENTIST_ROOT",
+      "source_dir": "EvoScientist",
+      "runtime_image": "evoscientist:runtime-ready",
+      "runtime_image_digest": "sha256:7532eadd3696c469b0be655c707c3e4ff0bdeb2ab32277101035024fda4e0795"
+    }
+  ],
+  "dispatch_policy": {
+    "one_cell_per_run": true,
+    "synchronized_fresh_fullrun": true,
+    "no_reuse_of_prior_runs": true,
+    "recovery_uses_new_run_id": true,
+    "fresh_physical_workspace_required": true,
+    "dataset_read_only": true,
+    "contract_read_only": true,
+    "repository_root_writable_mount_forbidden": true,
+    "host_artifact_backfill_forbidden": true
+  },
+  "required_outcome_dimensions": [
+    "research_completed",
+    "scored",
+    "contract_complete",
+    "engineering_complete"
+  ],
+  "files": {
+    "real_eval/config/ai_researcher_fullrun_freeze.v1.json": null,
+    "real_eval/standards/native_evaluation_standard.v1.json": null,
+    "real_eval/config/ai_researcher_models.json": null,
+    "real_eval/registry/topics.json": null,
+    "real_eval/registry/frameworks.json": null,
+    "real_eval/registry/runs.json": null
+  }
+}

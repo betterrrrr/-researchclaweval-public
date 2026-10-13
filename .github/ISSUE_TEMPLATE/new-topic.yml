@@ -1,0 +1,25 @@
+name: New Topic
+description: Propose a new evaluation contract and official metric.
+title: "[Topic] "
+labels: [topic]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Topic name
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Contract, metric, and data access
+      description: Describe public inputs, hidden inputs, scorer, and submission format.
+    validations:
+      required: true
+  - type: textarea
+    id: licensing
+    attributes:
+      label: Dataset license and redistribution constraints
+    validations:
+      required: true
+

@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use ResearchClawEval, please cite this software."
+title: "ResearchClawEval"
+type: software
+version: 0.1.0
+date-released: 2026-08-04
+authors:
+  - family-names: "Contributors"
+    given-names: "ResearchClawEval"
+license: Apache-2.0
+

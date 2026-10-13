@@ -1,0 +1,97 @@
+{
+  "topic_id": "topic2",
+  "evaluation_variant": "deepseek",
+  "comparison_mode": "native_framework_orchestration",
+  "campaign_id": "topic-mountaincar-continuous-deepseek-bianxie-01020405-rerun-20260816-v1",
+  "campaign_spec": "",
+  "campaign_freeze_manifest": "",
+  "model": "deepseek-v4-flash",
+  "frameworks": [
+    {
+      "id": "01",
+      "name": "AI-Researcher",
+      "run_dir": "01_ai_researcher_topic2_fullrun",
+      "wrapper": "real_eval/scripts/01_ai_researcher_topic2_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "required_paths": [
+        "AI-Researcher",
+        "automation"
+      ],
+      "required_images": [
+        "ai-researcher:runtime-ready"
+      ],
+      "source_dir": "AI-Researcher",
+      "native_probe_paths": [
+        "research_agent/run_infer_idea.py"
+      ],
+      "native_entrypoint": "python research_agent/run_infer_idea.py",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated DeepSeek relay provider",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated DeepSeek relay provider"
+    },
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "run_dir": "02_ai_scientist_v2_topic2_fullrun",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_topic2_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "required_paths": [
+        "AI-Scientist-v2",
+        "automation"
+      ],
+      "required_images": [
+        "ai-scientist-v2:runtime-ready"
+      ],
+      "source_dir": "AI-Scientist-v2",
+      "native_probe_paths": [
+        "ai_scientist/perform_ideation_temp_free.py",
+        "launch_scientist_bfts.py"
+      ],
+      "native_entrypoint": "python ai_scientist/perform_ideation_temp_free.py; python launch_scientist_bfts.py",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated DeepSeek relay provider",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated DeepSeek relay provider"
+    },
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_topic2_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_topic2_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "required_paths": [
+        "AutoResearchClaw",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "source_dir": "AutoResearchClaw",
+      "native_probe_paths": [
+        "researchclaw/cli.py"
+      ],
+      "native_entrypoint": "python -m researchclaw.cli run",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated DeepSeek relay provider",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated DeepSeek relay provider"
+    },
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_topic2_fullrun",
+      "wrapper": "real_eval/scripts/05_deepscientist_topic2_fullrun.sh",
+      "validator": "topic2_fullrun",
+      "required_paths": [
+        "DeepScientist",
+        "automation"
+      ],
+      "required_images": [
+        "deepscientist:runtime-ready"
+      ],
+      "source_dir": "DeepScientist",
+      "native_probe_paths": [
+        "src/deepscientist/cli.py"
+      ],
+      "native_entrypoint": "ds init; ds new; ds run run-experiment --runner codex",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated DeepSeek relay provider",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated DeepSeek relay provider"
+    }
+  ],
+  "provider_config": "api/codex_deepseek_v4_flash_bianxie_relay_container.toml"
+}

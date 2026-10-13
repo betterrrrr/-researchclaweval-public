@@ -1,0 +1,12 @@
+{
+  "campaign_id": "topic-mountaincar-continuous-kimi-recovery-06-20260819-v1",
+  "spec_version": "1.0",
+  "frozen_at": null,
+  "status": "pending_admission",
+  "framework_admissions": {
+    "06": "pending"
+  },
+  "runtime_image_digests": {},
+  "admission_evidence_paths": {},
+  "prompt_audit_paths": {}
+}

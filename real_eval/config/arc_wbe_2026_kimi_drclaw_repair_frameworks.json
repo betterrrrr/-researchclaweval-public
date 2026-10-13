@@ -1,0 +1,17 @@
+{
+  "topic_id": "arc_wbe_2026",
+  "comparison_mode": "native_framework_orchestration_adapter_repair",
+  "model": "kimi-k2.6",
+  "frameworks": [
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": ["dr-claw", "docs", "automation"],
+      "native_entrypoint": "node server/cli.js chat",
+      "kimi_injection": "OpenRouter-compatible client using injected OpenAI relay environment"
+    }
+  ]
+}

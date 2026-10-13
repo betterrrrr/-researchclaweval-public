@@ -1,0 +1,67 @@
+{
+  "frameworks": [
+    {
+      "id": "01",
+      "name": "AI-Researcher",
+      "run_dir": "01_ai_researcher_real_babylm",
+      "wrapper": "real_eval/scripts/01_ai_researcher_real_babylm.sh",
+      "validator": "ai_researcher_real",
+      "required_paths": ["AI-Researcher"],
+      "required_images": ["ai-researcher:runtime-ready"]
+    },
+    {
+      "id": "02",
+      "name": "AI-Scientist-v2",
+      "run_dir": "02_ai_scientist_v2_real_babylm",
+      "wrapper": "real_eval/scripts/02_ai_scientist_v2_real_babylm.sh",
+      "validator": "ai_scientist_v2",
+      "required_paths": ["AI-Scientist-v2"],
+      "required_images": ["ai-scientist-v2:runtime-ready"]
+    },
+    {
+      "id": "03",
+      "name": "ARIS",
+      "run_dir": "03_aris_real_babylm",
+      "wrapper": "real_eval/scripts/03_aris_real_babylm.sh",
+      "validator": "aris",
+      "required_paths": ["Auto-claude-code-research-in-sleep"],
+      "required_images": ["aris:runtime-ready"]
+    },
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_babylm_gpt_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_babylm_gpt_fullrun.sh",
+      "validator": "autoresearchclaw_babylm_fullrun",
+      "required_paths": ["AutoResearchClaw"],
+      "required_images": ["autoresearchclaw:runtime-ready"]
+    },
+    {
+      "id": "05",
+      "name": "DeepScientist",
+      "run_dir": "05_deepscientist_real_babylm",
+      "wrapper": "real_eval/scripts/05_deepscientist_real_babylm.sh",
+      "validator": "deepscientist",
+      "required_paths": ["DeepScientist"],
+      "required_images": ["deepscientist:runtime-ready"]
+    },
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_real_babylm",
+      "wrapper": "real_eval/scripts/06_drclaw_real_babylm.sh",
+      "validator": "drclaw",
+      "required_paths": ["dr-claw"],
+      "required_images": ["dr-claw:runtime-ready"]
+    },
+    {
+      "id": "07",
+      "name": "EvoScientist",
+      "run_dir": "07_evoscientist_real_babylm",
+      "wrapper": "real_eval/scripts/07_evoscientist_auto_blackwell_babylm.sh",
+      "validator": "evoscientist_auto",
+      "required_paths": ["EvoScientist"],
+      "required_images": ["evoscientist:runtime-ready", "nvcr.io/nvidia/pytorch:25.11-py3"]
+    }
+  ]
+}

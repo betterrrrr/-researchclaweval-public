@@ -1,0 +1,27 @@
+{
+    "topic_id": "tdc_admet_tox",
+    "evaluation_variant": "kimi",
+    "comparison_mode": "native_framework_orchestration_recovery",
+    "model": "kimi-k2.6",
+    "recovery_of": "topic5-tdc-admet-tox-kimi-recovery-0105-r5-20260808",
+    "recovery_reason": "r6 rerun (05 only): r5 proved upstream returns correct mcp__ names but codex still saw a 0-token empty turn. Root cause: relay emitted MCP tool calls as Responses 'custom' items, while codex 0.146 routes MCP invocations only from 'function_call' items carrying a namespace field (router.rs build_tool_call: ResponseItem::FunctionCall -> resolve_mcp_tool_info -> ToolPayload::Mcp; CustomToolCall -> ToolPayload::Custom, never dispatched to the MCP server). Fixed relay to split mcp__server__tool into namespace=mcp__server__ + name=tool on the response path, and to rejoin namespace+name on the input path. Verified end-to-end: relay now returns {type:function_call, name:read_quest_documents, namespace:mcp__artifact__}. 01 excluded to save wall time; AI-Researcher r5 hit the 7000s wall without predictions.csv handoff (separate model time-management issue, unchanged).",
+    "frameworks": [
+        {
+            "id": "05",
+            "name": "DeepScientist",
+            "run_dir": "05_deepscientist_tdc_admet_tox_fullrun",
+            "wrapper": "real_eval/scripts/05_deepscientist_tdc_admet_tox_fullrun.sh",
+            "validator": "tdc_admet_tox_fullrun",
+            "required_paths": [
+                "DeepScientist",
+                "docs",
+                "automation"
+            ],
+            "required_images": [
+                "deepscientist:tdc-runtime-ready"
+            ],
+            "native_entrypoint": "ds init -> ds new -> ds run run-experiment --runner codex",
+            "provider_injection": "official DeepScientist CodexRunner -> kimi relay; relay expands codex 'namespace' MCP tools into chat function tools (mcp__artifact__confirm_baseline/waive_baseline etc.) and maps prefixed calls back to custom responses items, so artifact tools reach the model"
+        }
+    ]
+}

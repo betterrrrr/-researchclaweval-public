@@ -1,0 +1,56 @@
+{
+  "topic_id": "arc_wbe_2026",
+  "evaluation_variant": "gpt",
+  "comparison_mode": "native_framework_orchestration",
+  "campaign_id": "topic3-arc-wbe-gpt-method-free-20260809-recovery-v7",
+  "campaign_spec": "real_eval/config/topic3-arc-wbe-gpt-method-free-20260809-recovery-v7.json",
+  "campaign_freeze_manifest": "real_eval/config/topic3-arc-wbe-gpt-method-free-20260809-recovery-v7.freeze.json",
+  "model": "gpt-5.4",
+  "frameworks": [
+    {
+      "id": "04",
+      "name": "AutoResearchClaw",
+      "run_dir": "04_autoresearchclaw_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/04_autoresearchclaw_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": [
+        "AutoResearchClaw",
+        "automation"
+      ],
+      "required_images": [
+        "autoresearchclaw:runtime-ready"
+      ],
+      "source_dir": "AutoResearchClaw",
+      "native_probe_paths": [
+        "researchclaw/cli.py"
+      ],
+      "native_entrypoint": "python -m researchclaw.cli run",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.4 provider",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.4 provider",
+      "status": "admitted"
+    },
+    {
+      "id": "06",
+      "name": "Dr. Claw",
+      "run_dir": "06_drclaw_arc_wbe_2026_fullrun",
+      "wrapper": "real_eval/scripts/06_drclaw_arc_wbe_2026_fullrun.sh",
+      "validator": "arc_wbe_2026_fullrun",
+      "required_paths": [
+        "dr-claw",
+        "automation"
+      ],
+      "required_images": [
+        "dr-claw:runtime-ready-arc2"
+      ],
+      "source_dir": "dr-claw",
+      "native_probe_paths": [
+        "server/cli.js"
+      ],
+      "native_entrypoint": "node server/cli.js chat --model gpt-5.4",
+      "provider_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.4 provider",
+      "kimi_injection": "OPENAI_BASE_URL, OPENAI_API_KEY, and OPENAI_MODEL resolve to the isolated GPT-5.4 provider",
+      "status": "admitted"
+    }
+  ],
+  "mode": "fullrun"
+}

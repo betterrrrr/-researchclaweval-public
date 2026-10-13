@@ -1,0 +1,39 @@
+{
+  "tasks": [
+    {
+      "id": "survey",
+      "title": "Survey dataset",
+      "status": "pending",
+      "stage": "Survey",
+      "nextActionPrompt": "Pt.1 Survey. Dataset at /data/ARC-WBE-2026/. Explore it. When done, set status to completed."
+    },
+    {
+      "id": "ideation",
+      "title": "Design approaches",
+      "status": "pending",
+      "stage": "Ideation",
+      "nextActionPrompt": "Pt.2 Ideation. Design 2-4 approaches. Save research_idea.json. When done, set status to completed."
+    },
+    {
+      "id": "experiment",
+      "title": "Run experiments",
+      "status": "pending",
+      "stage": "Experiment",
+      "nextActionPrompt": "Pt.3 Experiment. Train and evaluate. Save experiment_trace.json. When done, set status to completed."
+    },
+    {
+      "id": "analysis",
+      "title": "Analyze results",
+      "status": "pending",
+      "stage": "Analysis",
+      "nextActionPrompt": "Pt.4 Analysis. Select best. Write final_report.md. When done, set status to completed."
+    },
+    {
+      "id": "paper",
+      "title": "Write report",
+      "status": "pending",
+      "stage": "Paper",
+      "nextActionPrompt": "Pt.5 Finalize. Verify 3 deliverables exist. When done, set status to completed."
+    }
+  ]
+}
