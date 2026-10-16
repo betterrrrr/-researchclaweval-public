@@ -18,12 +18,12 @@ SUMMARY = """# PsyDefDetect Task Summary
 Run framework-native experimentation for PsyDefDetect rather than a single fast baseline.
 
 ## Standardized evaluation protocol
-- Use the provided dialogue-level split manifest under `automation/psydefdetect_split.json`.
+- Use the provided dialogue-level split manifest under `automation/psydefdetect_split.canonical.json`.
 - Do not invent a new split.
 - Treat macro-F1 over positive labels `1-8` as the primary score.
 
 ## Required research behavior
-- Run exactly 2 materially different experiments selected by the framework itself.
+- Run 2 to 4 materially different experiments selected by the framework itself.
 - Before the first experiment, write a framework-authored `research_idea.json` containing the
   hypothesis, method rationale, expected failure modes, and comparison logic.
 - Compare the experiments using official local macro-F1 evidence and select one final approach.
@@ -54,7 +54,7 @@ METRIC_SPEC = """# PsyDefDetect Metric Spec
 ```bash
 python3 automation/scripts/run_psydefdetect_local_score.py \
   --dataset-root /data/psydefdetect \
-  --split-manifest automation/psydefdetect_split.json \
+  --split-manifest automation/psydefdetect_split.canonical.json \
   --predictions predictions.jsonl \
   --output-score score.json
 ```
@@ -74,7 +74,7 @@ You may emit either:
 - CSV: use `id` and either `predicted_label` or `label`
 
 ## Hard requirement
-Every eval record listed in `automation/psydefdetect_split.json` must have exactly one prediction.
+Every eval record listed in `automation/psydefdetect_split.canonical.json` must have exactly one prediction.
 """
 
 EXPERIMENT_REQUIREMENTS = """# PsyDefDetect Experiment Requirements
@@ -156,7 +156,7 @@ algorithm family, feature representation, architecture, hyperparameter, or exper
 The two conditions must be scientifically motivated and distinguish the hypothesis in the
 framework-authored `research_idea.json`.
 
-The dataset is `/data/psydefdetect/PsyDefConv.json`, a top-level JSON list. Each row has `id` (string), `dialogue_id` (string), `dialogue` (list of `{text, speaker}` objects), `current_text` (string), and `label` (integer 0-8). Load it with Python `json.load`, preserving each `row["id"]` exactly as a string including leading zeroes such as `"0001"`; do not use `pandas.read_json`, which may coerce those ids to integers. Join `/workspace/automation/psydefdetect_split.json` to rows by the unchanged `row["id"]`, using `train_record_ids` and `eval_record_ids`. Do not invent CSV files, positional indices, another split, distant supervision, synthetic labels, a validation subset, or a different class count.
+The dataset is `/data/psydefdetect/PsyDefConv.json`, a top-level JSON list. Each row has `id` (string), `dialogue_id` (string), `dialogue` (list of `{text, speaker}` objects), `current_text` (string), and `label` (integer 0-8). Load it with Python `json.load`, preserving each `row["id"]` exactly as a string including leading zeroes such as `"0001"`; do not use `pandas.read_json`, which may coerce those ids to integers. Join `/workspace/automation/psydefdetect_split.canonical.json` to rows by the unchanged `row["id"]`, using `train_record_ids` and `eval_record_ids`. Do not invent CSV files, positional indices, another split, distant supervision, synthetic labels, a validation subset, or a different class count.
 
 The primary metric is macro-F1 over positive labels 1-8, direction `maximize`. The plan must
 explicitly state 9 classes (labels 0-8), exactly two total runs, and the fixed split and
@@ -177,7 +177,7 @@ from `turn["text"]` but must not replace `current_text`.
 
 Keep the project compact: at most three Python files with one canonical definition for each helper. Use only Python standard library, numpy, pandas, and scikit-learn. No generated Python file may import or call `runpy`. Do not install or download anything and do not make remote calls from experiment code. Initialize every local variable before conditional use, include a real `if __name__ == "__main__":` entrypoint, and run the two framework-selected conditions synchronously exactly once.
 
-Score each condition by invoking the mounted `/workspace/automation/scripts/run_psydefdetect_local_score.py` through `subprocess.run(..., check=True)` with all four CLI arguments: `--dataset-root /data/psydefdetect`, `--split-manifest /workspace/automation/psydefdetect_split.json`, `--predictions <condition prediction file>`, and `--output-score <condition score file>`. If the official scorer exits unsuccessfully, let `subprocess.CalledProcessError` propagate and abort the experiment immediately; do not catch it and continue. Never invoke the scorer in-process through `runpy`, generate or import another file named `run_psydefdetect_local_score.py`, write a null/placeholder score, or locally reimplement the scorer. You must never use a fallback summary. Select the higher observed `psydefdetect_score` from the two official score JSON files.
+Score each condition by invoking the mounted `/workspace/automation/scripts/run_psydefdetect_local_score.py` through `subprocess.run(..., check=True)` with all four CLI arguments: `--dataset-root /data/psydefdetect`, `--split-manifest /workspace/automation/psydefdetect_split.canonical.json`, `--predictions <condition prediction file>`, and `--output-score <condition score file>`. If the official scorer exits unsuccessfully, let `subprocess.CalledProcessError` propagate and abort the experiment immediately; do not catch it and continue. Never invoke the scorer in-process through `runpy`, generate or import another file named `run_psydefdetect_local_score.py`, write a null/placeholder score, or locally reimplement the scorer. You must never use a fallback summary. Select the higher observed `psydefdetect_score` from the two official score JSON files.
 
 Before the native pipeline exits, the framework must deliver root-level `/workspace/predictions.jsonl`, `/workspace/score.json`, `/workspace/experiment_trace.json`, and `/workspace/final_report.md`. Copy the selected official score JSON to `/workspace/score.json`; it must retain numeric `psydefdetect_score` and `score_key: "psydefdetect_score"`. The trace must be one top-level JSON object containing exactly two `experiments`, each with a unique `experiment_id`, numeric `psydefdetect_score`, prediction/score paths, and the complete official `scorer_command`; `selected_experiment_id` must identify the higher-scoring record. It must also set `framework_native_execution: true`, `consumed_topic_input: true`, `workspace_trace_root: "/workspace"`, `framework_internal_model` from `OPENAI_MODEL`, and `framework_internal_api_base_url` from `OPENAI_BASE_URL`. Do not fabricate metrics or copy values from prompts.
 IMPLEMENTATION CHECKLIST: `main.py` must never contain `None` for any score. After each
@@ -201,7 +201,7 @@ AUTORESEARCHCLAW_PSYDEF_BENCHMARK_KNOWLEDGE = """domains:
         classes: 9
         metrics: [macro_f1_positive_1_8]
         api: "json.load(open('/data/psydefdetect/PsyDefConv.json', encoding='utf-8'))"
-        note: "Use the fixed split at /workspace/automation/psydefdetect_split.json and the local scorer."
+        note: "Use the fixed split at /workspace/automation/psydefdetect_split.canonical.json and the local scorer."
     method_note: "The benchmark host does not prescribe a method. The framework must choose and justify two materially different methods from the installed dependencies."
 """
 
@@ -329,7 +329,7 @@ hyperparameter, baseline, or experiment order.
 - dataset root inside the runtime: `/data/psydefdetect`
 - source dataset: `{dataset_root}`
 - contract: `{contract_file}`
-- fixed split: `automation/psydefdetect_split.json`
+- fixed split: `automation/psydefdetect_split.canonical.json`
 - official local scorer: `automation/scripts/run_psydefdetect_local_score.py`
 
 ## Required framework-owned handoff
@@ -346,7 +346,7 @@ The framework must create and promote these artifacts itself. The host will vali
 def render_ai_researcher_metaprompt() -> str:
     return '''TASK = "PsyDefDetect psychological defense mechanism classification."
 DATASET = """
-Use only the real PsyDefDetect dataset mounted at /data/psydefdetect and exposed in the framework workplace. Use automation/psydefdetect_split.json without changing the split.
+Use only the real PsyDefDetect dataset mounted at /data/psydefdetect and exposed in the framework workplace. Use automation/psydefdetect_split.canonical.json without changing the split.
 """
 BASELINE = "Choose and score the first reproducible local classification experiment yourself on the fixed split using only libraries already installed in the runtime. The host does not prescribe its method."
 COMPARISON = "Design and run exactly one second materially different experiment yourself, compare official local macro-F1 evidence, and immediately select the better valid result. Experiment code must not make remote API calls."
@@ -388,7 +388,7 @@ Framework-native research on PsyDefDetect
 Formulate and run exactly two materially different experiments of your own design on the fixed dialogue-level split. Compare official macro-F1 over positive labels 1-8 and select the higher observed score. Do not treat any host text as a prescribed method.
 
 # Dataset
-Use `/data/psydefdetect/PsyDefConv.json` and `automation/psydefdetect_split.json` only.
+Use `/data/psydefdetect/PsyDefConv.json` and `automation/psydefdetect_split.canonical.json` only.
 
 # Dataset schema
 - `PsyDefConv.json` is a top-level JSON list. Every usable row has `id` (string), `dialogue_id` (string), `dialogue` (a list of `{{text, speaker}}` objects), `current_text` (string), and `label` (integer 0-8).
@@ -552,7 +552,7 @@ def main() -> int:
     write_file(output_root / "docs/psydefdetect_experiment_requirements.md", EXPERIMENT_REQUIREMENTS)
     write_file(output_root / "docs/psydefdetect_literature_catalog.md", AI_SCIENTIST_LITERATURE_CATALOG)
     write_file(output_root / "automation/psydefdetect_runtime_brief.md", RUNTIME_BRIEF)
-    write_file(output_root / "automation/psydefdetect_split.json", json.dumps(split_payload, ensure_ascii=False, indent=2) + "\n")
+    write_file(output_root / "automation/psydefdetect_split.canonical.json", json.dumps(split_payload, ensure_ascii=False, indent=2) + "\n")
     framework_brief = render_framework_brief(dataset_root, contract_file)
     framework_files = {
         "AI-Researcher/benchmark/process/dataset_candidate/psydefdetect/metaprompt.py": render_ai_researcher_metaprompt(),
@@ -604,7 +604,7 @@ def main() -> int:
                     "docs/psydefdetect_experiment_requirements.md",
                     "docs/psydefdetect_literature_catalog.md",
                     "automation/psydefdetect_runtime_brief.md",
-                    "automation/psydefdetect_split.json",
+                    "automation/psydefdetect_split.canonical.json",
                     "automation/scripts/run_psydefdetect_local_score.py",
                     "AI-Researcher/benchmark/final/psydefdetect/psydefdetect.json",
                     *framework_files,
