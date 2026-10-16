@@ -3,7 +3,7 @@
 - Status: Blocked
 - Project Path: `AI-Researcher/`
 - Dependency Guide: `依赖配置指南/ChatGPT-AI-Researcher框架端到端运行.md`
-- Docker Reference: `/home/jin/researchclaweval/docker_file_instruction.md`
+- Docker Reference: `docs/tutorials/docker_file_instruction.md`
 - Minimal Input: 使用"sklearn digits/iris 轻量分类器改进"研究主题。
 - Required E2E Flow: research idea → research plan / implementation plan → DockerEnv or sandbox experiment → result analysis → paper agent / write-up generation → optional PDF compile if supported.
 - Pre-E2E Checks: Python import check; `ai-researcher --help` / `paper-agent --help` / `python main_ai_researcher.py --help` 等入口检查；`AI-Researcher/docker/Dockerfile` 或 `tjbtech1/airesearcher:v1` 执行环境检查；Playwright/browser check；API environment variable presence check；LaTeX check if paper PDF is required.

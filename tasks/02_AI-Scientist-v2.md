@@ -3,7 +3,7 @@
 - Status: Pending
 - Project Path: `AI-Scientist-v2/`
 - Dependency Guide: `依赖配置指南/ChatGPT-AI-Scientist-v2_端到端运行.md`
-- Docker Reference: `/home/jin/researchclaweval/docker_file_instruction.md`
+- Docker Reference: `docs/tutorials/docker_file_instruction.md`
 - Minimal Input: 一个包含 Title / Keywords / TL;DR / Abstract 的最小 workshop topic markdown，主题使用"sklearn digits/iris 轻量分类器改进"。
 - Required E2E Flow: idea generation → ideas JSON → BFTS / minimal experiment run → plot aggregation / result analysis → citation/write-up → review or PDF output if feasible.
 - Pre-E2E Checks: Python import check; `requirements.txt` install check; PyTorch/CUDA visibility check; `perform_ideation_temp_free.py --help` or equivalent entry check; LaTeX/pdflatex/chktex check; API environment variable presence check.

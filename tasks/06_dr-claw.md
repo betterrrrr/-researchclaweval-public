@@ -3,7 +3,7 @@
 - Status: Pending
 - Project Path: `dr-claw/`
 - Dependency Guide: `依赖配置指南/ChatGPT-Dr._Claw_端到端配置.md`
-- Docker Reference: `/home/jin/researchclaweval/docker_file_instruction.md`
+- Docker Reference: `docs/tutorials/docker_file_instruction.md`
 - Minimal Input: 在 Research Lab / Auto Research / CLI-equivalent path 中输入"sklearn digits/iris 轻量分类器改进"研究 brief。
 - Required E2E Flow: service startup → agent backend configured → research brief → pipeline/tasks → auto research execution → experiment/result artifacts → publication/write-up output.
 - Pre-E2E Checks: Node/npm check; backend service health check; web/API endpoint check; selected agent backend minimal prompt check; database/sqlite check; API environment variable presence check.

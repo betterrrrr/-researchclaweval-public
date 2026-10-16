@@ -3,7 +3,7 @@
 - Status: Pending
 - Project Path: `EvoScientist/`
 - Dependency Guide: `依赖配置指南/ChatGPT-EvoScientist端到端部署.md`
-- Docker Reference: `/home/jin/researchclaweval/docker_file_instruction.md`
+- Docker Reference: `docs/tutorials/docker_file_instruction.md`
 - Minimal Input: 在 EvoScientist 工作区中输入"sklearn digits/iris 轻量分类器改进"研究任务，并启用必要 EvoSkills / research skills。
 - Required E2E Flow: EvoScientist startup → provider configured → research skill/agent invocation → idea/plan → experiment/code execution → analysis/figure → write-up/final report → optional memory/skill update.
 - Pre-E2E Checks: official Docker image or local package startup check; `EvoSci` help/startup check; provider config check; workspace writeability check; Node/npx check for MCP if used; LaTeX check if paper PDF is required.

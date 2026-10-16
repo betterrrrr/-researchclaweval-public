@@ -3,7 +3,7 @@
 - Status: Pending
 - Project Path: `Auto-claude-code-research-in-sleep/`
 - Dependency Guide: `依赖配置指南/ChatGPT-Auto-claude框架部署指南.md`
-- Docker Reference: `/home/jin/researchclaweval/docker_file_instruction.md`
+- Docker Reference: `docs/tutorials/docker_file_instruction.md`
 - Minimal Input: 使用"sklearn digits/iris 轻量分类器改进"研究主题，作为 `/research-pipeline` 或等价 workflow 的输入。
 - Required E2E Flow: idea discovery → experiment bridge / minimal experiment execution → auto-review loop → paper writing → optional LaTeX/PDF output.
 - Pre-E2E Checks: skill/CLI availability check; configured executor/reviewer runner check; MCP/reviewer bridge check if used; LaTeX check if PDF is required; API environment variable presence check.

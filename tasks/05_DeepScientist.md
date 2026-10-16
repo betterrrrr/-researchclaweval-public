@@ -3,7 +3,7 @@
 - Status: Pending
 - Project Path: `DeepScientist/`
 - Dependency Guide: `依赖配置指南/ChatGPT-DeepScientist_端到端配置.md`
-- Docker Reference: `/home/jin/researchclaweval/docker_file_instruction.md`
+- Docker Reference: `docs/tutorials/docker_file_instruction.md`
 - Minimal Input: 在新 quest/project 中输入"sklearn digits/iris 轻量分类器改进"研究任务，并限制为最小实验轮次。
 - Required E2E Flow: runner available → `ds doctor` → create quest/project → baseline/context setup → idea → experiment → analysis campaign → write/finalize artifacts.
 - Pre-E2E Checks: Node/npm check; Python runtime check; `ds --help`; `ds doctor` for selected runner; selected runner CLI minimal prompt check; API/login state presence check.

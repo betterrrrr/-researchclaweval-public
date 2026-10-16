@@ -3,7 +3,7 @@
 - Status: Pending
 - Project Path: `AutoResearchClaw/`
 - Dependency Guide: `依赖配置指南/ChatGPT-AutoResearchClaw_端到端配置.md`
-- Docker Reference: `/home/jin/researchclaweval/docker_file_instruction.md`
+- Docker Reference: `docs/tutorials/docker_file_instruction.md`
 - Minimal Input: `researchclaw run --topic "sklearn digits/iris 轻量分类器改进" --auto-approve` 或项目支持的等价最小 topic 输入。
 - Required E2E Flow: topic intake → literature/context → idea/proposal → experiment plan → sandbox/docker experiment → figure/table generation → paper/report writing → quality/review stage if enabled.
 - Pre-E2E Checks: `researchclaw --help`; `researchclaw doctor`; `researchclaw validate`; Python import check; sandbox/docker executor check; API environment variable presence check.
