@@ -7,6 +7,10 @@ frameworks. It defines task contracts, pins upstream framework versions,
 records adapter patches, validates run evidence, and renders sanitized result
 tables without distributing private datasets or framework checkouts.
 
+**Running your own framework?** Start with
+[docs/participant_quickstart.md](docs/participant_quickstart.md) — environment,
+data, wrapper, first run, in that order.
+
 ## Support matrix
 
 | Topic | Maturity | Registered modes |
@@ -76,7 +80,7 @@ hands off to the shared topic runner — it contains no evaluation logic.
 
 - Interface reference: [real_eval/docs/wrapper_interface.md](real_eval/docs/wrapper_interface.md)
 - Skeleton to copy: [real_eval/templates/my_framework_wrapper.sh](real_eval/templates/my_framework_wrapper.sh)
-- Generate both: `uv run rceval adapter init --id 08 --name MyFramework --topics babylm`
+- Generate both: `uv run rceval adapter init --id 08 --name MyFramework --topics tdc_admet_tox`
 
 `adapter init` writes one wrapper per topic plus an adapter manifest. Wrappers
 run standalone, so registering in the registry is optional.
@@ -89,9 +93,20 @@ What your framework must *produce* is specified separately, per topic, in
 `automation/<topic>_contract.md` — required artifacts, experiment count, and
 trace fields.
 
-Datasets are **not** distributed here. Obtain each topic's dataset from its own
-official source and point the corresponding `*_DATASET_ROOT` environment
-variable at it.
+Datasets are **not stored in this repository**, but you are not left to find
+them yourself either — `setup_datasets.sh` downloads each one from its official
+source and verifies a pinned sha256 before accepting it:
+
+```bash
+bash scripts/setup_datasets.sh --dataset tdc_admet_tox   # Harvard Dataverse, 1.4 MB
+bash scripts/setup_datasets.sh --dataset psydefdetect    # HuggingFace,      5.4 MB
+bash scripts/setup_datasets.sh --dataset arc_wbe_2026    # HuggingFace,    907 MB
+```
+
+Each run prints the `*_DATASET_ROOT` to export. If `huggingface.co` is
+unreachable on your network, set `HF_ENDPOINT=https://hf-mirror.com` first —
+the script already falls back to a mirror, but only when the direct attempt
+fails.
 
 ## Repository boundary
 
