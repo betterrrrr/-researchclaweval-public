@@ -16,7 +16,7 @@ Build methods for the PsyDefDetect shared task: detecting levels of psychologica
 - `docs/psydefdetect_submission_spec.md`
 - `docs/psydefdetect_experiment_requirements.md`
 - `automation/psydefdetect_runtime_brief.md`
-- `automation/psydefdetect_split.json`
+- `automation/psydefdetect_split.canonical.json`
 - `automation/scripts/run_psydefdetect_local_score.py`
 
 ## Task Definition
@@ -43,7 +43,7 @@ The primary score is macro-F1 over positive classes `1-8`. Class `0` is excluded
 - Logs and workspace traces
 
 ## Experiment Contract
-- Use the standardized split in `automation/psydefdetect_split.json`.
+- Use the standardized split in `automation/psydefdetect_split.canonical.json`.
 - Run exactly 2 to 4 materially different experiments before selecting a final approach. Never start a fifth experiment.
 - Follow `automation/psydefdetect_execution_budget.md`: record compact experiment results, only use experiments 3-4 for a specific improvement over the current best result, and finalize immediately after the last experiment.
 - Record those experiments in `experiment_trace.json`.

@@ -72,7 +72,7 @@ tar -czf <name>.tar.gz <run_dir>/     # 保留目录结构；不要 strip 顶层
   "native_entrypoint": "python -m myfw.run --topic arc_wbe_2026",
   "evaluator_origin": "self_provided",
   "dataset_sha256": {"arc_white_box_estimation_2026": "<sha256>"},
-  "split_sha256": {"psydefdetect_split.json": "<sha256>"},
+  "split_sha256": {"psydefdetect_split.canonical.json": "<sha256>"},
   "self_reported_score": 0.0661,
   "notes": "任何需要说明的偏差都写这里，没有就写 null"
 }

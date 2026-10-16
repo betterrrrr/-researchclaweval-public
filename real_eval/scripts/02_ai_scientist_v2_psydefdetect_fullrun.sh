@@ -96,7 +96,7 @@ new = '''        if os.getenv("AI_SCIENTIST_PSYDEFDETECT_TWO_EXPERIMENTS") == "1
 
 MANDATORY PSYDEFDETECT EXECUTION CONTRACT:
 - Generate one self-contained program that synchronously runs exactly two materially different configurations chosen and justified by the framework's own idea.
-- Use only the fixed /data/psydefdetect/PsyDefConv.json dataset, /workspace/automation/psydefdetect_split.json, standard library, numpy, pandas, scipy, and scikit-learn.
+- Use only the fixed /data/psydefdetect/PsyDefConv.json dataset, /workspace/automation/psydefdetect_split.canonical.json, standard library, numpy, pandas, scipy, and scikit-learn.
 - PsyDefConv.json is a top-level list whose rows use id, dialogue_id, dialogue, current_text, and integer label. Join train_record_ids/eval_record_ids from the split manifest to row['id']; use current_text as the target text and never assume conversation_id, defense_mechanism, or pre-split top-level objects.
 - Preserve the complete target text and any context used by the framework's chosen representation; do not silently discard valid signal.
 - Never import or use sentence_transformers, transformers, torch, Hugging Face, pretrained models, embeddings, external datasets, downloads, package installation, or remote calls.
@@ -176,7 +176,7 @@ new = '''    def _prompt_impl_guideline(self):
                 "Implementation guideline": [
                     "Write one self-contained CPU-only Python program using standard library, numpy, pandas, scipy, and scikit-learn only.",
                     "Never import torch, sentence_transformers, transformers, or any package outside that allowlist.",
-                    "Load only /data/psydefdetect/PsyDefConv.json and /workspace/automation/psydefdetect_split.json.",
+                    "Load only /data/psydefdetect/PsyDefConv.json and /workspace/automation/psydefdetect_split.canonical.json.",
                     "PsyDefConv.json is a top-level list with row keys id, dialogue_id, dialogue, current_text, and integer label; select rows by matching split train_record_ids/eval_record_ids to row['id'].",
                     "Use current_text as the target text, optionally prepend dialogue turn text, and do not assume conversation_id/defense_mechanism fields.",
                     "Run exactly two materially different configurations selected by the framework's research idea; do not use a host-prescribed algorithm.",
