@@ -22,11 +22,12 @@ data, wrapper, first run, in that order.
 | MountainCar-Continuous | experimental | full run |
 
 "Registered modes" means the registry has a run mapping, which is what `rceval
-registry matrix` and `rceval dry-run` read. MountainCar-Continuous has fullrun
-mappings but no smoke mappings: the validator mapping in
-real_eval/scripts/validate_framework_run.py has no mountaincar smoke entry.
+registry matrix` and `rceval dry-run` read. **BabyLM-10M and
+MountainCar-Continuous have fullrun mappings but no smoke mappings** — the
+validator mapping in real_eval/scripts/validate_framework_run.py has no entry
+for either. Treat their first fullrun as the admission gate instead.
 
-The registry contains 7 framework adapters and 56 topic/framework/mode
+The registry contains 7 framework adapters and 63 topic/framework/mode
 mappings. A mapping is not proof of a valid native result. Full-run rows remain
 `candidate_requires_runtime_evidence` until launch, provider, trace, and output
 evidence pass validation. Generic host `codex exec` mappings are explicitly

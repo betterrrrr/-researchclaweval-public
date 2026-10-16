@@ -17,8 +17,12 @@ ResearchClawEval 是面向科研 Agent 框架的公开评测控制层。它维�
 | TDC-ADMET-Tox | experimental | smoke、full run |
 | MountainCar-Continuous | experimental | smoke、full run |
 
-注册表包含 7 个框架和 56 条映射。映射存在并不代表结果已通过原生执行准入；
+注册表包含 7 个框架和 63 条映射。映射存在并不代表结果已通过原生执行准入；
 使用通用宿主 `codex exec` 的 fullrun 会明确标记为 `unsupported_non_native`。
+
+注意 **BabyLM-10M 与 MountainCar-Continuous 没有 smoke 映射**，只有 fullrun；
+`real_eval/scripts/validate_framework_run.py` 里这两个 topic 都没有 smoke 条目。
+它们的准入只能以第一次 fullrun 为准。
 
 ## 本地使用
 
