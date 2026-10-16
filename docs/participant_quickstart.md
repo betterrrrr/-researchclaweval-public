@@ -126,7 +126,7 @@ workspace/
   final_report.md         ← 必需
   score.json              ← 官方分（host 侧评分器写入）
 logs/
-  e2e.log                 ← 必需，判官只读这个路径
+  e2e.log                 ← 必需，执行日志；工具只认这个路径
 state.json                ← 结束状态
 ```
 
@@ -166,7 +166,7 @@ state.json                ← 结束状态
 | runner 报 `blocked` exit 28 | arc 缺可见验证集 —— 重跑 `setup_datasets.sh --dataset arc_wbe_2026` |
 | 跑完了但 `score.json` 不存在 | 你的框架没产出必需的载荷；检查 `state.json` 的 summary |
 | 日志里没有原生标记 → 不计分 | `FRAMEWORK_NATIVE_LOG_MARKER` 没从你的框架里打印 |
-| 判官给了 0 分 / 说"无证据" | `logs/e2e.log` 不存在或为空 —— 判官读的是这个路径，不是根目录的 `run.log` |
+| 产物被说"缺执行证据" | `logs/e2e.log` 不存在或为空 —— 工具读的是这个路径，不是根目录的 `run.log` |
 | 模型不符 | 框架内部用了自己的 model/base_url，没读注入的环境变量 |
 
 ---
