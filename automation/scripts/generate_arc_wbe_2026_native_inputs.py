@@ -112,7 +112,8 @@ Execute the ARC White-Box Estimation Challenge 2026 topic directly instead of fa
 ## Inputs
 - dataset root: {dataset_root}
 - contract file: {contract_file}
-- the mounted dataset contains real parquet records with `mlp_id`, `mlp_name`, `mlp_seed`, and `weights`; target labels are not visible to the framework
+- the mounted dataset contains real parquet records with `mlp_id`, `mlp_name`, `mlp_seed`, and `weights`; target labels for the scored records are **not** visible to the framework
+- a small **labelled** visible-validation subset is mounted alongside at `visible-validation/` (10 of the 100 MLPs, with `weights`, `all_layer_means`, and `final_means`). Use it to self-evaluate your estimator with the official metric. It is disjoint from the scoring set by `mlp_id`.
 
 ## Success Criteria
 - write and lock `research_idea.json` before the first experiment
@@ -123,6 +124,7 @@ Execute the ARC White-Box Estimation Challenge 2026 topic directly instead of fa
 - do NOT predict a scalar score or class label; the scorer computes the metric from the activation predictions
 - do not fabricate, synthesize, zero-fill, broadcast, or use placeholder predictions; if a real estimator cannot be produced, stop with a concrete blocker and do not write a score
 - record `framework_native_execution`, `consumed_topic_input`, `workspace_trace_root`, `experiments`, `selected_experiment_id`, `framework_internal_model`, `framework_internal_api_base_url`, `idea_artifact`, and `idea_locked_before_experiments` in `experiment_trace.json`
+- record each experiment's self-evaluation under `framework_visible_validation` as **numeric fields** (`n_mlps`, `adjusted_final_layer_score`, `final_layer_mse`, `all_layers_mse`). A qualitative sentence is not a substitute: without numbers the trace cannot support `b0`/`bT`/`AUP`/`UR`, and those dimensions fall back to the judge's ordinal path.
 - use the injected OpenAI-compatible API environment and record the model/base URL in the trace
 - preserve logs, manifests, and workspace traces
 - write `final_report.md`

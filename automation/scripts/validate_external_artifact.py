@@ -35,6 +35,11 @@ TOPICS = ("arc", "mc", "babylm", "psydef", "tdc")
 # 与 run_mountaincar_continuous_host_score.py 的 DEFAULT_TOPIC_ROOT 一致
 DEFAULT_TOPIC2_ROOT = ROOT / "data" / "topic2"
 DEFAULT_ARC_ROOT = ROOT / "data" / "arc_white_box_estimation_2026"
+# arc 的官方分只对 **scoring** 子集算（90 个 MLP），与框架可见的
+# visible-validation（10 个）互斥。指向整个 root 会把可见集的标签算进去 ——
+# 既评错集合，又让框架能靠自评集里的真值刷分。
+# 切分见 automation/scripts/make_arc_wbe_2026_visible_validation.py。
+DEFAULT_ARC_SCORING_ROOT = DEFAULT_ARC_ROOT / "scoring"
 DEFAULT_PSYDEF_ROOT = ROOT / "data" / "psydefdetect"
 DEFAULT_TDC_ROOT = ROOT / "data" / "tdc_admet_tox"
 CANONICAL_PSYDEF_SPLIT = ROOT / "automation" / "psydefdetect_split.canonical.json"
@@ -233,9 +238,22 @@ def check_common(pkg: Path, rep: Report) -> Path | None:
             bad = value.startswith("1970-") or not value.endswith("Z")
             rep.add(f"PROVENANCE.{field} 是 UTC ISO8601", not bad, f"got {value!r}")
 
-    log = pkg / "run.log"
+    # 日志路径必须与七维判官读的完全一致（见 hybrid_judge.build_sandbox）：
+    # 判官只认 logs/e2e.log → logs/native.log → logs/native_stdout.log，
+    # **不读根目录的 run.log**。这里若不同步，校验器会放行一个判官读不到日志的包，
+    # 而判官缺日志不报错、照常给分 —— ER/SC/CC 三维会静默变成假分。
+    log = next(
+        (p for p in (pkg / "logs/e2e.log", pkg / "logs/native.log",
+                     pkg / "logs/native_stdout.log") if p.is_file()),
+        pkg / "logs/e2e.log",
+    )
     log_size = log.stat().st_size if log.is_file() else 0
-    rep.add("run.log 存在且非空", log_size > 0, f"{log_size} bytes", fatal=False)
+    rep.add(
+        "logs/e2e.log 存在且非空（判官日志路径）",
+        log_size > 0,
+        f"{log.relative_to(pkg)}: {log_size} bytes",
+        fatal=False,
+    )
     return ws
 
 
@@ -677,7 +695,7 @@ def run_scorer(topic: str, pkg: Path, ws: Path, args: argparse.Namespace, out: P
     elif topic == "arc":
         cmd = [sys.executable, str(SCRIPTS / "run_arc_wbe_2026_local_score.py"),
                "--workspace", str(ws), "--output-score", str(out),
-               "--dataset-root", str(args.dataset_root or DEFAULT_ARC_ROOT),
+               "--dataset-root", str(args.dataset_root or DEFAULT_ARC_SCORING_ROOT),
                "--framework-hint", args.framework_hint,
                "--whest-output-root", str(out.parent / "_whest_out")]
     else:  # pragma: no cover - argparse 已限定 choices

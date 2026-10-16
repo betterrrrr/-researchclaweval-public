@@ -70,11 +70,17 @@ AGENT_DIMS = ("er", "sc", "cc")
 ENUM_DIMS = ("er",)
 
 # The agent prompt is assembled from the same rubric files the single call uses,
-# minus their "## 输入" section -- the agent reads the files itself instead of
-# being handed their contents.
+# minus their "## 维度定义" section -- the agent reads the files itself instead
+# of being handed their contents.
+#
+# 维度名以 prompts/judge_<dim>.md 的标题为准 —— 那是判官实际读到的正文，两者必须一致。
+# 此前 pea/ou/ecc/sc 四项与提示词标题不符；因 agent 路径只跑 er/sc/cc、且 er 走枚举
+# 不拼标签，**实际只有 sc 受影响**（pq/pea/ou/ecc 四个标签在 agent 路径上是死代码）。
+# ⚠️ 修 sc 会改变 agent 提示词，此前由 agent 路径产出的 sc 值需重判 ——
+# 查 score.json 的 evaluation.judge_mode.agent_dims 是否含 "sc"。
 DIM_LABELS = {
-    "pq": "计划质量", "pea": "计划充分性", "er": "执行稳健性", "ou": "产出可用性",
-    "ecc": "外部校验", "sc": "科学贡献", "cc": "合同合规",
+    "pq": "计划质量", "pea": "计划—执行一致性", "er": "执行稳健性", "ou": "观察利用",
+    "ecc": "证据—结论闭合", "sc": "状态一致性", "cc": "合同合规",
 }
 
 PROMPT_HEADER = """# 科研代理运行评审任务

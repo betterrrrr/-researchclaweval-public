@@ -50,6 +50,10 @@ PROVIDER_ENV="$BASE/provider.env"
 SEMANTIC_ENV="$BASE/semantic.env"
 WORKSPACE_DATA_MOUNT="$FRAMEWORK_CONTAINER_WORKDIR/data/arc_wbe_2026"
 FRAMEWORK_DATASET_ROOT="$INPUT_ROOT/arc_wbe_2026_weights_only"
+# 框架自评用的可见验证集（带真值）与 host 侧评分集，二者互斥。
+# 由 automation/scripts/make_arc_wbe_2026_visible_validation.py 产出并冻结（sha256 在 split_manifest.json）。
+ARC_VISIBLE_VALIDATION_ROOT="$DATASET_ROOT/visible-validation"
+ARC_SCORING_ROOT="$DATASET_ROOT/scoring"
 WEIGHTS_ONLY_PYTHON="${ARC_WBE_2026_WHEST_PYTHON:-/tmp/whest-starterkit/.venv/bin/python}"
 # final_report.md may be written to "$WORKSPACE/final_report.md" or fall back to "$BASE/artifacts/final_report.md".
 repo_basename="$(basename "$FRAMEWORK_SRC")"
@@ -117,6 +121,16 @@ fi
 "$WEIGHTS_ONLY_PYTHON" "$ROOT/automation/scripts/generate_arc_wbe_2026_weights_only_dataset.py" \
   --source-root "$DATASET_ROOT" \
   --output-root "$FRAMEWORK_DATASET_ROOT"
+
+# 可见验证集：框架拿它自评，算的就是官方 adjusted_final_layer_score。
+# 缺它就 blocked，**不静默降级** —— 没有它框架无法自评，experiment_trace 里
+# 就没有逐轮性能数字，b0/bT/AUP/UR 会掉回裁判序数兜底
+# （实测 140 格里 arc 只有 3/28 有 b0，根因正是这个）。
+if [[ ! -d "$ARC_VISIBLE_VALIDATION_ROOT/data" || ! -d "$ARC_SCORING_ROOT/data" ]]; then
+  write_state "blocked" "Missing ARC visible-validation/scoring split under $DATASET_ROOT; regenerate with automation/scripts/make_arc_wbe_2026_visible_validation.py" 28
+  exit 28
+fi
+cp -R "$ARC_VISIBLE_VALIDATION_ROOT" "$FRAMEWORK_DATASET_ROOT/visible-validation"
 
 python3 "$ROOT/automation/scripts/generate_arc_wbe_2026_native_inputs.py" \
   --output-root "$INPUT_ROOT" \
@@ -397,7 +411,7 @@ if [[ "$run_rc" -eq 0 ]]; then
   if ! "$WEIGHTS_ONLY_PYTHON" "$ROOT/automation/scripts/run_arc_wbe_2026_local_score.py" \
     --workspace "$WORKSPACE" \
     --output-score "$WORKSPACE/score.json" \
-    --dataset-root "$DATASET_ROOT" \
+    --dataset-root "$ARC_SCORING_ROOT" \
     --framework-hint "$FRAMEWORK_NAME" \
     --whest-bin "$(dirname "$WEIGHTS_ONLY_PYTHON")/whest" >"$LOG_DIR/official_score.log" 2>&1; then
     write_state "failed" "Official ARC scorer failed closed; no fallback score was accepted." 43 "$FRAMEWORK_COMMAND_LABEL"

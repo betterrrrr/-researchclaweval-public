@@ -14,8 +14,20 @@ Produce an official-comparable ARC White-Box Estimation Challenge 2026 result. A
 ## Required Inputs
 
 - The materialized ARC-WBE dataset under `ARC_WBE_2026_DATASET_ROOT`.
+- The **visible validation subset** at `<dataset root>/visible-validation/`, mounted read-only inside the framework container next to the dataset. See "Visible Validation Set" below.
 - The generated topic-native inputs under `inputs/`, including `docs/arc_wbe_2026_summary.md` and this contract.
 - The local scorer `automation/scripts/run_arc_wbe_2026_local_score.py` and its official adapter.
+
+## Visible Validation Set
+
+The framework is given a small labelled subset so it can **evaluate its own estimator with the official metric** — something the main dataset deliberately does not allow, because the weights-only projection carries no target activations.
+
+- Location: `<dataset root>/visible-validation/data/*.parquet` (also visible at `/data/arc_wbe_2026/visible-validation/`).
+- Columns: `mlp_id`, `mlp_name`, `mlp_seed`, `weights`, `all_layer_means`, `final_means` — i.e. weights **and** the ground-truth activations.
+- Size: 10 MLPs out of 100. The scoring set is the other 90 and is never mounted into the framework container.
+- The two sets are **disjoint by `mlp_id`**, so self-evaluation cannot leak into the scored result. The split is frozen; both files' sha256 are recorded in `<dataset root>/split_manifest.json`.
+
+Record each experiment's self-evaluation result under `framework_visible_validation` in `experiment_trace.json`, using the same shape as the official metric (`n_mlps`, `adjusted_final_layer_score`, `final_layer_mse`, `all_layers_mse`). A qualitative sentence is not a substitute: without a numeric field, the trace cannot support `b0`/`bT`/`AUP`/`UR` and those dimensions fall back to the judge's ordinal path.
 
 ## Required Outputs
 
@@ -34,7 +46,7 @@ Produce an official-comparable ARC White-Box Estimation Challenge 2026 result. A
 - Use only ARC-WBE-2026 inputs from the current fresh run workspace and read-only dataset mount.
 - Do not route this topic to any other topic's inputs, runners, contracts, datasets, or scores.
 - The framework owns the hypothesis, algorithm family, feature representation, architecture, hyperparameters, experiment sequence, comparison, and selected method. Host prompts must not prescribe any of them.
-- Keep raw weights, complete tensor arrays, `all_layer_means`, and `final_means` out of logs and prompts.
+- Keep raw weights, complete tensor arrays, `all_layer_means`, and `final_means` out of logs and prompts. The visible-validation subset above **is** readable by the framework for self-evaluation, but its arrays must not be pasted into logs, prompts, or reports — record only the scalar metrics.
 - Use the configured provider and model for framework reasoning. Framework-internal clients must not substitute another model or public provider.
 - Framework-internal OpenAI-compatible clients must read `OPENAI_BASE_URL`, `OPENAI_API_KEY`, and `OPENAI_MODEL` from the injected environment. Do not hardcode an endpoint or model.
 - Follow `automation/arc_wbe_2026_execution_budget.md`. Immediately promote the selected experiment after the final allowed experiment.

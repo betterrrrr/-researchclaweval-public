@@ -20,6 +20,9 @@ STATE_FILE="$BASE/state.json"
 MANIFEST_FILE="$BASE/fullrun_manifest.json"
 CODEX_HOME_DIR="$BASE/codex_home"
 DATASET_ROOT="${ARC_WBE_2026_DATASET_ROOT:-$(real_eval_resolve_topic_dataset "$ROOT" arc_wbe_2026)}"
+# 与 arc_framework_fullrun.sh 保持一致：框架自评集 / host 评分集互斥。
+ARC_VISIBLE_VALIDATION_ROOT="$DATASET_ROOT/visible-validation"
+ARC_SCORING_ROOT="$DATASET_ROOT/scoring"
 CONTRACT_FILE="${ARC_WBE_2026_CONTRACT_FILE:-$ROOT/automation/arc_wbe_2026_contract.md}"
 PROVIDER_CONFIG="${PROVIDER_CONFIG:-$ROOT/api/codex_gpt54_shubiaobiao.toml}"
 PROVIDER_BASE_URL="$(sed -n 's/^[[:space:]]*base_url[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$PROVIDER_CONFIG" | head -1)"
@@ -84,6 +87,14 @@ write_state "starting" "Preparing AI-Researcher ARC-WBE-2026 fullrun workspace"
   "$ROOT/automation/scripts/generate_arc_wbe_2026_weights_only_dataset.py" \
   --source-root "$DATASET_ROOT" \
   --output-root "$FRAMEWORK_DATASET_ROOT"
+
+# 可见验证集：框架拿它自评。缺就 blocked，不静默降级
+# （没有它框架算不出分，b0/bT/AUP/UR 会掉回裁判序数兜底）。
+if [[ ! -d "$ARC_VISIBLE_VALIDATION_ROOT/data" || ! -d "$ARC_SCORING_ROOT/data" ]]; then
+  write_state "blocked" "Missing ARC visible-validation/scoring split under $DATASET_ROOT; regenerate with automation/scripts/make_arc_wbe_2026_visible_validation.py" 28
+  exit 28
+fi
+cp -R "$ARC_VISIBLE_VALIDATION_ROOT" "$FRAMEWORK_DATASET_ROOT/visible-validation"
 
 python3 "$ROOT/automation/scripts/generate_arc_wbe_2026_native_inputs.py" \
   --output-root "$INPUT_ROOT" \
@@ -509,7 +520,7 @@ PY
 if ! "$WEIGHTS_ONLY_PYTHON" "$ROOT/automation/scripts/run_arc_wbe_2026_local_score.py" \
   --workspace "$WORKSPACE" \
   --output-score "$WORKSPACE/score.json" \
-  --dataset-root "$DATASET_ROOT" \
+  --dataset-root "$ARC_SCORING_ROOT" \
   --framework-hint "$FRAMEWORK_NAME" \
   --whest-bin "$(dirname "$WEIGHTS_ONLY_PYTHON")/whest" >"$LOG_DIR/official_score.log" 2>&1; then
   write_state "failed" "Official ARC scorer failed closed; no fallback score was accepted" 43 "python run_infer_idea.py --category arc_wbe_2026"

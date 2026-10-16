@@ -32,11 +32,21 @@
 │   ├── experiment_trace.json# 必需（babylm 的分直接读它，见 §3.3）
 │   ├── final_report.md      # 必需
 │   └── <topic 载荷>          # 见 §3，逐 topic 不同
-├── run.log                  # 必需：交付方自己的完整 stdout/stderr
+├── logs/
+│   └── e2e.log              # 必需：运行时的**原始 stdout/stderr 流**，见下
+├── run.log                  # 可选：交付方自己的补充日志
 └── source/                  # 建议：生成的研究代码，便于审计
 ```
 
 **`workspace/` 这个名字不能改。** 官方评分器按它定位（`--workspace`），改名即等于没交。
+
+**日志必须落在 `logs/e2e.log`。** 七维判官只认三个路径
+（`logs/e2e.log` → `logs/native.log` → `logs/native_stdout.log`，取第一个存在的），
+**不读根目录的 `run.log`**。放错位置的后果是静默的：判官拿不到日志既不报错也不拒收，
+而是照常给分 —— 而 ER / SC / CC 三个维度主要靠日志取证，会直接变成假分。
+
+**它必须是运行时的原始流，不是事后整理的摘要。** 判官的输入里写明
+「日志才是宿主记录的事实，与框架自述冲突时以日志为准」；事后撰写的日志会让这条判据失效。
 
 打包：
 
