@@ -126,30 +126,115 @@ download_babylm() {
 }
 
 # ============================================================================
-# PsyDefDetect (beta, contact maintainers)
+# PsyDefDetect (public — HuggingFace AIMH/PsyDefConv, cc-by-nc-4.0)
 # ============================================================================
+# 单一公开文件，5,376,380 字节。校验 sha256 后才接受，
+# 因为整套评测都建在这份数据上（含主榜的 psydef 切分）。
+PSYDEF_FILE_SHA256="88d55e1ae6f4653661baa795166ef103f5439f4d6720b1767c3be7bbc3904ad7"
+PSYDEF_FILE_SIZE=5376380
 download_psydefdetect() {
   header "PsyDefDetect Dataset"
+  local dest="$DATA_DIR/psydefdetect"
+  local out="$dest/PsyDefConv.json"
+  mkdir -p "$dest"
 
-  echo "  PsyDefDetect is currently in beta."
-  echo "  Contact the maintainers for access."
+  # 直连 huggingface.co 在部分网络下不可达（或被 DNS 污染），
+  # 因此依次尝试：显式 HF_ENDPOINT → 官方 → 镜像。
+  local endpoints=()
+  [[ -n "${HF_ENDPOINT:-}" ]] && endpoints+=("${HF_ENDPOINT%/}")
+  endpoints+=("https://huggingface.co" "https://hf-mirror.com")
+
+  local got=0
+  for ep in "${endpoints[@]}"; do
+    info "尝试 $ep"
+    if curl -fsSL --retry 2 --connect-timeout 15 --max-time 300 \
+         -o "$out.part" \
+         "$ep/datasets/AIMH/PsyDefConv/resolve/main/PsyDefConv.json" 2>/dev/null; then
+      if [[ "$(sha256sum "$out.part" | cut -d' ' -f1)" == "$PSYDEF_FILE_SHA256" ]]; then
+        mv "$out.part" "$out"; got=1; break
+      fi
+      warn "sha256 不符，换个源重试"
+      rm -f "$out.part"
+    fi
+  done
+
+  if [[ "$got" != "1" ]]; then
+    rm -f "$out.part"
+    error "PsyDefDetect 下载失败。请手动获取后放置："
+    echo "  $out"
+    echo "  期望 sha256: $PSYDEF_FILE_SHA256"
+    echo "  期望大小  : $PSYDEF_FILE_SIZE 字节"
+    echo "  许可      : cc-by-nc-4.0（非商业）—— 使用前确认用途合规"
+    echo "  然后：export PSYDEFDETECT_DATASET_ROOT=$dest"
+    return 1
+  fi
+
+  ok "PsyDefConv.json  sha256 校验通过  ($(stat -c%s "$out") 字节)"
+  echo "  export PSYDEFDETECT_DATASET_ROOT=$dest"
   echo ""
-  echo "  After obtaining, set:"
-  echo "  export PSYDEFDETECT_DATASET_ROOT=/path/to/PsyDefDetect"
+  echo "  注：官方切分为**记录级**，同一对话的话语会跨 train/test"
+  echo "      （实测 472/472 条 test 记录的对话都出现在 train 中）。"
+  echo "      本仓库另有一份对话级无泄漏切分，见"
+  echo "      automation/psydefdetect_split.canonical.json"
   echo ""
 }
 
 # ============================================================================
-# TDC-ADMET-Tox (public)
+# TDC-ADMET-Tox (public — Harvard Dataverse, doi:10.7910/DVN/21LKWG)
 # ============================================================================
+# 归档 1,472,501 字节，含 22 个 ADMET endpoint；本评测使用 AMES / hERG / DILI。
+# 归档里每个 endpoint 有两份带标签文件：
+#   train_val.csv  → 需按 host 的冻结划分拆成 train / validation
+#   test.csv       → 官方测试集（**标签就是主办方持有的那份**）
+TDC_ARCHIVE_MD5="e3e4dda2f7f62268448fc813ceefccd5"
+TDC_ARCHIVE_SHA256="bd0005246cb6f1672333c28ad202112a8bf071ab65d847848715030308faf1f1"
+TDC_ARCHIVE_BYTES=1472501
+TDC_DATAVERSE_FILE_ID=4426004
 download_tdc_admet_tox() {
   header "TDC-ADMET-Tox Dataset"
+  local dest="$DATA_DIR/tdc_admet_tox"
+  local cache="$dest/.cache"
+  local zip="$cache/admet_group.zip"
+  mkdir -p "$cache"
 
-  echo "  TDC ADMET dataset is available from:"
-  echo "  https://tdcommons.ai/"
+  if [[ ! -f "$zip" ]] || [[ "$(sha256sum "$zip" 2>/dev/null | cut -d' ' -f1)" != "$TDC_ARCHIVE_SHA256" ]]; then
+    info "从 Harvard Dataverse 下载 admet_group.zip"
+    if ! curl -fsSL --retry 2 --connect-timeout 20 --max-time 600 -o "$zip.part" \
+         "https://dataverse.harvard.edu/api/access/datafile/$TDC_DATAVERSE_FILE_ID"; then
+      error "下载失败。手动获取："
+      echo "  https://doi.org/10.7910/DVN/21LKWG  (V105, admet_group.zip)"
+      echo "  MD5    : $TDC_ARCHIVE_MD5"
+      echo "  SHA256 : $TDC_ARCHIVE_SHA256"
+      echo "  放到  : $zip"
+      return 1
+    fi
+    mv "$zip.part" "$zip"
+  fi
+
+  local actual_sha actual_size
+  actual_sha="$(sha256sum "$zip" | cut -d' ' -f1)"
+  actual_size="$(stat -c%s "$zip")"
+  if [[ "$actual_sha" != "$TDC_ARCHIVE_SHA256" ]] || [[ "$actual_size" != "$TDC_ARCHIVE_BYTES" ]]; then
+    error "归档校验失败：期望 $TDC_ARCHIVE_SHA256 ($TDC_ARCHIVE_BYTES B)，实际 $actual_sha ($actual_size B)"
+    return 1
+  fi
+  ok "admet_group.zip  sha256 + 大小校验通过"
+
+  # 解出三个 endpoint 的原始文件。转换与划分由 python 脚本负责，
+  # 这里只保证拿到的是逐字节正确的归档。
+  info "解压 AMES / hERG / DILI"
+  local raw="$cache/raw"
+  rm -rf "$raw"; mkdir -p "$raw"
+  unzip -q -o "$zip" "admet_group/ames/*" "admet_group/herg/*" "admet_group/dili/*" -d "$raw"
+
+  python3 "$ROOT/automation/scripts/prepare_tdc_admet_tox_from_archive.py" \
+    --raw-root "$raw/admet_group" \
+    --output-root "$dest"
+
+  ok "已生成 $dest/public/{train,validation,test}.csv"
+  echo "  export TDC_ADMET_TOX_DATASET_ROOT=$dest/public"
   echo ""
-  echo "  After downloading, set:"
-  echo "  export TDC_ADMET_TOX_DATASET_ROOT=/path/to/TDC-ADMET-Tox-public"
+  echo "  注：test.csv 无标签；隐藏标签由主办方持有，用于统一评分。"
   echo ""
 }
 
@@ -182,5 +267,5 @@ echo "Don't forget to set the corresponding environment variables:"
 echo "  export ARC_WBE_2026_DATASET_ROOT=$DATA_DIR/arc_white_box_estimation_2026"
 echo "  export GAVE2_DATASET_ROOT=/path/to/GAVE2_preliminary"
 echo "  export BABYLM_DATASET_ROOT=/path/to/BabyLM-2026-Strict-Small"
-echo "  export PSYDEFDETECT_DATASET_ROOT=/path/to/PsyDefDetect"
-echo "  export TDC_ADMET_TOX_DATASET_ROOT=/path/to/TDC-ADMET-Tox-public"
+echo "  export PSYDEFDETECT_DATASET_ROOT=$DATA_DIR/psydefdetect"
+echo "  export TDC_ADMET_TOX_DATASET_ROOT=$DATA_DIR/tdc_admet_tox/public"
