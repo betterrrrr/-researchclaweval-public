@@ -73,16 +73,39 @@ download_arc_wbe_2026() {
   echo ""
 
   # Try automated download if datasets is installed
+  local prepared=0
   if python3 -c "import datasets" 2>/dev/null; then
     info "datasets library found, attempting download..."
-    python3 automation/scripts/prepare_arc_wbe_2026_dataset.py \
-      --output-root "$target" \
-      --splits mini 2>/dev/null && \
-      ok "ARC-WBE-2026 downloaded (mini split)" || \
+    if python3 automation/scripts/prepare_arc_wbe_2026_dataset.py \
+         --output-root "$target" \
+         --splits mini 2>/dev/null; then
+      ok "ARC-WBE-2026 downloaded (mini split)"
+      prepared=1
+    else
       warn "ARC-WBE-2026 download failed (may need HuggingFace auth)"
+    fi
   else
     warn "datasets library not available. Install with: pip install datasets"
   fi
+
+  # 可见验证集 / 评分集切分。**arc runner 缺它就 blocked（exit 28）**：
+  # arc 是唯一不给框架真值的 topic，没有这个自评集，框架算不出
+  # adjusted_final_layer_score，b0/bT/AUP/UR 就落回裁判序数兜底。
+  if [[ -n "$(ls -A "$target/data" 2>/dev/null)" ]]; then
+    if [[ -d "$target/visible-validation/data" && -d "$target/scoring/data" ]]; then
+      ok "可见验证集/评分集切分已存在"
+    else
+      info "生成可见验证集（10 个 MLP，含真值）与评分集（90 个）"
+      python3 automation/scripts/make_arc_wbe_2026_visible_validation.py \
+        --source-root "$target" --output-root "$target" \
+        && ok "切分已生成（sha256 见 $target/split_manifest.json）" \
+        || warn "切分生成失败 —— arc 的 fullrun 会因为缺切分而 blocked"
+    fi
+  fi
+  echo ""
+  echo "  注：可见验证集与评分集按 mlp_id 互斥。前者给框架自评，"
+  echo "      后者是 host 侧评分集。切分冻结值见 split_manifest.json。"
+  echo ""
 }
 
 # ============================================================================
